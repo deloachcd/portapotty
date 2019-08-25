@@ -29,15 +29,3 @@ fake_deploy() {
 	env HOME="$FAKEHOME" ./deploy.sh
 	HOME="$REALHOME"
 }
-
-# install_packages() {
-# 	PACKAGE_INSTALL_LIST="$1"
-# 	APT_PACKAGES=""
-# 	while read line; do
-# 		if [[ ! "$line" =~ "#" ]]; then  # Ignore comments
-# 			APT_PACKAGES="$(eval printf "$line") $APT_PACKAGES"
-# 		fi
-# 	done < "$PACKAGE_INSTALL_LIST"
-# 	sudo apt install -y "$APT_PACKAGES"
-# }
-
