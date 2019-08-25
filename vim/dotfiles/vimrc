@@ -1,0 +1,17 @@
+""" Vim 8 / Neovim configuration section
+set shiftwidth=4 tabstop=4
+set nu rnu							  " 'hybrid' line numbers
+set t_Co=256						  " truecolor
+set scrolloff=10					  " scroll padding
+filetype plugin indent on
+
+""" Neovim-only configuration section
+if has('nvim')
+	let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
+	call plug#begin('~/.vim/plugged')
+		Plug 'w0rp/ale'
+		Plug 'tpope/vim-surround'
+		Plug 'scrooloose/nerdcommenter'
+	call plug#end()
+	call matchadd('ColorColumn', '\%80v', 100)	" highlight column 80
+endif

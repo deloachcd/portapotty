@@ -8,7 +8,7 @@ mkpotty() {
 	mkdir binaries
 	mkdir dotfiles
 	touch apt-packages.sh
-	touch hooks.sh
+	printf "#!/bin/bash\n\n" > hooks.sh
 	cd ..
 }
 
