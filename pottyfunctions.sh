@@ -23,8 +23,9 @@ install_packages_from_all_potties() {
 }
 
 fake_deploy() {
+	# Always run this from project root
 	REALHOME="$HOME"
-	FAKEHOME="fake_deployments/deployment_$(date +%s)"
+	FAKEHOME="$(pwd)/fake_deployments/deployment_$(date +%s)"
 	mkdir -p "$FAKEHOME"
 	env HOME="$FAKEHOME" ./deploy.sh
 	HOME="$REALHOME"
