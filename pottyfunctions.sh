@@ -30,3 +30,7 @@ fake_deploy() {
 	env HOME="$FAKEHOME" ./deploy.sh
 	HOME="$REALHOME"
 }
+
+clean_fakes() {
+	rm -r ./fake_deployments/*
+}
