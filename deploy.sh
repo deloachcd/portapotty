@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-source ./pottyfunctions.sh
+source "./pottyfunctions.sh"
 
 # Install from apt-packages.sh file from all potties
 install_packages_from_all_potties
