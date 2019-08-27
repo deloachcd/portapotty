@@ -1,12 +1,5 @@
 #!/bin/bash
 
-if [[ -e "$HOME/.local/share/portapotty/vim" ]]; then
-	echo "Skipping deployment for 'vim'... (already present)"
-	exit
-fi
-
-## deploy {
-
 NEOVIM_CONFIG_DIR=$HOME/.config/nvim
 VIM_CONFIG_DIR=$HOME/.vim
 NEOVIM_PLUGIN_DIR=$NEOVIM_CONFIG_DIR/autoload
@@ -30,10 +23,10 @@ cp ./binaries/nvim* $HOME/.local/bin/nvim
 cp ./dotfiles/vimrc $HOME/.vimrc
 
 # Symlink neovim's init.vim to .vimrc
-ln -s $HOME/.vimrc $NEOVIM_CONFIG_DIR/init.vim
+ln -sf $HOME/.vimrc $NEOVIM_CONFIG_DIR/init.vim
 
 # Symlink neovim's autoload plugin dir to vim's
-ln -s $VIM_PLUGIN_DIR $NEOVIM_PLUGIN_DIR
+ln -sf $VIM_PLUGIN_DIR $NEOVIM_PLUGIN_DIR
 
 # Get latest version of vim plug
 curl -fLo ./plugins/plug.vim \
@@ -41,7 +34,3 @@ curl -fLo ./plugins/plug.vim \
 
 # Place vim plug in vim's autoload plugin directory
 cp ./plugins/plug.vim $VIM_PLUGIN_DIR
-
-## }
-
-touch "$HOME/.local/share/portapotty/vim"

@@ -2,24 +2,12 @@
 # This function should only be sourced, not executed!
 
 mkpotty() {
+	HOME_VAR='$HOME'
 	POTTYNAME="$1"
 	mkdir "$POTTYNAME"
 	cd "$POTTYNAME"
 	touch apt-packages.sh
-	cat > hooks.sh << EOF
-#!/bin/bash
-
-if [[ -e "$HOME/.local/share/portapotty/$POTTYNAME" ]]; then
-	echo "Skipping deployment for '$POTTYNAME'... (already present)"
-	exit
-fi
-
-## deploy {
-
-## }
-
-touch "$HOME/.local/share/portapotty/$POTTYNAME"
-EOF
+	printf "#!/bin/bash\n\n" > hooks.sh
 	cd ..
 }
 
