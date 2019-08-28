@@ -12,8 +12,3 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-surround'
 	Plug 'scrooloose/nerdcommenter'
 call plug#end()
-
-""" Neovim-only configuration section
-if has('nvim')
-	let $NVIM_TUI_ENABLE_CURSOR_SHAPE=0
-endif
