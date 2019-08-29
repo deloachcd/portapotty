@@ -11,4 +11,12 @@ call plug#begin('~/.vim/plugged')
 	Plug 'w0rp/ale'
 	Plug 'tpope/vim-surround'
 	Plug 'scrooloose/nerdcommenter'
+	Plug 'itchyny/lightline.vim'
 call plug#end()
+
+" lightline config
+set laststatus=2
+let g:lightline = {
+	\ 'colorscheme': 'seoul256',
+	\ }
+set noshowmode

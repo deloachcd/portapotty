@@ -15,6 +15,9 @@ fi
 if [[ ! -d "$VIM_PLUGIN_DIR" ]]; then
 	mkdir -p $VIM_PLUGIN_DIR
 fi
+if [[ ! -d "$NEOVIM_PLUGIN_DIR" ]]; then
+	mkdir -p $NEOVIM_PLUGIN_DIR
+fi
 
 FLAGS="$@"
 if [[ ! "$FLAGS" =~ "no-compile" ]]; then
@@ -43,8 +46,8 @@ cp ./dotfiles/vimrc $HOME/.vimrc
 # Symlink neovim's init.vim to .vimrc
 ln -sf $HOME/.vimrc $NEOVIM_CONFIG_DIR/init.vim
 
-# Symlink neovim's autoload plugin dir to vim's
-ln -sf $VIM_PLUGIN_DIR $NEOVIM_PLUGIN_DIR
+# Symlink vim's plug.vim in neovim's plugin directory
+ln -sf "$VIM_PLUGIN_DIR/plug.vim" "$NEOVIM_PLUGIN_DIR/plug.vim"
 
 # Get latest version of vim plug
 curl -fLo ./plugins/plug.vim \
