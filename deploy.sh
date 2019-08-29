@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+GLOBAL_FLAGS="$@"
+
 source "./pottyfunctions.sh"
 
 # Install from apt-packages.sh file from all potties
@@ -25,7 +27,12 @@ while read file; do
 		echo "Running '$POTTY' hooks..."
 		cd "$POTTY"
 		chmod u+x ./hooks.sh
-		./hooks.sh
+		if [[ -e "flags" ]]; then
+			get_local_flags "flags" # assigns LOCAL_FLAGS
+		else
+			LOCAL_FLAGS=""
+		fi
+		./hooks.sh "$GLOBAL_FLAGS" "$LOCAL_FLAGS"
 		cd ..
 	fi
 done < <(ls)

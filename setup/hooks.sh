@@ -11,3 +11,6 @@ PORTAPOTTY_TRACKING_DIR="$HOME/.local/share/portapotty"
 if [[ ! -d "$PORTAPOTTY_TRACKING_DIR" ]]; then
 	mkdir -p "$PORTAPOTTY_TRACKING_DIR"
 fi
+
+# Update package listing
+sudo apt update

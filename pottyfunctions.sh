@@ -11,6 +11,15 @@ mkpotty() {
 	cd ..
 }
 
+get_local_flags() {
+	LOCAL_FLAGS=""
+	while read flag; do
+		if [[ ! "$flag" =~ "#" ]]; then
+			LOCAL_FLAGS="$flag $LOCAL_FLAGS"
+		fi
+	done < <(cat "$1")
+}
+
 install_packages_from_all_potties() {
 	APT_PACKAGES=""
 	while read package_list; do
@@ -18,15 +27,17 @@ install_packages_from_all_potties() {
 			APT_PACKAGES="$(eval printf "$package") $APT_PACKAGES"
 		done < <(cat "$package_list")
 	done < <(find . | grep 'apt-packages')
+	sudo apt update
 	sudo apt install $APT_PACKAGES
 }
 
 fake_deploy() {
 	# Always run this from project root
+	FLAGS="$@"
 	REALHOME="$HOME"
 	FAKEHOME="$(pwd)/fake_deployments/deployment_$(date +%s)"
 	mkdir -p "$FAKEHOME"
-	env HOME="$FAKEHOME" ./deploy.sh
+	env HOME="$FAKEHOME" ./deploy.sh "$FLAGS"
 	HOME="$REALHOME"
 }
 

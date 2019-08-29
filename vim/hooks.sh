@@ -16,32 +16,26 @@ if [[ ! -d "$VIM_PLUGIN_DIR" ]]; then
 	mkdir -p $VIM_PLUGIN_DIR
 fi
 
-# Clone official vim repo
-git clone https://github.com/vim/vim
+FLAGS="$@"
+if [[ ! "$FLAGS" =~ "no-compile" ]]; then
+	# Clone official vim repo
+	git clone https://github.com/vim/vim
 
-# Enter latest vim's source dir
-cd ./vim/src
+	# Enter latest vim's source dir
+	cd ./vim/src
 
-# Ensure we have all of vim's build dependencies installed
-sudo apt build-dep vim
+	# Ensure we have all of vim's build dependencies installed
+	sudo apt build-dep -y vim
 
-# Configure for user installation
-./configure --prefix=$HOME/.local/bin
+	# Configure for user installation
+	./configure --prefix=$HOME/.local && make && make install
 
-# Compile vim
-make
+	# Leave latest vim's source dir
+	cd ../..
 
-# Install vim
-make install
-
-# Leave latest vim's source dir
-cd ../..
-
-# Clean up
-rm -rf ./vim
-
-# Place neovim binary in user bin
-cp ./binaries/nvim* $HOME/.local/bin/nvim
+	# Clean up
+	rm -rf ./vim
+fi
 
 # Place vimrc in home directory
 cp ./dotfiles/vimrc $HOME/.vimrc
