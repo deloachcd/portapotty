@@ -5,6 +5,7 @@ set t_Co=256						  " truecolor
 set scrolloff=10					  " scroll padding
 filetype plugin indent on
 call matchadd('ColorColumn', '\%80v', 100)	" highlight column 80
+set backspace=indent,eol,start
 
 """ Plugin listing section
 call plug#begin('~/.vim/plugged')
