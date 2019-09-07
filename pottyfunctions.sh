@@ -51,7 +51,7 @@ deploy_dotfile() {
     cp "$SRC" "$DST"
     cat >> "$HOME/.local/bin/push-up" << EOF
 if [[ -e "$DST" ]]; then
-    cp "$DST" "$SRC"
+    cp "$DST" "$SRC" && echo "$DST -> $SRC"
 fi
 EOF
 }
