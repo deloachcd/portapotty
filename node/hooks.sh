@@ -1,20 +1,19 @@
 #!/bin/bash
 
-cd ./archives
+NODE_VERSION="v10.16.3"
+NODE_DIRECTORY="node-$NODE_VERSION-linux-x64"
+NODE_ARCHIVE="$NODE_DIRECTORY.tar.xz"
+NODE_URL="https://nodejs.org/dist/$NODE_VERSION/$NODE_ARCHIVE"
 
-# Retrieve and extract latest node.js, removing archive afterwards
-wget http://nodejs.org/dist/node-latest.tar.gz
-tar -xvf "node-latest.tar.gz"
-rm node-latest.tar.gz
+# Get stable release of node.js
+wget "$NODE_URL"                               # Creates NODE_ARCHIVE 
+tar -xvf "$NODE_ARCHIVE" && rm "$NODE_ARCHIVE" # Creates NODE_DIRECTORY
 
-# Figure out where node has been extracted
-NODE_DIRECTORY="$(ls | grep -E 'node-v[0-9]' | head -n 1)"
-
-# Extract, build and install
-cd "$NODE_DIRECTORY"
-./configure --prefix="$HOME/.local" && make install
+# Install node files into user's local installation directory
+cp $NODE_DIRECTORY/bin/* "$HOME/.local/bin"
+cp -r $NODE_DIRECTORY/lib/* "$HOME/.local/lib"
+cp -r $NODE_DIRECTORY/share/* "$HOME/.local/share"
+cp -r $NODE_DIRECTORY/include/* "$HOME/.local/include"
 
 # Clean up
 rm -r "$NODE_DIRECTORY"
-
-cd ..

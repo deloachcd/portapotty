@@ -6,7 +6,7 @@ if [[ ! -e "$BASH_CONFIG_DIR" ]]; then
 fi
 
 # Copy primary bash dotfiles to home directory
-cp -r "$PWD/dotfiles/bash/*" "$BASH_CONFIG_DIR"
+cp -r $PWD/dotfiles/bash/* "$BASH_CONFIG_DIR"
 
 # Copy shell-agnostic profile to home directory
 cp "$PWD/dotfiles/profile" "$HOME/.profile"

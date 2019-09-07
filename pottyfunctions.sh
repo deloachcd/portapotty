@@ -49,7 +49,7 @@ deploy_dotfile() {
     SRC="$1"
     DST="$2"
     cp "$SRC" "$DST"
-    cat >> "$HOME/.local/portapush" << EOF
+    cat >> "$HOME/.local/bin/push-up" << EOF
 if [[ -e "$DST" ]]; then
     cp "$DST" "$SRC"
 fi
