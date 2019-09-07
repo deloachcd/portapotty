@@ -7,7 +7,7 @@ mkpotty() {
 	mkdir "$POTTYNAME"
 	cd "$POTTYNAME"
 	touch apt-packages.sh
-	printf "#!/bin/bash\n\n" > hooks.sh
+	printf "#!/bin/bash\nsource ../pottyfunctions.sh\n\n" > hooks.sh
 	cd ..
 }
 

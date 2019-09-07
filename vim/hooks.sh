@@ -1,4 +1,5 @@
 #!/bin/bash
+source ../pottyfunctions.sh
 
 NEOVIM_CONFIG_DIR=$HOME/.config/nvim
 VIM_CONFIG_DIR=$HOME/.vim
@@ -40,8 +41,8 @@ if [[ "$FLAGS" =~ "compile-latest" ]]; then
 	rm -rf ./vim
 fi
 
-# Place vimrc in home directory
-cp "$PWD/dotfiles/vimrc" $HOME/.vimrc
+# Deploy vimrc in home directory
+deploy_dotfile "$PWD/dotfiles/vimrc" "$HOME/.vimrc"
 
 # Symlink neovim's init.vim to .vimrc
 ln -sf $HOME/.vimrc $NEOVIM_CONFIG_DIR/init.vim
