@@ -1,23 +1,37 @@
 """ Vim 8 / Neovim configuration section
-set shiftwidth=4 tabstop=4
-set nu rnu							  " 'hybrid' line numbers
-set t_Co=256						  " truecolor
-set scrolloff=10					  " scroll padding
+set expandtab autoindent shiftwidth=4 tabstop=4 softtabstop=4
 filetype plugin indent on
-call matchadd('ColorColumn', '\%80v', 100)	" highlight column 80
 set backspace=indent,eol,start
+set nu rnu                            " 'hybrid' line numbers
+set t_Co=256                          " truecolor
+set scrolloff=10                      " scroll padding
+call matchadd('ColorColumn', '\%80v', 100)  " highlight column 80
+" filetype plugin indent on
 
 """ Plugin listing section
 call plug#begin('~/.vim/plugged')
-	Plug 'w0rp/ale'
-	Plug 'tpope/vim-surround'
-	Plug 'scrooloose/nerdcommenter'
-	Plug 'itchyny/lightline.vim'
+    Plug 'w0rp/ale'
+    Plug 'tpope/vim-surround'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'itchyny/lightline.vim'
+    Plug 'junegunn/seoul256.vim'
+    " JavaScript plugins
+    Plug 'pangloss/vim-javascript'
+    Plug 'mxw/vim-jsx'
+    " Python plugins
+    Plug 'psf/black'
 call plug#end()
+
+" theme config
+" seoul256 (dark)
+" Range: 233 (darkest) ~ 239 (lightest)
+" Default: 237
+let g:seoul256_background = 235
+colo seoul256
 
 " lightline config
 set laststatus=2
 let g:lightline = {
-	\ 'colorscheme': 'seoul256',
-	\ }
+    \ 'colorscheme': 'seoul256',
+    \ }
 set noshowmode

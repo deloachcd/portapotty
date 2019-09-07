@@ -20,7 +20,7 @@ if [[ ! -d "$NEOVIM_PLUGIN_DIR" ]]; then
 fi
 
 FLAGS="$@"
-if [[ ! "$FLAGS" =~ "no-compile" ]]; then
+if [[ "$FLAGS" =~ "compile-latest" ]]; then
 	# Clone official vim repo
 	git clone https://github.com/vim/vim
 
@@ -41,7 +41,7 @@ if [[ ! "$FLAGS" =~ "no-compile" ]]; then
 fi
 
 # Place vimrc in home directory
-cp ./dotfiles/vimrc $HOME/.vimrc
+cp "$PWD/dotfiles/vimrc" $HOME/.vimrc
 
 # Symlink neovim's init.vim to .vimrc
 ln -sf $HOME/.vimrc $NEOVIM_CONFIG_DIR/init.vim

@@ -6,10 +6,10 @@ if [[ ! -e "$BASH_CONFIG_DIR" ]]; then
 fi
 
 # Copy primary bash dotfiles to home directory
-cp -r ./dotfiles/bash/* "$BASH_CONFIG_DIR"
+cp -r "$PWD/dotfiles/bash/*" "$BASH_CONFIG_DIR"
 
 # Copy shell-agnostic profile to home directory
-cp ./dotfiles/profile "$HOME/.profile"
+cp "$PWD/dotfiles/profile" "$HOME/.profile"
 
 # Link ~/.bashrc to our deployed bash init logic
 cat > "$HOME/.bashrc" << EOF

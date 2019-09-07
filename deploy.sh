@@ -4,9 +4,6 @@ GLOBAL_FLAGS="$@"
 
 source "./pottyfunctions.sh"
 
-# Install from apt-packages.sh file from all potties
-install_packages_from_all_potties
-
 if [[ -d "setup" ]]; then
 	# 'setup' always has its hooks run before all other
 	# potties
@@ -16,6 +13,9 @@ if [[ -d "setup" ]]; then
 	./hooks.sh
 	cd ..
 fi
+
+# Install from apt-packages.sh file from all potties
+install_packages_from_all_potties
 
 while read file; do
 	if [[ -d "$file" && \
