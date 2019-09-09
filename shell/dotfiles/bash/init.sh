@@ -7,5 +7,10 @@
 # source ~/.config/bash/init.sh
 export BASHDIR=~/.config/bash
 
+if [[ -z "$(printf "$PATH" | grep "$HOME/\.local/bin")" ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 . $BASHDIR/distro-defaults/debian
 source $BASHDIR/aliases.sh
+
