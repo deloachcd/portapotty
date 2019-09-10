@@ -27,3 +27,4 @@ function isoflash() {
 
 alias nim="nvim"
 alias tmux="tmux -2"
+alias code="codium"
