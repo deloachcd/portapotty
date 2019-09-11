@@ -18,8 +18,6 @@ call plug#begin('~/.vim/plugged')
     " JavaScript plugins
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
-    " Python plugins
-    Plug 'psf/black'
 call plug#end()
 
 " theme config
