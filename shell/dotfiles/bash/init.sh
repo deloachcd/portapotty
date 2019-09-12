@@ -13,3 +13,8 @@ fi
 
 . $BASHDIR/distro-defaults/debian
 source $BASHDIR/aliases.sh
+
+if [[ "$(uname -r)" =~ "Microsoft" ]]; then
+    # Allow vagrant to access Windows if we're using WSL
+    export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS=1
+fi
