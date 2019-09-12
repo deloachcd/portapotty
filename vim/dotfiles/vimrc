@@ -6,7 +6,6 @@ set nu rnu                            " 'hybrid' line numbers
 set t_Co=256                          " truecolor
 set scrolloff=10                      " scroll padding
 call matchadd('ColorColumn', '\%80v', 100)  " highlight column 80
-" filetype plugin indent on
 
 """ Plugin listing section
 call plug#begin('~/.vim/plugged')
@@ -17,6 +16,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/seoul256.vim'
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim'
+    Plug 'christoomey/vim-tmux-navigator'
     " JavaScript plugins
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
