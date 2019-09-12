@@ -1,5 +1,6 @@
 #!/bin/bash
 source ../pottyfunctions.sh
+FLAGS="$@"
 
 NEOVIM_CONFIG_DIR=$HOME/.config/nvim
 VIM_CONFIG_DIR=$HOME/.vim
@@ -20,7 +21,6 @@ if [[ ! -d "$NEOVIM_PLUGIN_DIR" ]]; then
 	mkdir -p $NEOVIM_PLUGIN_DIR
 fi
 
-FLAGS="$@"
 if [[ "$FLAGS" =~ "compile-latest" ]]; then
 	# Clone official vim repo
 	git clone https://github.com/vim/vim
