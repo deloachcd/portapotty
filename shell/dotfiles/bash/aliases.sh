@@ -28,3 +28,7 @@ function isoflash() {
 alias nim="nvim"
 alias tmux="tmux -2"
 alias code="codium"
+
+if [[ "$(uname -r)" =~ "Microsoft" ]]; then
+    alias cdw='cd "/mnt/c/Users/Chandler DeLoach/Whistle"'
+fi

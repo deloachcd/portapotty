@@ -28,7 +28,8 @@ install_packages_from_all_potties() {
 			APT_PACKAGES="$(eval printf "$package") $APT_PACKAGES"
 		done < <(cat "$package_list")
 	done < <(find . | grep 'apt-packages')
-	sudo apt update && sudo apt install -y $APT_PACKAGES
+	sudo apt update
+    sudo apt install -y $APT_PACKAGES
 }
 
 fake_deploy() {
