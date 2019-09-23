@@ -35,3 +35,7 @@ let g:lightline = {
     \ 'colorscheme': 'seoul256',
     \ }
 set noshowmode
+
+" erb templating support for surround.vim
+let g:surround_{char2nr('=')} = "<%= \r %>"
+let g:surround_{char2nr('-')} = "<% \r %>"
