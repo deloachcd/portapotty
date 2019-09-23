@@ -1,9 +1,9 @@
-function repid() {
+repid() {
 	REGEX_ARG="$1"
 	echo "$(ps -ax | grep -E "$REGEX_ARG" | head -n 1 | awk '{ print $1 }')"
 }
 
-function rekill() {
+rekill() {
 	# Kill first process matched by regex string argument
 	REGEX_ARG="$1"
 	LINE=$(ps -ax | grep -E "$REGEX_ARG" | head -n 1)
@@ -18,11 +18,15 @@ function rekill() {
 	fi
 }
 
-function isoflash() {
+isoflash() {
 	if="$1"
 	of="$2"
 	sudo dd bs=4M if="$if" \
 		of="$of" conv=fdatasync status=progress
+}
+
+weekspay() {
+    echo 'scale=2;' '26.55475' '*' "$1" '/' '1' | bc
 }
 
 alias nim="nvim"
