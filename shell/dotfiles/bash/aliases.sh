@@ -29,10 +29,19 @@ weekspay() {
     echo 'scale=2;' '26.55475' '*' "$1" '/' '1' | bc
 }
 
+myip() {
+    curl --ssl https://ipv4.myip.info && echo
+}
+
 alias nim="nvim"
 alias tmux="tmux -2"
 alias code="codium"
 
 if [[ "$(uname -r)" =~ "Microsoft" ]]; then
     alias cdw='cd "/mnt/c/Users/Chandler DeLoach/Whistle"'
+fi
+
+CHARTER_FUNCTIONS="$HOME/.config/bash/charter/source.sh"
+if [[ -e "$CHARTER_FUNCTIONS" ]]; then
+    source "$CHARTER_FUNCTIONS"
 fi
