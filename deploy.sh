@@ -1,7 +1,5 @@
 #!/bin/bash -x
 
-GLOBAL_FLAGS="$@"
-
 source "./pottyfunctions.sh"
 
 if [[ -d "setup" ]]; then
@@ -27,12 +25,7 @@ while read file; do
 		echo "Running '$POTTY' hooks..."
 		cd "$POTTY"
 		chmod u+x ./hooks.sh
-		if [[ -e "flags" ]]; then
-			get_local_flags "flags" # assigns LOCAL_FLAGS
-		else
-			LOCAL_FLAGS=""
-		fi
-		./hooks.sh "$GLOBAL_FLAGS" "$LOCAL_FLAGS"
+		./hooks.sh
 		cd ..
 	fi
 done < <(ls)

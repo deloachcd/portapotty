@@ -3,7 +3,7 @@
 # Ensure user install dir exists and has subdirs we expect
 USER_LOCAL="$HOME/.local"
 if [[ ! -d "$USER_LOCAL" ]]; then
-	mkdir -p "$USER_LOCAL"
+    mkdir -p "$USER_LOCAL"
 fi
 if [[ ! -d "$USER_LOCAL/bin" ]]; then
     mkdir "$USER_LOCAL/bin"
@@ -21,7 +21,7 @@ fi
 # Ensure portapotty state tracking directory exists
 PORTAPOTTY_TRACKING_DIR="$HOME/.local/share/portapotty"
 if [[ ! -d "$PORTAPOTTY_TRACKING_DIR" ]]; then
-	mkdir -p "$PORTAPOTTY_TRACKING_DIR"
+    mkdir -p "$PORTAPOTTY_TRACKING_DIR"
 fi
 
 # Create new 'push-up' script for portapotty

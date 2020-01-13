@@ -7,18 +7,12 @@ mkpotty() {
 	mkdir "$POTTYNAME"
 	cd "$POTTYNAME"
 	touch apt-packages.sh
-    HOOKS_TEMPLATE='#!/bin/bash\nsource ../pottyfunctions.sh\nFLAGS="$@"\n'
-    printf "$HOOKS_TEMPLATE" > hooks.sh
+cat > hooks.sh << EOF
+#!/bin/bash
+# portapotty deployment: '$POTTYNAME' layer
+source ../pottyfunctions.sh
+EOF
 	cd ..
-}
-
-get_local_flags() {
-	LOCAL_FLAGS=""
-	while read flag; do
-		if [[ ! "$flag" =~ "#" ]]; then
-			LOCAL_FLAGS="$flag $LOCAL_FLAGS"
-		fi
-	done < <(cat "$1")
 }
 
 install_packages_from_all_potties() {
