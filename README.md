@@ -1,27 +1,24 @@
 # portapotty
 
 ## what is this?
-"ultra low-overhead" deployment solution for stuff I use.
-basically just a set of convenience functions and a directory
-layout for scripting automated deployment of software packages
-and configurations.
+bash scripting project for deploying dotfiles and installing apt
+packages on a new linux workstation.
 
 ## "shit out" all deployments
 ```
-git clone --depth=1 git@github.com:deloachcd/portapotty.git &&\
+git clone https://github.com/deloachcd/portapotty &&\
 	cd portapotty &&\
-	chmod u+x ./deploy.sh &&\
 	./deploy.sh &&\
 	cd ..
 ```
 
 ## create a "potty" to add deployment logic for a piece of software
 ```
-	source ./potty/activate && mkpotty [name_of_software]
+	source ./pottyfunctions.sh && mkpotty [name_of_software]
 ```
 
-## create a fake deployment to test your deployment logic
+## create a fake deployment to test deployment logic
 
 ```
-	source ./potty/activate && fake_deploy
+	source ./pottyfunctions.sh && fake_deploy
 ```
