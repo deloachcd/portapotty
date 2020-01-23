@@ -4,7 +4,7 @@
 #promptinit
 #prompt adam1
 #-version
-PROMPT="%t %F{cyan}%~%F{white} %(?.%F{green}✔.%F{red}✘)%F{white} =>  "
+PROMPT="%F{cyan}%~%F{white} %(?.%F{green}.%F{red})%?%F{white} $ "
 
 setopt histignorealldups sharehistory
 
