@@ -2,4 +2,6 @@
 # portapotty deployment: 'node' layer
 source ../pottyfunctions.sh
 
-./script/install-node-lts.sh -y --prefix=$HOME/.local
+if ! which node; then
+    ./script/install-node-lts.sh -y --prefix=$HOME/.local
+fi
