@@ -25,4 +25,19 @@ isoflash() {
 		of="$of" conv=fdatasync status=progress
 }
 
+mkscript() {
+    FILES="$@"
+    for file in $FILES; do
+        cat >> $file << EOF
+#!/bin/bash
+
+# dynamically include 'magic spells' mini debug library if constant defined
+MAGIC_SPELLS_DEBUG_LIB=1 
+if [[ ! -z "\$MAGIC_SPELLS_DEBUG_LIB" ]]; then
+    source \$HOME/.config/bash/magic-spells.sh
+fi
+EOF
+    done
+}
+
 alias tmux="tmux -2"
