@@ -32,6 +32,3 @@ cat > "$PUSH_UP" << EOF
 # dotfiles to the user's local copy of the portapotty repo
 EOF
 chmod u+x "$PUSH_UP"
-
-# Update package listing
-sudo apt update

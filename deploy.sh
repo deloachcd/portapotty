@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/bash -e
 
 source "./pottyfunctions.sh"
 
-# Install from apt-packages.sh file from all potties
+# Install packages first
+install_dev_essentials
 install_packages_from_all_potties
 
 if [[ -d "setup" ]]; then
