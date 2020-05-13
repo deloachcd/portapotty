@@ -12,13 +12,6 @@ git clone https://github.com/deloachcd/portapotty &&\
 	cd ..
 ```
 
-## create a "potty" to add deployment logic for a piece of software
-```
-	source ./pottyfunctions.sh && mkpotty [name_of_software]
-```
-
-## create a fake deployment to test deployment logic
-
-```
-	source ./pottyfunctions.sh && fake_deploy
-```
+## TODO
+- monolithic script
+- eliminate redundant sourcing of `pottyfunctions.sh`
