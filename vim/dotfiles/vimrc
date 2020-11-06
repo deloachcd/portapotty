@@ -1,22 +1,24 @@
 """ Vim 8 / Neovim configuration section
-set expandtab autoindent shiftwidth=4 tabstop=4 softtabstop=4
-filetype plugin indent on
-set backspace=indent,eol,start
-set nu rnu                            " 'hybrid' line numbers
-set t_Co=256                          " truecolor
-set scrolloff=10                      " scroll padding
+set nu rnu                                  " hybrid line numbers
+set t_Co=256                                " truecolor
+set scrolloff=10                            " scroll padding
 call matchadd('ColorColumn', '\%80v', 100)  " highlight column 80
 
 """ Plugin listing section
 call plug#begin('~/.vim/plugged')
-    Plug 'w0rp/ale'
+    Plug 'tpope/vim-sensible'
+    " Plug 'tpope/vim-sleuth'
+    Plug 'roryokane/detectindent'
     Plug 'tpope/vim-surround'
-    Plug 'scrooloose/nerdcommenter'
+    Plug 'tpope/vim-commentary'
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/seoul256.vim'
-    Plug 'junegunn/fzf'
-    Plug 'junegunn/fzf.vim'
+    Plug 'vim-syntastic/syntastic'
     Plug 'christoomey/vim-tmux-navigator'
+    "Plug 'w0rp/ale'
+    "Plug 'scrooloose/nerdcommenter'
+    "Plug 'junegunn/fzf'
+    "Plug 'junegunn/fzf.vim'
     " JavaScript plugins
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
