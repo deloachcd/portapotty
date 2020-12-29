@@ -3,7 +3,6 @@
 source "./pottyfunctions.sh"
 
 # Install packages first
-install_dev_essentials
 install_packages_from_all_potties
 
 if [[ -d "setup" ]]; then

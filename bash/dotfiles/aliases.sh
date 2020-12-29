@@ -41,3 +41,25 @@ EOF
 }
 
 alias tmux="tmux -2"
+
+count() {
+    i=1
+    while [[ $i -lt $(($1+1)) ]]; do
+        printf "$i..."
+        sleep 1
+        i=$((i+1))
+    done
+    echo "Done!"
+}
+
+scrollfix() {
+    sudo modprobe -r psmouse
+    count 5
+    sudo modprobe psmouse
+}
+
+keyjp() {
+    clear && python3 ~/Scripts/keyjp.py
+}
+
+alias えぃと="exit"

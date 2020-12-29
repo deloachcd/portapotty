@@ -1,39 +1,95 @@
 """ Vim 8 / Neovim configuration section
 set nu rnu                                  " hybrid line numbers
 set t_Co=256                                " truecolor
-set scrolloff=10                            " scroll padding
+set scrolloff=3                             " scroll padding
 call matchadd('ColorColumn', '\%80v', 100)  " highlight column 80
 
 """ Plugin listing section
 call plug#begin('~/.vim/plugged')
+    " plugins written by other people
     Plug 'tpope/vim-sensible'
-    " Plug 'tpope/vim-sleuth'
-    Plug 'roryokane/detectindent'
+    Plug 'tpope/vim-sleuth'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
-    Plug 'itchyny/lightline.vim'
-    Plug 'junegunn/seoul256.vim'
-    Plug 'vim-syntastic/syntastic'
+    Plug 'dense-analysis/ale'
+    Plug 'inkarkat/SyntaxAttr.vim'
     Plug 'christoomey/vim-tmux-navigator'
-    "Plug 'w0rp/ale'
+    " plugins written by me
+    Plug 'mildewchan/takodachi.vim'
+    Plug 'mildewchan/atlantean.vim'
+    " plugins to deprecate completely
+    "Plug 'vim-syntastic/syntastic'
+    "Plug 'junegunn/seoul256.vim'
+    "Plug 'edkolev/tmuxline.vim'
+    "Plug 'arcticicestudio/nord-vim'
+    "Plug 'pgdouyon/vim-yin-yang'
+    "Plug 'altercation/vim-colors-solarized'
+    "Plug 'roryokane/detectindent'
+    "Plug 'itchyny/lightline.vim'
     "Plug 'scrooloose/nerdcommenter'
     "Plug 'junegunn/fzf'
     "Plug 'junegunn/fzf.vim'
     " JavaScript plugins
-    Plug 'pangloss/vim-javascript'
-    Plug 'mxw/vim-jsx'
+    "Plug 'pangloss/vim-javascript'
+    "Plug 'mxw/vim-jsx'
 call plug#end()
 
-" theme config
-" seoul256 (dark)
-" Range: 233 (darkest) ~ 239 (lightest)
-" Default: 237
-let g:seoul256_background = 235
-colo seoul256
+""" color config
+colorscheme atlantean
 
-" lightline config
+""" themed statusline
+function! g:StatuslineMode()
+  let l:mode_map = {
+    \ 'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE',
+    \ 'v': 'VISUAL', 'V': 'V-LINE', "\<C-v>": 'V-BLOCK',
+    \ 'c': 'COMMAND', 's': 'SELECT', 'S': 'S-LINE',
+    \ "\<C-s>": 'S-BLOCK', 't': 'TERMINAL',
+    \   }
+  return get(l:mode_map, mode(), "BLACK MAGIC")
+endfunction
+set statusline=%1*\ %{StatuslineMode()}\ %2*\ %f\ %m\ %r%=\ %{&ff}\ \|\ 
+set statusline+=%{strlen(&fenc)?&fenc:'none'}\ \|\ %{&filetype}\ 
+set statusline+=%3*\ %l:%L\ 
 set laststatus=2
-let g:lightline = {
-    \ 'colorscheme': 'seoul256',
-    \ }
 set noshowmode
+
+" mappings 
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+map -a	:call SyntaxAttr#SyntaxAttr()<CR>
+
+"" helper functions
+function! StatuslineGitBranch()
+  let b:gitbranch=""
+  if &modifiable
+    try
+      let l:dir=expand('%:p:h')
+      let l:gitrevparse = system("git -C ".l:dir." rev-parse --abbrev-ref HEAD")
+      if !v:shell_error
+        let b:gitbranch="(".substitute(l:gitrevparse, '\n', '', 'g').") "
+      endif
+    catch
+    endtry
+  endif
+endfunction
+
+augroup GetGitBranch
+  autocmd!
+  autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
+augroup END
+
+"See help completion for source,
+"Note: usual completion is on <C-n> but more trouble to press all the time.
+"Never type the same word twice and maybe learn a new spellings!
+"Use the Linux dictionary when spelling is in doubt.
+"Window users can copy the file to their machine.
+" source: https://vim.fandom.com/wiki/Autocomplete_with_TAB_when_typing_words
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+"set dictionary="/usr/dict/words"
+"
+"

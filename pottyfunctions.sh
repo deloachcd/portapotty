@@ -15,10 +15,6 @@ EOF
     cd ..
 }
 
-install_dev_essentials() {
-    sudo dnf groupinstall "C Development Tools and Libraries"
-}
-
 install_packages_from_all_potties() {
     PACKAGES=""
     while read package_list; do
@@ -26,8 +22,10 @@ install_packages_from_all_potties() {
             PACKAGES="$(eval printf "$package") $PACKAGES"
         done < <(cat "$package_list")
     done < <(find . | grep 'packages')
+    echo "** UPDATE REMOTE **"
+    sudo apt update
     echo "** INSTALL DEPENDENCIES **"
-    sudo dnf install -y $PACKAGES
+    sudo apt install -y $PACKAGES
 }
 
 fake_deploy() {
