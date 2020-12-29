@@ -6,32 +6,18 @@ call matchadd('ColorColumn', '\%80v', 100)  " highlight column 80
 
 """ Plugin listing section
 call plug#begin('~/.vim/plugged')
-    " plugins written by other people
-    Plug 'tpope/vim-sensible'
-    Plug 'tpope/vim-sleuth'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-commentary'
-    Plug 'dense-analysis/ale'
-    Plug 'inkarkat/SyntaxAttr.vim'
-    Plug 'christoomey/vim-tmux-navigator'
-    " plugins written by me
-    Plug 'mildewchan/takodachi.vim'
-    Plug 'mildewchan/atlantean.vim'
-    " plugins to deprecate completely
-    "Plug 'vim-syntastic/syntastic'
-    "Plug 'junegunn/seoul256.vim'
-    "Plug 'edkolev/tmuxline.vim'
-    "Plug 'arcticicestudio/nord-vim'
-    "Plug 'pgdouyon/vim-yin-yang'
-    "Plug 'altercation/vim-colors-solarized'
-    "Plug 'roryokane/detectindent'
-    "Plug 'itchyny/lightline.vim'
-    "Plug 'scrooloose/nerdcommenter'
-    "Plug 'junegunn/fzf'
-    "Plug 'junegunn/fzf.vim'
-    " JavaScript plugins
-    "Plug 'pangloss/vim-javascript'
-    "Plug 'mxw/vim-jsx'
+  " plugins written by other people
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-sleuth'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
+  Plug 'dense-analysis/ale'
+  Plug 'dense-analysis/ale'
+  Plug 'inkarkat/SyntaxAttr.vim'
+  Plug 'christoomey/vim-tmux-navigator'
+  " plugins written by me
+  Plug 'mildewchan/takodachi.vim'
+  Plug 'mildewchan/atlantean.vim'
 call plug#end()
 
 """ color config
