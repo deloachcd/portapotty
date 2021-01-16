@@ -21,7 +21,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 """ color config
-colorscheme atlantean
+colorscheme takodachi
 
 """ themed statusline
 function! g:StatuslineMode()
@@ -79,3 +79,17 @@ endfunction
 "set dictionary="/usr/dict/words"
 "
 "
+
+""" abbreviations
+func Eatchar(pat)
+  " some black magic from the help manual to remove trailing
+  " spaces from abbreviations. to use it, append this directly
+  " to the end of an abbreviation definition:
+  " <C-R>=Eatchar('\s')<CR>
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
+endfunc
+"python
+autocmd Filetype python :iabbrev im import
+autocmd Filetype python :iabbrev ifn if<Space>__name__<Space>==<Space>"__main__":<CR><C-R>=Eatchar('\s')<CR>
+autocmd Filetype python :iabbrev pr print("")<left><left><C-R>=Eatchar('\s')<CR>
