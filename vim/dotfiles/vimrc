@@ -15,13 +15,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'dense-analysis/ale'
   Plug 'inkarkat/SyntaxAttr.vim'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'habamax/vim-godot'
   " plugins written by me
   Plug 'mildewchan/takodachi.vim'
   Plug 'mildewchan/atlantean.vim'
 call plug#end()
 
 """ color config
-colorscheme takodachi
+colorscheme atlantean
 
 """ themed statusline
 function! g:StatuslineMode()
