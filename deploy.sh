@@ -19,8 +19,8 @@ while read file; do
     if [[ -d "$file" && \
             ! "$file" =~ "setup" && \
             ! "$file" =~ "fake_deployments" ]]; then
-        # If file is non-setup fileectory, assume it's a potty
-        # and run its hooks
+        # If file is non-setup directory and it has hooks.sh,
+        # assume it's a potty and run the hooks script
         POTTY="$file"
         echo "Running '$POTTY' hooks..."
         cd "$POTTY"

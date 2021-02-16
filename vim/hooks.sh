@@ -21,3 +21,8 @@ curl -fLo ./plugins/plug.vim \
 
 # Place vim plug in vim's autoload plugin directory
 cp ./plugins/plug.vim $VIM_PLUGIN_DIR
+
+# Symlinks for neovim
+ln -s ~/.vim ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
+
