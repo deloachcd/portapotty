@@ -3,6 +3,9 @@ set nu rnu                                  " hybrid line numbers
 set t_Co=256                                " truecolor
 set scrolloff=3                             " scroll padding
 call matchadd('ColorColumn', '\%80v', 100)  " highlight column 80
+set tabstop=8                               " hard tabs are 8 spaces wide
+set shiftwidth=4                            " 4-space wide indents
+set expandtab                               " hitting "tab" inserts spaces
 
 """ Plugin listing section
 call plug#begin('~/.vim/plugged')
@@ -11,18 +14,24 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
-  Plug 'dense-analysis/ale'
-  Plug 'dense-analysis/ale'
+  Plug 'vim-syntastic/syntastic'
+  Plug 'preservim/nerdtree'
   Plug 'inkarkat/SyntaxAttr.vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'habamax/vim-godot'
+  Plug 'deloachcd/nord-vim'
   " plugins written by me
   Plug 'mildewchan/takodachi.vim'
   Plug 'mildewchan/atlantean.vim'
 call plug#end()
 
+""" plugin configuration
+let g:syntastic_cpp_include_dirs = [
+      \ $HOME."/.local/include/syntastic-headers"
+      \ ]
+
 """ color config
-colorscheme atlantean
+colorscheme nord
 
 """ themed statusline
 function! g:StatuslineMode()
@@ -34,8 +43,8 @@ function! g:StatuslineMode()
     \   }
   return get(l:mode_map, mode(), "BLACK MAGIC")
 endfunction
-set statusline=%1*\ %{StatuslineMode()}\ %2*\ %f\ %m\ %r%=\ %{&ff}\ \|\ 
-set statusline+=%{strlen(&fenc)?&fenc:'none'}\ \|\ %{&filetype}\ 
+set statusline=%1*\ %{StatuslineMode()}\ >>%2*\ %f\ %m\ %r%=\ %{&ff}\ \|\ 
+set statusline+=%{strlen(&fenc)?&fenc:'none'}\ \|\ %{&filetype}\ <<
 set statusline+=%3*\ %l:%L\ 
 set laststatus=2
 set noshowmode
@@ -43,6 +52,7 @@ set noshowmode
 " mappings 
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 map -a	:call SyntaxAttr#SyntaxAttr()<CR>
+map -t	:NERDTreeToggle<CR>
 
 "" helper functions
 function! StatuslineGitBranch()
@@ -64,12 +74,7 @@ augroup GetGitBranch
   autocmd VimEnter,WinEnter,BufEnter * call StatuslineGitBranch()
 augroup END
 
-"See help completion for source,
-"Note: usual completion is on <C-n> but more trouble to press all the time.
-"Never type the same word twice and maybe learn a new spellings!
-"Use the Linux dictionary when spelling is in doubt.
-"Window users can copy the file to their machine.
-" source: https://vim.fandom.com/wiki/Autocomplete_with_TAB_when_typing_words
+" Source: https://vim.fandom.com/wiki/Autocomplete_with_TAB_when_typing_words
 function! Tab_Or_Complete()
   if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
     return "\<C-N>"
@@ -78,8 +83,6 @@ function! Tab_Or_Complete()
   endif
 endfunction
 "set dictionary="/usr/dict/words"
-"
-"
 
 """ abbreviations
 func Eatchar(pat)
