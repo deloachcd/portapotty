@@ -1,3 +1,3 @@
-python3
-python3-pip
-python3-venv
+python38
+python38-pip
+python38-virtualenv

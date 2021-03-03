@@ -22,24 +22,8 @@ install_packages_from_all_potties() {
             PACKAGES="$(eval printf "$package") $PACKAGES"
         done < <(cat "$package_list")
     done < <(find . | grep 'packages')
-    echo "** UPDATE REMOTE **"
-    sudo apt update
     echo "** INSTALL DEPENDENCIES **"
-    sudo apt install -y $PACKAGES
-}
-
-fake_deploy() {
-    # Always run this from project root
-    FLAGS="$@"
-    REALHOME="$HOME"
-    FAKEHOME="$(pwd)/fake_deployments/deployment_$(date +%s)"
-    mkdir -p "$FAKEHOME"
-    env HOME="$FAKEHOME" ./deploy.sh "$FLAGS"
-    HOME="$REALHOME"
-}
-
-clean_fakes() {
-    rm -r ./fake_deployments/*
+    sudo zypper in -y $PACKAGES
 }
 
 deploy_dotfile() {
