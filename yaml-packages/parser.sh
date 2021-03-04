@@ -1,25 +1,24 @@
 #!/bin/bash
 
-DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
+DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | gawk -F '"' '{ print $2 }')"
 if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
     USER_DISTRO="ubuntu"
+    PKG_CMD="apt install"
 elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
     USER_DISTRO="opensuse"
+    PKG_CMD="zypper in"
 fi
 
-packages=
+packages=""
 distro=NONE
 while read line; do
-    if [[ $line == *"all"* ]]; then
-        distro=ALL
-    elif [[ $line =~ ((' '|\t)*\-) ]]; then
-        package="$(echo $line | cut -c 3-)"
-        if [[ $distro == ALL || $distro == $USER_DISTRO ]]; then
-            packages+=" $package" 
-        fi
+    if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
+            || $distro == $USER_DISTRO) ]]; then
+        package=$(echo -n "$line" | gawk '{ gsub(/- /, ""); print $l }')
+        packages+=" $package"
     else
-        distro="$(awk '{ print substr(ENVIRON["line"], 1, length(ENVIRON["line"])-1) }')"
+        distro=$(echo -n "$line" | gawk '{ print substr($1, 1, length($1)-1) }')
     fi
 done < packages.yml
-echo $USER_DISTRO
-echo $packages
+RESOLVE_DEPENDENCIES="sudo $PKG_CMD $packages"
+echo $RESOLVE_DEPENDENCIES

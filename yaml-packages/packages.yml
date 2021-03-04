@@ -1,15 +1,14 @@
-packages:
-    all:
-        - dkms
-        - wget
-        - git
-        - curl
-        - make
-    ubuntu:
-        - build-essential
-        - pkg-config
-    opensuse:
-        - gcc
-        - gcc-c++
-        - glibc-devel
-        - linux-glibc-devel
+all:
+    - dkms
+    - wget
+    - git
+    - curl
+    - make
+ubuntu:
+    - build-essential
+    - pkg-config
+opensuse:
+    - gcc
+    - gcc-c++
+    - glibc-devel
+    - linux-glibc-devel
