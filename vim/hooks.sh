@@ -23,6 +23,10 @@ curl -fLo ./plugins/plug.vim \
 cp ./plugins/plug.vim $VIM_PLUGIN_DIR
 
 # Symlinks for neovim
-ln -s ~/.vim ~/.config/nvim
-ln -s ~/.vimrc ~/.config/nvim/init.vim
+if [[ ! -e ~/.config/nvim ]]; then
+    ln -s ~/.vim ~/.config/nvim
+fi
+if [[ ! -e ~/.config/nvim/init.vim ]]; then
+    ln -s ~/.vimrc ~/.config/nvim/init.vim
+fi
 
