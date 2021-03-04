@@ -11,18 +11,17 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-sleuth'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
-  Plug 'dense-analysis/ale'
-  Plug 'dense-analysis/ale'
   Plug 'inkarkat/SyntaxAttr.vim'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'habamax/vim-godot'
   " plugins written by me
   Plug 'mildewchan/takodachi.vim'
   Plug 'mildewchan/atlantean.vim'
+  Plug 'deloachcd/nord-vim'
 call plug#end()
 
 """ color config
-colorscheme atlantean
+colorscheme nord
 
 """ themed statusline
 function! g:StatuslineMode()
