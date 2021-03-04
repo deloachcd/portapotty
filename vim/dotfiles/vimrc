@@ -11,7 +11,7 @@ set expandtab                               " hitting "tab" inserts spaces
 call plug#begin('~/.vim/plugged')
   " plugins written by other people
   Plug 'tpope/vim-sensible'
-  Plug 'tpope/vim-sleuth'
+  Plug 'ciaranm/detectindent'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
   Plug 'vim-syntastic/syntastic'
@@ -53,6 +53,7 @@ set noshowmode
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 map -a	:call SyntaxAttr#SyntaxAttr()<CR>
 map -t	:NERDTreeToggle<CR>
+map -d	:DetectIndent<CR>
 
 "" helper functions
 function! StatuslineGitBranch()
