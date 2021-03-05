@@ -7,7 +7,7 @@
 1. create directories for storing dotfiles, pulling remote objects, etc.
 2. specify dependencies for deploying your software in `packages.yml`
 3. write logic for deploying your software in `hooks.sh` scripts
-4. run `deploy.sh` to deploy your software, and push-up to update the repo
+4. run `deploy.sh` to deploy your software, and `push-up` to update the repo
 
 ## ...what?
 Just skim over `pottyfunctions.sh` and `deploy.sh` and you'll be able to
