@@ -1,7 +1,7 @@
 # portapotty
 ![portapotty-logo](https://github.com/deloachcd/img/blob/master/portapotty-logo.png?raw=true)
 
-*"portapotty is the Gentoo of version controlling your Linux workflow" - me*
+*"portapotty is the Gentoo of version controlling your Linux command line tools" - me*
 
 ## how it works
 1. create directories for storing dotfiles, pulling remote objects, etc.
