@@ -1,20 +1,6 @@
 #!/bin/bash
 # This function should only be sourced, not executed!
 
-mkpotty() {
-    HOME_VAR='$HOME'
-    POTTYNAME="$1"
-    mkdir "$POTTYNAME"
-    cd "$POTTYNAME"
-    touch packages.yml
-cat > hooks.sh << EOF
-#!/bin/bash
-# portapotty deployment: '$POTTYNAME' layer
-source ../pottyfunctions.sh
-EOF
-    cd ..
-}
-
 install_packages_from_all_potties() {
     DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | gawk -F '"' '{ print $2 }')"
     if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
@@ -40,7 +26,7 @@ deploy_dotfile() {
     DST="$2"
     cp "$SRC" "$DST"
     cat >> "$HOME/.local/bin/push-up" << EOF
-if [[ -e "$DST" ]]; then
+if [[ -e "$DST" ]] && ! diff -q "$SRC" "$DST" 1>/dev/null; then
     cp "$DST" "$SRC" && echo "$DST -> $SRC"
 fi
 EOF
