@@ -14,7 +14,7 @@ distro=NONE
 while read line; do
     if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
             || $distro == $USER_DISTRO) ]]; then
-        package=$(echo -n "$line" | gawk '{ gsub(/- /, ""); print $l }')
+        package=$(echo -n "$line" | gawk '{ print $2 }')
         packages+=" $package"
     else
         distro=$(echo -n "$line" | gawk '{ print substr($1, 1, length($1)-1) }')
