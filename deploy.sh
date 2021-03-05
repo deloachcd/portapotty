@@ -2,6 +2,7 @@
 
 display_help() {
     cat << EOF
+
 Portapotty - deploy script
 --------------------------
 An aggressively simple software (ASS) suite for keeping my shit together.
@@ -11,14 +12,15 @@ the parameters listed below.
 
 Optional parameters:
     -h      display this help message
-    -s      skip installation of dependencies for potties
+    -s      skip automated installation of packages.yml dependencies
     -t      run deploy logic only for target potty, specified as argument
+
 EOF
 }
 
-while getopts "hst:"; do
+while getopts "hst:" opt_sg; do
     case $opt_sg in
-        h) display_help ;;
+        h) display_help && exit 0 ;;
         s) SKIP_DEPENDENCY_RESOLUTION=true ;;
         t) TARGET=$OPTARG ;;
         ?) echo "unknown_option: $opt_sg" ;;
