@@ -2,7 +2,7 @@
 # This function should only be sourced, not executed!
 
 install_packages_from_all_potties() {
-    DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | gawk -F '"' '{ print $2 }')"
+    DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
     if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
         USER_DISTRO="ubuntu"
         PKG_CMD="apt install"
@@ -41,10 +41,10 @@ resolve_dependencies() {
     while read line; do
         if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
                 || $distro == $USER_DISTRO) ]]; then
-            package=$(echo -n "$line" | gawk '{ print $2 }')
+            package=$(echo -n "$line" | awk '{ print $2 }')
             packages+=" $package"
         else
-            distro=$(echo -n "$line" | gawk '{ print substr($1, 1, length($1)-1) }')
+            distro=$(echo -n "$line" | awk '{ print substr($1, 1, length($1)-1) }')
         fi
     done < "$PACKAGE_LISTING_YAML"
     printf "$packages"
