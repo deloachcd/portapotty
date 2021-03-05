@@ -1,0 +1,8 @@
+ubuntu:
+    - python3
+    - python3-pip
+    - python3-venv
+opensuse:
+    - python38
+    - python38-pip
+    - python38-virtualenv

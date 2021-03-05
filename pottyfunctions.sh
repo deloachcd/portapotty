@@ -16,30 +16,23 @@ EOF
 }
 
 install_packages_from_all_potties() {
+    DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | gawk -F '"' '{ print $2 }')"
+    if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
+        USER_DISTRO="ubuntu"
+        PKG_CMD="apt install"
+    elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
+        USER_DISTRO="opensuse"
+        PKG_CMD="zypper in"
+    fi
+
     PACKAGES=""
-    while read package_list; do
-        while read package; do
+    while read packagefile; do
+        for package in $(resolve_dependencies "$USER_DISTRO" "$packagefile"); do
             PACKAGES="$(eval printf "$package") $PACKAGES"
-        done < <(cat "$package_list")
-    done < <(find . | grep 'packages')
-    echo "** UPDATE REMOTE **"
-    sudo apt update
+        done
+    done < <(find . | grep 'packages.yml')
     echo "** INSTALL DEPENDENCIES **"
-    sudo apt install -y $PACKAGES
-}
-
-fake_deploy() {
-    # Always run this from project root
-    FLAGS="$@"
-    REALHOME="$HOME"
-    FAKEHOME="$(pwd)/fake_deployments/deployment_$(date +%s)"
-    mkdir -p "$FAKEHOME"
-    env HOME="$FAKEHOME" ./deploy.sh "$FLAGS"
-    HOME="$REALHOME"
-}
-
-clean_fakes() {
-    rm -r ./fake_deployments/*
+    sudo $PKG_CMD -y $PACKAGES
 }
 
 deploy_dotfile() {
@@ -51,4 +44,22 @@ if [[ -e "$DST" ]]; then
     cp "$DST" "$SRC" && echo "$DST -> $SRC"
 fi
 EOF
+}
+
+resolve_dependencies() {
+    USER_DISTRO="$1"
+    PACKAGE_LISTING_YAML="$2"
+
+    packages=""
+    distro=NONE
+    while read line; do
+        if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
+                || $distro == $USER_DISTRO) ]]; then
+            package=$(echo -n "$line" | gawk '{ print $2 }')
+            packages+=" $package"
+        else
+            distro=$(echo -n "$line" | gawk '{ print substr($1, 1, length($1)-1) }')
+        fi
+    done < "$PACKAGE_LISTING_YAML"
+    printf "$packages"
 }

@@ -62,4 +62,5 @@ keyjp() {
     clear && python3 ~/Scripts/keyjp.py
 }
 
-alias えぃと="exit"
+alias vim="nvim"
+alias echo="echo -e"
