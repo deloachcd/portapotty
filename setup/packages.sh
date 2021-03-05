@@ -1,9 +1,0 @@
-dkms
-wget
-git
-curl
-make
-gcc
-gcc-c++
-glibc-devel
-linux-glibc-devel
