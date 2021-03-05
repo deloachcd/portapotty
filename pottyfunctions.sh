@@ -6,7 +6,7 @@ mkpotty() {
     POTTYNAME="$1"
     mkdir "$POTTYNAME"
     cd "$POTTYNAME"
-    touch packages.sh
+    touch packages.yml
 cat > hooks.sh << EOF
 #!/bin/bash
 # portapotty deployment: '$POTTYNAME' layer

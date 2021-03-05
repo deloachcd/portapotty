@@ -1,5 +1,30 @@
 #!/bin/bash -e
 
+display_help() {
+    cat << EOF
+Portapotty - deploy script
+--------------------------
+An aggressively simple software (ASS) suite for keeping my shit together.
+By default this script resolves dependencies from packages.yml and runs
+hooks from hooks.sh for all potties, but you can tweak this behavior through
+the parameters listed below.
+
+Optional parameters:
+    -h      display this help message
+    -s      skip installation of dependencies for potties
+    -t      run deploy logic only for target potty, specified as argument
+EOF
+}
+
+while getopts "hst:"; do
+    case $opt_sg in
+        h) display_help ;;
+        s) SKIP_DEPENDENCY_RESOLUTION=true ;;
+        t) TARGET=$OPTARG ;;
+        ?) echo "unknown_option: $opt_sg" ;;
+    esac
+done
+
 source "./pottyfunctions.sh"
 
 # Install packages first
