@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'inkarkat/SyntaxAttr.vim'
   Plug 'christoomey/vim-tmux-navigator'
-  Plug 'habamax/vim-godot'
+  Plug 'wincent/terminus'
   Plug 'deloachcd/nord-vim'
   " plugins written by me
   Plug 'mildewchan/takodachi.vim'
