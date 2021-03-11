@@ -1,0 +1,15 @@
+autoload -Uz compinit promptinit
+
+export ZSH_CONFIG_DIR=~/.config/zsh
+
+source $ZSH_CONFIG_DIR/constants.sh
+source $ZSH_CONFIG_DIR/path.sh
+source $ZSH_CONFIG_DIR/prompt.sh
+source $ZSH_CONFIG_DIR/aliases.sh
+
+if [[ -e $ZSH_CONFIG_DIR/local.sh ]]; then
+    source $ZSH_CONFIG_DIR/local.sh
+fi
+
+compinit
+promptinit

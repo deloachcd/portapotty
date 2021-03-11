@@ -2,7 +2,6 @@ export BASH_CONFIG_DIR=~/.config/bash
 
 source $BASH_CONFIG_DIR/constants.sh
 source $BASH_CONFIG_DIR/path.sh
-source $BASH_CONFIG_DIR/prompt.sh
 source $BASH_CONFIG_DIR/aliases.sh
 
 if [[ -e $BASH_CONFIG_DIR/local.sh ]]; then
