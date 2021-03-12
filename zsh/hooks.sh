@@ -12,5 +12,5 @@ deploy_dotfile "$PWD/dotfiles/aliases.sh" "$ZSH_CONFIG_DIR/aliases.sh"
 
 # change user's shell to zsh if it's bash
 if cat /etc/passwd | grep $(whoami) | grep bash 2>&1 1>/dev/null; then
-    chsh -s /bin/zsh
+    sudo chsh -s /bin/zsh $(whoami)
 fi
