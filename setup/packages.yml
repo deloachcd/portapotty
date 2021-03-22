@@ -4,6 +4,7 @@ all:
     - git
     - curl
     - make
+    - htop
 ubuntu:
     - build-essential
     - pkg-config
@@ -12,3 +13,4 @@ opensuse:
     - gcc-c++
     - glibc-devel
     - linux-glibc-devel
+    - systemd-coredump
