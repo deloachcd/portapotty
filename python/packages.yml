@@ -6,3 +6,7 @@ opensuse:
     - python38
     - python38-pip
     - python38-virtualenv
+arch:
+    - python
+    - python-pip
+    - python-virtualenv

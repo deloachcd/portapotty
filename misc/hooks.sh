@@ -1,5 +1,4 @@
-DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
-if [[ "$DISTRO_LONGNAME" == *"openSUSE"* && $QUICK_DEPLOY == false ]]; then
+if [[ "$USER_DISTRO" == "opensuse" && $QUICK_DEPLOY == false ]]; then
     # Fix annoying prompt where NetworkManager has to ask for root permission
     # every time you connect to a Wi-Fi network
     if ! sudo cat "/etc/polkit-default-privs.local" | grep NetworkManager 1>/dev/null; then

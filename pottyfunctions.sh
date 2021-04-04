@@ -2,18 +2,18 @@
 # This function should only be sourced, not executed!
 
 install_packages_from_all_potties() {
-    DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
-    if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
-        USER_DISTRO="ubuntu"
-        PKG_CMD="apt install"
-    elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
-        USER_DISTRO="opensuse"
-        PKG_CMD="zypper in"
+    local DISTRO="$1"
+    if [[ "$DISTRO" == "ubuntu" ]]; then
+        local PKG_CMD="apt install"
+    elif [[ "$DISTRO" == "opensuse" ]]; then
+        local PKG_CMD="zypper in"
+    elif [[ "$DISTRO" == "arch" ]]; then
+        local PKG_CMD="pacman -S --needed"
     fi
 
-    PACKAGES=""
+    local PACKAGES=""
     while read packagefile; do
-        for package in $(resolve_dependencies "$USER_DISTRO" "$packagefile"); do
+        for package in $(resolve_dependencies "$DISTRO" "$packagefile"); do
             PACKAGES="$(eval printf "$package") $PACKAGES"
         done
     done < <(find . | grep 'packages.yml')
@@ -22,8 +22,8 @@ install_packages_from_all_potties() {
 }
 
 deploy_dotfile() {
-    SRC="$1"
-    DST="$2"
+    local SRC="$1"
+    local DST="$2"
     cp "$SRC" "$DST"
     cat >> "$HOME/.local/bin/push-up" << EOF
 if [[ -e "$DST" ]] && ! diff -q "$SRC" "$DST" 1>/dev/null; then
@@ -33,11 +33,11 @@ EOF
 }
 
 resolve_dependencies() {
-    USER_DISTRO="$1"
-    PACKAGE_LISTING_YAML="$2"
+    local USER_DISTRO="$1"
+    local PACKAGE_LISTING_YAML="$2"
 
-    packages=""
-    distro=NONE
+    local packages=""
+    local distro=NONE
     while read line; do
         if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
                 || $distro == $USER_DISTRO) ]]; then

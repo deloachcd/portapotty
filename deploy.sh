@@ -35,9 +35,19 @@ done
 
 source pottyfunctions.sh
 
+# Determine which distro we're running
+DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
+if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
+    USER_DISTRO="ubuntu"
+elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
+    USER_DISTRO="opensuse"
+elif [[ "$DISTRO_LONGNAME" == *"Arch Linux"* ]]; then
+    USER_DISTRO="arch"
+fi
+
 # Install packages first
 if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
-    install_packages_from_all_potties
+    install_packages_from_all_potties "$USER_DISTRO"
 fi
 
 if [[ -d setup ]]; then

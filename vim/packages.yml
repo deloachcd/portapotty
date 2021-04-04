@@ -1,3 +1,2 @@
 all:
-    - vim
     - neovim
