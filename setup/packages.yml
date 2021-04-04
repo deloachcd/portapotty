@@ -5,6 +5,8 @@ all:
     - curl
     - make
     - htop
+    - zip
+    - unzip
 ubuntu:
     - build-essential
     - pkg-config
