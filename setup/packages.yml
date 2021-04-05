@@ -7,6 +7,7 @@ all:
     - htop
     - zip
     - unzip
+    - util-linux
 ubuntu:
     - build-essential
     - pkg-config
