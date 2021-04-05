@@ -6,6 +6,7 @@ source $ZSH_CONFIG_DIR/constants.sh
 source $ZSH_CONFIG_DIR/path.sh
 source $ZSH_CONFIG_DIR/prompt.sh
 source $ZSH_CONFIG_DIR/aliases.sh
+source $ZSH_CONFIG_DIR/pkg.sh
 
 if [[ -e $ZSH_CONFIG_DIR/local.sh ]]; then
     source $ZSH_CONFIG_DIR/local.sh
