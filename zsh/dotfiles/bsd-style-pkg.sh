@@ -169,13 +169,29 @@ BSDPKG_install_package() {
     local DISTRO="$1"
     shift
     case $DISTRO in
-        (arch) CMD='sudo pacman -S --needed $@' ;;
+        (arch)
+            LOCAL_PKG_CMD='sudo pacman -U $@'
+            REMOTE_PKG_CMD='sudo pacman -S --needed $@'
+            if [[ "$1" == *".pkg.tar"* ]]; then
+                CMD="$LOCAL_PKG_CMD"
+            else
+                CMD="$REMOTE_PKG_CMD"
+            fi
+            ;;
         (ubuntu) CMD='sudo apt install $@' ;;
     esac
     if [[ "$@" == "help" ]]; then
         echo "-- install / in --"
-        echo "Install packages from remote repositories."
-        echo "\`$CMD\` is the underlying command."
+        echo "Install packages from remote repositories or tarballs."
+        case $DISTRO in
+            arch)
+                echo "\`$REMOTE_PKG_CMD\` is the underlying command for remote install."
+                echo "\`$LOCAL_PKG_CMD\` is the underlying command for local install."
+                ;;
+            *)
+                echo "\`$CMD\` is the underlying command."
+                ;;
+        esac
     else
         eval $CMD
     fi

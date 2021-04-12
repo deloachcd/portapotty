@@ -8,6 +8,7 @@ all:
     - zip
     - unzip
     - util-linux
+    - xsel
 ubuntu:
     - build-essential
     - pkg-config
