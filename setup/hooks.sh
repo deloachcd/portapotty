@@ -1,20 +1,9 @@
 # Ensure user install dir exists and has subdirs we expect
 USER_LOCAL="$HOME/.local"
-if [[ ! -d "$USER_LOCAL" ]]; then
-    mkdir -p "$USER_LOCAL"
-fi
-if [[ ! -d "$USER_LOCAL/bin" ]]; then
-    mkdir "$USER_LOCAL/bin"
-fi
-if [[ ! -d "$USER_LOCAL/lib" ]]; then
-    mkdir "$USER_LOCAL/lib"
-fi
-if [[ ! -d "$USER_LOCAL/include" ]]; then
-    mkdir "$USER_LOCAL/include"
-fi
-if [[ ! -d "$USER_LOCAL/share" ]]; then
-    mkdir "$USER_LOCAL/share"
-fi
+ensure_dir_exists "$USER_LOCAL/bin"
+ensure_dir_exists "$USER_LOCAL/lib"
+ensure_dir_exists "$USER_LOCAL/include"
+ensure_dir_exists "$USER_LOCAL/share"
 
 # Create new 'push-up' script for portapotty
 PUSH_UP="$USER_LOCAL/bin/push-up"
