@@ -6,8 +6,14 @@ if [[ ! -e "$TMUX_CONFIG_DIR/plugins/tpm" ]]; then
     git clone https://github.com/tmux-plugins/tpm "$TMUX_CONFIG_DIR/plugins/tpm"
 fi
 
-# Deploy tmux config
-deploy_dotfile "$PWD/dotfiles/tmux.conf" "$TMUX_CONFIG_DIR/tmux.conf"
-if [[ ! -e "$HOME/.tmux.conf" ]]; then
-    ln -s "$TMUX_CONFIG_DIR/tmux.conf" "$HOME/.tmux.conf"
+# Update tpm through git if we're not doing a quick deploy 
+if [[ "$QUICK_DEPLOY" == false ]]; then
+    WORKING_DIR="$PWD"
+    cd "$TMUX_CONFIG_DIR/plugins/tpm"
+    git pull
+    cd "$WORKING_DIR"
 fi
+
+# Deploy tmux config
+link_config "$PWD/config/tmux.conf" "$TMUX_CONFIG_DIR/tmux.conf"
+link_config "$PWD/config/tmux.conf" "$HOME/.tmux.conf"
