@@ -1,8 +1,6 @@
 #!/bin/bash
 VIM_CONFIG_DIR=$HOME/.vim
 VIM_PLUGIN_DIR=$VIM_CONFIG_DIR/autoload
-
-# Ensure the actual directories we need exist
 ensure_dir_exists "$VIM_CONFIG_DIR"
 ensure_dir_exists "$VIM_PLUGIN_DIR"
 
