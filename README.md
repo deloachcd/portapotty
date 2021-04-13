@@ -16,3 +16,18 @@ Software, or ASS. It will never be some multiple hundred line behemoth
 that calls python, perl, and imports half of the node ecosystem unless
 someone forks this thing and turns it into the cornerstone of their
 startup company's value proposition.
+
+## what if I want to compile my software from source?
+Just script out the compilation and deployment in a `hooks.sh` script,
+and congratulations, you now have your own discount `emerge` implementation.
+You probably will want to guard your compilation logic with
+`[[ $QUICK_DEPLOY == false ]]` so that you aren't re-compiling
+everything when you just want to push out dotfile changes from remote.
+
+## what distros does this support?
+This supports distros I use out of the box, namely Ubuntu, openSUSE and
+Arch. If you want to add your distro, make `deploy.sh` resolve its name
+as `$USER_DISTRO` and package manager as `$PKG_CMD` before installing
+packages. If you're not installing dependencies through a package manager,
+this will work with whatever distro you want it to.
+
