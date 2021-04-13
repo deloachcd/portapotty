@@ -100,7 +100,6 @@ done
 
 
 ## g3. Main deploy logic
-source pottyfunctions.sh
 
 # Determine which distro we're running
 DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
