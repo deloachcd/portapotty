@@ -1,5 +1,4 @@
-LOCAL_INSTALL_DIR=$HOME/.local/share/konsole
-if [ ! -d $LOCAL_INSTALL_DIR ]; then
-    mkdir -p $LOCAL_INSTALL_DIR
-fi
+KONSOLE_DIR=$HOME/.local/share/konsole
+
+ensure_dir_exists "$KONSOLE_DIR"
 deploy_dotfile "$PWD/dotfiles/nord.colorscheme" "$LOCAL_INSTALL_DIR/nord.colorscheme"

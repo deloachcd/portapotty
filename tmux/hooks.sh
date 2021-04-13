@@ -1,7 +1,5 @@
 TMUX_CONFIG_DIR="$HOME/.config/tmux"
-if [[ ! -e "$TMUX_CONFIG_DIR" ]]; then
-    mkdir -p "$TMUX_CONFIG_DIR"
-fi
+ensure_dir_exists "$TMUX_CONFIG_DIR"
 
 # Get tmux plugin manager
 if [[ ! -e "$TMUX_CONFIG_DIR/plugins/tpm" ]]; then

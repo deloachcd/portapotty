@@ -3,12 +3,8 @@ VIM_CONFIG_DIR=$HOME/.vim
 VIM_PLUGIN_DIR=$VIM_CONFIG_DIR/autoload
 
 # Ensure the actual directories we need exist
-if [[ ! -d "$VIM_CONFIG_DIR" ]]; then
-	mkdir -p $VIM_CONFIG_DIR
-fi
-if [[ ! -d "$VIM_PLUGIN_DIR" ]]; then
-	mkdir -p $VIM_PLUGIN_DIR
-fi
+ensure_dir_exists "$VIM_CONFIG_DIR"
+ensure_dir_exists "$VIM_PLUGIN_DIR"
 
 # Deploy vimrc in home directory
 deploy_dotfile "$PWD/dotfiles/vimrc" "$HOME/.vimrc"
