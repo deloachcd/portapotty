@@ -1,11 +1,11 @@
 #!/bin/bash -e
-#                       __                 __  __      
-#        ___  ___  ____/ /____  ___  ___  / /_/ /___ __
-#       / _ \/ _ \/ __/ __/ _ `/ _ \/ _ \/ __/ __/ // /
-#      / .__/\___/_/  \__/\_,_/ .__/\___/\__/\__/\_, / 
-#     /_/                    /_/                /___/  
+#                         __                 __  __      
+#          ___  ___  ____/ /____  ___  ___  / /_/ /___ __
+#         / _ \/ _ \/ __/ __/ _ `/ _ \/ _ \/ __/ __/ // /
+#        / .__/\___/_/  \__/\_,_/ .__/\___/\__/\__/\_, / 
+#       /_/                    /_/                /___/  
 # 
-#  "Because bash is the best configuration management tool"
+#   "...because bash is the best configuration management tool"
 #
 #  GOTOs (you can jump to these through your editor's 'find next'):
 #  g1. Helper function definitions
@@ -79,6 +79,14 @@ ensure_dir_exists() {
     DIRPATH="$1"
     if [[ ! -d "$DIRPATH" ]]; then
         mkdir -p "$DIRPATH"
+    fi
+}
+
+link_config() {
+    local SRC="$1"
+    local DST="$2"
+    if [[ ! -e "$DST" ]]; then
+        ln -s "$SRC" "$DST"
     fi
 }
 
