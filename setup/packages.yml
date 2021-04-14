@@ -21,3 +21,4 @@ opensuse:
 arch:
     - gcc
     - glibc
+    - lazygit
