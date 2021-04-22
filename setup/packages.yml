@@ -9,6 +9,7 @@ all:
     - unzip
     - util-linux
     - xsel
+    - gawk
 ubuntu:
     - build-essential
     - pkg-config
