@@ -5,9 +5,13 @@ ensure_dir_exists "$VIM_AUTOLOAD_DIR"
 ensure_dir_exists "$NEOVIM_AUTOLOAD_DIR"
 
 # Deploy vimrc in home directory
-link_config "$PWD/config" "$HOME/.config/nvim"
-link_config "$PWD/config/init.vim" "$HOME/.vimrc"
-link_config "$NEOVIM_AUTOLOAD_DIR" "$VIM_AUTOLOAD_DIR"
+link_config config ~/.config/nvim
+link_config config/init.vim ~/.vimrc
+
+# Ensure we have the directory for loading vim-plug
+if [[ ! -e "$VIM_AUTOLOAD_DIR" ]]; then
+    ln -s "$NEOVIM_AUTOLOAD_DIR" "$VIM_AUTOLOAD_DIR"
+fi
 
 if [[ "$QUICK_DEPLOY" == false ]]; then
     # Get latest version of vim plug

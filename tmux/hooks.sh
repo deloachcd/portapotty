@@ -15,5 +15,5 @@ if [[ "$QUICK_DEPLOY" == false ]]; then
 fi
 
 # Deploy tmux config
-link_config "$PWD/config/tmux.conf" "$TMUX_CONFIG_DIR/tmux.conf"
-link_config "$PWD/config/tmux.conf" "$HOME/.tmux.conf"
+link_config config/tmux.conf "$TMUX_CONFIG_DIR/tmux.conf"
+link_config config/tmux.conf ~/.tmux.conf

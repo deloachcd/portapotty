@@ -7,7 +7,7 @@
 # 
 #   "...because bash is the best configuration management tool"
 #
-#  GOTOs (you can jump to these through your editor's 'find next'):
+#  GOTOs (you can jump to these through your editor's 'find next')
 #  g1. Helper function definitions
 #  g2. User argument parsing
 #  g3. Main deploy logic
@@ -19,14 +19,14 @@ Portapotty - deploy script
 --------------------------
 An aggressively simple software (ASS) suite for keeping my shit together.
 By default this script resolves dependencies from packages.yml and runs
-hooks from hooks.sh for all potties, but you can tweak this behavior through
+hooks from hooks.sh for all subdirectories, but you can tweak this behavior through
 the parameters listed below.
 
 Optional parameters:
     -h      display this help message
     -q      pass QUICK_DEPLOY flag to hooks.sh scripts to skip redundant work
     -s      skip automated installation of packages.yml dependencies
-    -t      run deploy logic only for target potty, specified as argument
+    -t      run deploy logic only for target directory, specified as argument
 
 EOF
 }
@@ -64,17 +64,6 @@ resolve_dependencies() {
     printf "$packages"
 }
 
-deploy_dotfile() {
-    local SRC="$1"
-    local DST="$2"
-    cp "$SRC" "$DST"
-    cat >> "$HOME/.local/bin/push-up" << EOF
-if [[ -e "$DST" ]] && ! diff -q "$SRC" "$DST" 1>/dev/null; then
-    cp "$DST" "$SRC" && echo "$DST -> $SRC"
-fi
-EOF
-}
-
 ensure_dir_exists() {
     DIRPATH="$1"
     if [[ ! -d "$DIRPATH" ]]; then
@@ -83,8 +72,8 @@ ensure_dir_exists() {
 }
 
 link_config() {
-    local SRC="$1"
-    local DST="$2"
+    local SRC="$PWD/$1"
+    local DST="$(echo "$2" | awk '{ gsub(/~/, "$HOME"); print }')"
     if [[ ! -e "$DST" ]]; then
         ln -s "$SRC" "$DST"
     fi

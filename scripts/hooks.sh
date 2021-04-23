@@ -1,1 +1,1 @@
-link_config "$PWD/files" "$HOME/Scripts"
+link_config files ~/Scripts

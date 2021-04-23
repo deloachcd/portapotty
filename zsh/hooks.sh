@@ -1,5 +1,5 @@
-link_config "$PWD/home/zshrc" "$HOME/.zshrc"
-link_config "$PWD/config" "$HOME/.config/zsh"
+link_config home/zshrc ~/.zshrc
+link_config config ~/.config/zsh
 
 # change user's shell to zsh if it's bash
 if cat /etc/passwd | grep $(whoami) | grep bash 2>&1 1>/dev/null; then

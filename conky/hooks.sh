@@ -1,1 +1,1 @@
-link_config "$PWD/config" "$HOME/.config/conky"
+link_config config ~/.config/conky
