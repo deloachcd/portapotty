@@ -77,7 +77,7 @@ link_config() {
     else
         local SRC="$PWD/$1"
     fi
-    local DST="$(echo "$2" | awk '{ gsub(/~/, "$HOME"); print }')"
+    local DST="$(echo "$2" | awk '{ home=ENVIRON["HOME"]; gsub(/~/, home); print }')"
     if [[ ! -e "$DST" ]]; then
         ln -s "$SRC" "$DST"
     fi
