@@ -1,11 +1,11 @@
 #!/bin/bash -e
-#                         __                 __  __      
-#          ___  ___  ____/ /____  ___  ___  / /_/ /___ __
-#         / _ \/ _ \/ __/ __/ _ `/ _ \/ _ \/ __/ __/ // /
-#        / .__/\___/_/  \__/\_,_/ .__/\___/\__/\__/\_, / 
-#       /_/                    /_/                /___/  
+#                            __                 __  __      
+#             ___  ___  ____/ /____  ___  ___  / /_/ /___ __
+#            / _ \/ _ \/ __/ __/ _ `/ _ \/ _ \/ __/ __/ // /
+#           / .__/\___/_/  \__/\_,_/ .__/\___/\__/\__/\_, / 
+#          /_/                    /_/                /___/  
 # 
-#   "...because bash is the best configuration management tool"
+#   "...because Ansible is bloat for single desktop provisioning"
 #
 #  GOTOs (you can jump to these through your editor's 'find next')
 #  g1. Helper function definitions
@@ -72,7 +72,11 @@ ensure_dir_exists() {
 }
 
 link_config() {
-    local SRC="$PWD/$1"
+    if [[ "$SRC" == "$PWD"* ]]; then
+        local SRC="$1"
+    else
+        local SRC="$PWD/$1"
+    fi
     local DST="$(echo "$2" | awk '{ gsub(/~/, "$HOME"); print }')"
     if [[ ! -e "$DST" ]]; then
         ln -s "$SRC" "$DST"
