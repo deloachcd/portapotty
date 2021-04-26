@@ -14,3 +14,5 @@ fi
 
 compinit
 promptinit
+
+export ZLE_SPACE_SUFFIX_CHARS=$'|&'
