@@ -107,6 +107,9 @@ DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 
 if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
     USER_DISTRO="ubuntu"
     PKG_CMD="apt install"
+elif [[ "$DISTRO_LONGNAME" == *"Debian"* ]]; then
+    USER_DISTRO="ubuntu"
+    PKG_CMD="apt install"
 elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
     USER_DISTRO="opensuse"
     PKG_CMD="zypper in"
