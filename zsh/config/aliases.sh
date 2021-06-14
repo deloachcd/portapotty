@@ -62,5 +62,39 @@ keyjp() {
     clear && python3 ~/Scripts/keyjp.py
 }
 
+synlink() {
+    # this function clears the directory that syntastic looks in for C++ headers, and creates
+    # new links to the items in the directory that its run from. this is the simplest solution I
+    # can think of to multiple C++ projects which may require syntastic to look at different
+    # header files, without having to duplicate a ton of data. just link to the one you're
+    # working on
+    setopt localoptions rmstarsilent
+    SYNTASTIC_HEADERS_DIR=~/.local/include/syntastic-headers
+    if [[ ! -e $SYNTASTIC_HEADERS_DIR ]]; then
+        mkdir -p $SYNTASTIC_HEADERS_DIR
+    fi
+    rm -rf $SYNTASTIC_HEADERS_DIR/* 2>/dev/null
+    # C++ dependencies are a special kind of hell, so there's no way for this not to be a monolith
+    while read target; do
+        if [[ "$target" == "gl3w" ]]; then
+            SRC="$PWD/$target/include/GL"
+            DST="$SYNTASTIC_HEADERS_DIR/GL"
+        elif [[ "$target" == "glfw" ]]; then
+            SRC="$PWD/$target/include/GLFW"
+            DST="$SYNTASTIC_HEADERS_DIR/GLFW"
+        elif [[ "$target" == "glm" ]]; then
+            SRC="$PWD/$target/glm"
+            DST="$SYNTASTIC_HEADERS_DIR/glm"
+        else
+            SRC="$PWD/$target"
+            DST="$SYNTASTIC_HEADERS_DIR/$target"
+        fi
+        ln -s $SRC $DST
+        echo "$SRC -> $DST"
+    done < <(ls)
+}
+
+
 alias vim="nvim"
 alias echo="echo -e"
+alias mirrorget="wget --mirror --convert-links --backup-converted --adjust-extension"
