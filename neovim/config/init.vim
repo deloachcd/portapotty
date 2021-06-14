@@ -98,3 +98,9 @@ endfunc
 autocmd Filetype python :iabbrev im import
 autocmd Filetype python :iabbrev ifn if<Space>__name__<Space>==<Space>"__main__":<CR><C-R>=Eatchar('\s')<CR>
 autocmd Filetype python :iabbrev pr print("")<left><left><C-R>=Eatchar('\s')<CR>
+
+""" ugly hacks
+if has('nvim')
+    " some nasty shit to fix <c-h> in neovim
+    nmap <BS> <C-W>h  
+endif
