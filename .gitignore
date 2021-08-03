@@ -1,2 +1,10 @@
 *.swp
 fake_deployments/*
+
+emacs/config/*~
+emacs/config/elpa/
+emacs/config/auto-save-list/
+emacs/config/projectile-bookmarks*
+emacs/config/**/#*#
+emacs/config/eshell/
+emacs/config/recentf
