@@ -4,8 +4,6 @@
 (tool-bar-mode -1)
 (tooltip-mode -1)
 
-;; I keep a stable release of use-package in the repo, since
-;; every other package is installed through it
 (add-to-list 'load-path "~/.emacs.d/init-layers")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
@@ -19,10 +17,10 @@
 (unless package-archive-contents
   (package-refresh-contents))
 (package-initialize)
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
 
 ;; Load use-package and make sure each entry is downloaded
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
 
