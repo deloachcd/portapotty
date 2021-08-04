@@ -12,7 +12,7 @@
 (add-hook 'emacs-startup-hook 'startup/reset-gc)
 
 (add-to-list 'load-path "~/.emacs.d/init-layers")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;;(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 ;; Ensure our package archives are up-to-date and load the
 ;; package manager

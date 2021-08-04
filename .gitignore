@@ -8,3 +8,4 @@ emacs/config/projectile-bookmarks*
 emacs/config/**/#*#
 emacs/config/eshell/
 emacs/config/recentf
+emacs/backups/
