@@ -19,7 +19,35 @@
   :config
   (load-theme 'doom-homage-white t))
 
-;;(use-package all-the-icons) <= use this if fancy icons are desired
 (use-package doom-modeline
   :init (setq doom-modeline-icon nil)
   :config (doom-modeline-mode 1))
+
+;; Font configuration happens here - size is dynamic based on display resolution
+(setq emacs-monospace-font-family "Hack")
+
+(defun mono-font-size-from-display-resolution ()
+  (progn
+    (defun get-display-resolution-windows ()
+      "TODO: actually implement this"
+      "1920x1080")
+    (defun get-display-resolution-linux ()
+      (shell-command-to-string "xrandr | grep '*' | awk '{ printf $1 }'"))
+
+    (let ((resolution (cond ((string-equal system-type "gnu/linux")
+			     (get-display-resolution-linux))
+			    ((string-equal system-type "windows-nt")
+			     (get-display-resolution-windows)))))
+
+      (cond ((string-equal resolution "3840x2160") 14)
+	    ((string-equal resolution "1920x1080") 12)
+	    (t 12)))))
+
+(setq emacs-default-font
+      (concat (concat emacs-monospace-font-family "-")
+	      (number-to-string (mono-font-size-from-display-resolution))))
+
+;; Font gets set as default for current and future frames, and
+;; applied here
+(add-to-list 'default-frame-alist '(font . emacs-default-font))
+(set-frame-font emacs-default-font nil t)
