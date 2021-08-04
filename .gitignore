@@ -10,3 +10,4 @@ emacs/config/eshell/*
 !emacs/config/eshell/alias
 emacs/config/recentf
 emacs/config/backups/
+emacs/config/org-roam.db
