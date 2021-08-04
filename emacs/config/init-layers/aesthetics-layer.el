@@ -1,10 +1,7 @@
 (provide 'aesthetics-layer)
 
-;; Disable GUI toolbars
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
+;; GUI toolbars should already be disabled by the time we load
+;; this layer, so we don't need to do it here
 
 ;; Splash screen displayed on startup
 (use-package dashboard

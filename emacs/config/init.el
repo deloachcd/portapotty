@@ -1,8 +1,12 @@
-;; autoload is mainly for use-package
-(add-to-list 'load-path "~/.emacs.d/autoload")
-;; init-layers are for my init logic
+;; Disable GUI toolbars first so that startup looks nicer
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(tooltip-mode -1)
+
+;; I keep a stable release of use-package in the repo, since
+;; every other package is installed through it
 (add-to-list 'load-path "~/.emacs.d/init-layers")
-;; this is exactly what you'd expect
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 ;; Ensure our package archives are up-to-date and load the
@@ -15,6 +19,8 @@
 (unless package-archive-contents
   (package-refresh-contents))
 (package-initialize)
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 ;; Load use-package and make sure each entry is downloaded
 (require 'use-package)
