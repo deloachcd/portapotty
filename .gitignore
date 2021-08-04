@@ -6,6 +6,7 @@ emacs/config/elpa/
 emacs/config/auto-save-list/
 emacs/config/projectile-bookmarks*
 emacs/config/**/#*#
-emacs/config/eshell/
+emacs/config/eshell/*
+!emacs/config/eshell/alias
 emacs/config/recentf
 emacs/config/backups/
