@@ -18,3 +18,7 @@
 
 (add-hook 'text-mode-hook (lambda ()
 			    (hl-line-mode)))
+
+;; Don't litter every working directory with backups
+(defvar backup-dir "~/.emacs.d/backups")
+(setq backup-directory-alist (list (cons "." backup-dir)))
