@@ -8,4 +8,5 @@
   :keymaps 'override)
 
 (magit-bindings
- "s" 'magit-status)
+ "s" 'magit-status
+ "c" 'with-editor-finish)
