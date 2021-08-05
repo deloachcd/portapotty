@@ -6,12 +6,18 @@
 ;; Much of the ideas here are taken from Witchmacs, by snackon:
 ;; https://github.com/snackon/Witchmacs
 
-;; Vim-like bindings everywhere
+;; Vim-like bindings
 (use-package evil
   :init
-  (setq evil-overriding-maps nil
-        evil-intercept-maps nil)
+  (progn
+	(setq evil-want-keybinding nil)
+	(setq evil-overriding-maps nil
+          evil-intercept-maps nil))
   :config (evil-mode t))
+
+;; Make vim-like bindings play nice everywhere
+(use-package evil-collection
+  :config (evil-collection-init))
 
 ;; Vim-like scrolling
 (setq scroll-step 1)
