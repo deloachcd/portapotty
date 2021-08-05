@@ -1,12 +1,17 @@
 (provide 'org-layer)
 
+;; Where we'll store all our org documents
+(setq org-root "~/Documents/org")
+
 (use-package org-roam
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/Documents/OrgRoam")
+  (org-roam-directory (concat org-root "/roam"))
   :config
   (org-roam-setup))
+
+(setq org-agenda-files (concat org-root "/agenda"))
 
 ;; This gives us those nice looking bullets in org-mode
 (use-package org-bullets
