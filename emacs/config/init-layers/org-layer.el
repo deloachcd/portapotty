@@ -7,3 +7,8 @@
   (org-roam-directory "~/Documents/Org")
   :config
   (org-roam-setup))
+
+;; This gives us those nice looking bullets in org-mode
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
