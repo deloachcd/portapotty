@@ -35,9 +35,9 @@
       (shell-command-to-string "xrandr | grep '*' | awk '{ printf $1 }'"))
 
     (let ((resolution (cond ((string-equal system-type "gnu/linux")
-			     (get-display-resolution-linux))
-			    ((string-equal system-type "windows-nt")
-			     (get-display-resolution-windows)))))
+							 (get-display-resolution-linux))
+							((string-equal system-type "windows-nt")
+							 (get-display-resolution-windows)))))
 
       (cond ((string-equal resolution "3840x2160") 14)
 	    ((string-equal resolution "1920x1080") 12)
