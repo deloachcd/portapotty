@@ -49,3 +49,9 @@
 			   (number-to-string (mono-font-size-from-display-resolution)))))
   (add-to-list 'default-frame-alist (cons 'font emacs-default-font))
   (set-frame-font emacs-default-font nil t))
+
+;; Set default frame size for GUI
+(if (display-graphic-p)
+	(let ((frame-size-params '((width . 108) (height . 42))))
+	  (setq initial-frame-alist frame-size-params)
+	  (setq default-frame-alist frame-size-params)))
