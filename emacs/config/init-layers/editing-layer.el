@@ -16,14 +16,19 @@
 ;; Vim-like scrolling
 (setq scroll-step 1)
 
-;; All prog and text modes will get these hooks
-(add-hook 'prog-mode-hook (lambda ()
-			    (display-line-numbers-mode)
-			    (hl-line-mode)
-			    (show-paren-mode)))
+;; Primary autocompletion engine
+(use-package company)
 
-(add-hook 'text-mode-hook (lambda ()
-			    (hl-line-mode)))
+;; All text editing modes will get this hook
+(defun text-editing-hook ()
+  "hook to run for buffers where we're editing text"
+  (display-line-numbers-mode)
+  (hl-line-mode)
+  (show-paren-mode)
+  (company-mode))
+
+(add-hook 'prog-mode-hook 'text-editing-hook)
+(add-hook 'text-mode-hook 'text-editing-hook)
 
 ;; Indentation
 (setq-default tab-width 4)
