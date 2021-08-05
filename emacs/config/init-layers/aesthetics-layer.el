@@ -43,11 +43,9 @@
 	    ((string-equal resolution "1920x1080") 12)
 	    (t 12)))))
 
-(setq emacs-default-font
-      (concat (concat emacs-monospace-font-family "-")
-	      (number-to-string (mono-font-size-from-display-resolution))))
-
-;; Font gets set as default for current and future frames, and
-;; applied here
-(add-to-list 'default-frame-alist '(font . emacs-default-font))
-(set-frame-font emacs-default-font nil t)
+;; Font gets set as default and applied to current frame here
+(let ((emacs-default-font
+	   (concat (concat emacs-monospace-font-family "-")
+			   (number-to-string (mono-font-size-from-display-resolution)))))
+  (add-to-list 'default-frame-alist (cons 'font emacs-default-font))
+  (set-frame-font emacs-default-font nil t))
