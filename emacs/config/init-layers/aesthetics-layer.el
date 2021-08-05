@@ -40,7 +40,7 @@
 							 (get-display-resolution-windows)))))
 
       (cond ((string-equal resolution "3840x2160") 14)
-	    ((string-equal resolution "1920x1080") 12)
+	    ((string-equal resolution "1920x1080") 11)
 	    (t 12)))))
 
 ;; Font gets set as default and applied to current frame here
