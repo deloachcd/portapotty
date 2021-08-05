@@ -1,5 +1,8 @@
 (provide 'general-keybinds-layer)
 
+;; Keybindings not in this file:
+;; org-mode and org-roam bindings are defined in org-layer.el
+
 ;; Bail out of prompts with ESC
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
