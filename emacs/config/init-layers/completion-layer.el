@@ -9,3 +9,7 @@
 ;; Provides suggestions for available keybinds as you type
 (use-package which-key
   :config (which-key-mode))
+
+;; Primary autocompletion engine
+(use-package company
+  :config (add-hook 'after-init-hook 'global-company-mode))
