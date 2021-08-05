@@ -24,7 +24,7 @@
   :config (doom-modeline-mode 1))
 
 ;; Font configuration happens here - size is dynamic based on display resolution
-(setq emacs-monospace-font-family "Hack")
+(setq emacs-monospace-font-family "FiraCode")
 
 (defun mono-font-size-from-display-resolution ()
   (progn
