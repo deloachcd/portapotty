@@ -11,4 +11,4 @@
   :keymaps 'override)
 (projectile-bindings
  "f" 'projectile-find-file
- "p" 'projectile-switch-project)
+ "s" 'projectile-switch-project)
