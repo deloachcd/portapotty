@@ -32,13 +32,14 @@
 ;; TODO: SPC e as general eval layer, not just elisp
 (general-create-definer elisp-bindings
   :prefix "SPC e"
-  :states '(normal emacs)
+  :states '(normal emacs visual)
   :keymaps 'override)
 
 (elisp-bindings
   "b" 'eval-buffer
   "s" 'eval-last-sexp
-  "r" 'eval-region)
+  "r" 'eval-region
+  "i" 'indent-pp-sexp)
 
 (general-create-definer buffer-management-bindings
   :prefix "SPC b"
