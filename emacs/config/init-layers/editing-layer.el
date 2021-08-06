@@ -25,22 +25,26 @@
 ;; Primary autocompletion engine
 (use-package company)
 
-;; All text editing modes will get this hook
-(defun text-editing-hook ()
-  "hook to run for buffers where we're editing text"
-  (display-line-numbers-mode)
-  (hl-line-mode)
-  (show-paren-mode)
-  (company-mode))
+;; Hook for all programming language editing major modes
+(add-hook 'prog-mode-hook (lambda ()
+							(display-line-numbers-mode)
+							(hl-line-mode)
+							(show-paren-mode)
+							(company-mode)))
 
-(add-hook 'prog-mode-hook 'text-editing-hook)
-(add-hook 'text-mode-hook 'text-editing-hook)
+;; Hook for text editing major modes, mainly org-mode
+(add-hook 'text-mode-hook (lambda ()
+							(hl-line-mode)
+							(show-paren-mode)
+							(company-mode)))
 
 ;; Indentation
+;; TODO: deep-dive into this, and set up bindings
+;; include: C-M-q (indent-pp-sexp)
 (setq-default tab-width 4)
 (setq-default standard-indent 4)
 (setq c-basic-offset tab-width)
-(setq-default electric-indent-inhibit t)
+;;(setq-default electric-indent-inhibit t)
 (setq-default indent-tabs-mode t)
 (setq backward-delete-char-untabify-method 'nil)
 
