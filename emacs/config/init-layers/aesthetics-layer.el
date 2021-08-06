@@ -58,10 +58,10 @@
 
 			 ;; 1080p
 			((string-equal resolution "1920x1080") ; NOTE: 14 -> 11 original config
-			 (set-fonts-from-heights 140 190))
+			 (set-fonts-from-heights 120 150))
 
 			;; Default case - same as 1080p for now
-			(t (set-fonts-from-heights 140 190))))))
+			(t (set-fonts-from-heights 120 150))))))
 
 (set-fonts-from-display-resolution "FiraCode" "ETBembo")
 
