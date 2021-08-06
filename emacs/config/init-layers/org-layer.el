@@ -3,6 +3,15 @@
 ;; Where we'll store all our org documents
 (setq org-root "~/Documents/org")
 
+(defun org-mode-setup ()
+  (variable-pitch-mode 1)
+  (visual-line-mode 1))
+
+(use-package org
+  :hook (org-mode . org-mode-setup)
+  :config
+  (aesthetics/org-font-setup))
+
 (use-package org-roam
   :init
   (setq org-roam-v2-ack t)
@@ -12,11 +21,6 @@
   (org-roam-setup))
 
 (setq org-agenda-files (concat org-root "/agenda"))
-
-;; This gives us those nice looking bullets in org-mode
-(use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 ;; keybinds
 (general-create-definer org-bindings
