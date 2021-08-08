@@ -18,7 +18,8 @@
   :custom
   (org-roam-directory (concat org-root "/roam"))
   :config
-  (org-roam-setup))
+  (org-roam-setup)
+  (setq org-M-RET-may-split-line nil))
 
 (setq org-agenda-files (concat org-root "/agenda"))
 
@@ -29,6 +30,17 @@
   :keymaps 'override)
 
 (org-bindings
- "n f" 'org-roam-node-find
- "n i" 'org-roam-node-insert
- "c" 'org-capture-finalize)
+  ;; insertion
+ "i i" 'org-insert-item
+ "i h" 'org-insert-heading
+ "i s" 'org-insert-subheading
+ "i l" 'org-insert-link
+  ;; org-roam
+ "r f" 'org-roam-node-find
+ "r i" 'org-roam-node-insert
+ "r b" 'org-roam-buffer-toggle
+ "r c" 'org-capture-finalize
+  ;; following links
+ "l n" 'org-open-at-point
+ "l p" 'org-mark-ring-goto
+ )
