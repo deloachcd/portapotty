@@ -13,8 +13,7 @@
 
 ;; I use a few DOOM emacs packages to simplify configuration
 (use-package doom-themes
-  :config
-  (load-theme 'doom-homage-white t))
+  :config (load-theme 'doom-homage-white t))
 
 (use-package doom-modeline
   :init (setq doom-modeline-icon nil)
@@ -43,11 +42,19 @@
       (set-face-attribute (car face) nil
 						  :font "ETBembo" :weight 'bold :height (cdr face)))
 
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+	;; Ensure that anything that should be fixed-pitch in Org files appears that way
+	;; NOTE: describe-text-properties is a godsend for figuring this shit out
+	(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+	(set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+	(set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+	(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+	(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+	(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+	(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+	(set-face-attribute 'org-link nil :inherit 'fixed-pitch)
+	(set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
+	(set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch)
+	(set-face-attribute 'org-document-info-keyword nil :inherit 'fixed-pitch)
+	(set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
+	(set-face-attribute 'org-property-value nil :inherit 'fixed-pitch)
+	)
