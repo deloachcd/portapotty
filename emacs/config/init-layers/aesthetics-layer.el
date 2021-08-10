@@ -7,7 +7,7 @@
   (setq dashboard-center-content t)
   (setq dashboard-set-footer nil)
   (setq dashboard-items '((recents . 5)
-			  (projects . 5)))
+                          (projects . 5)))
   :config
   (dashboard-setup-startup-hook))
 
@@ -28,33 +28,37 @@
   :hook (org-mode . org-bullets-mode)
   :config (setq org-bullets-bullet-list '("♣" "♠" "♦" "♥")))
 
+(defun aesthetics/org-mode-setup ()
+  (setq org-hide-emphasis-markers t)
+  (variable-pitch-mode 1)
+  (visual-line-mode 1))
+
 ;; this gets hooked in when we get to org-layer.el
 (defun aesthetics/org-font-setup ()
-	(dolist (face '((org-document-title . 1.75)
-					(org-level-1 . 1.5)
-					(org-level-2 . 1.25)
-					(org-level-3 . 1.1)
-					(org-level-4 . 1.0)
-					(org-level-5 . 1.0)
-					(org-level-6 . 1.0)
-					(org-level-7 . 1.0)
-					(org-level-8 . 1.0)))
-      (set-face-attribute (car face) nil
-						  :font "ETBembo" :weight 'bold :height (cdr face)))
+  (dolist (face '((org-document-title . 1.75)
+                  (org-level-1 . 1.5)
+                  (org-level-2 . 1.25)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
+    (set-face-attribute (car face) nil
+                        :inherit 'variable-pitch :weight 'bold :height (cdr face)))
 
-	;; Ensure that anything that should be fixed-pitch in Org files appears that way
-	;; NOTE: describe-text-properties is a godsend for figuring this shit out
-	(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-	(set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-	(set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-	(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-	(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-	(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-	(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-	(set-face-attribute 'org-link nil :inherit 'fixed-pitch)
-	(set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
-	(set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch)
-	(set-face-attribute 'org-document-info-keyword nil :inherit 'fixed-pitch)
-	(set-face-attribute 'org-drawer nil :inherit 'fixed-pitch)
-	(set-face-attribute 'org-property-value nil :inherit 'fixed-pitch)
-	)
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  ;; NOTE: describe-text-properties is a godsend for figuring this shit out
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (dolist (face '(org-code
+                  org-table
+                  org-verbatim))
+	(set-face-attribute face nil :inherit '(shadow fixed-pitch)))
+  (dolist (face '(org-special-keyword
+                  org-meta-line))
+    (set-face-attribute face nil :inherit '(font-lock-comment-face fixed-pitch)))
+  (dolist (face '(org-checkbox
+                  org-document-info-keyword
+                  org-drawer
+                  org-property-value))
+	(set-face-attribute face nil :inherit 'fixed-pitch)))
