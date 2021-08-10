@@ -6,6 +6,9 @@
 ;; Much of the ideas here are taken from Witchmacs, by snackon:
 ;; https://github.com/snackon/Witchmacs
 
+;; TODO: surround.vim equivalent
+;; TODO: leader keybindings - emacs from scratch episode 3
+
 ;; Vim-like bindings
 (use-package evil
   :init
@@ -70,8 +73,7 @@
 ;; Hook for text editing major modes, mainly org-mode
 (add-hook 'text-mode-hook (lambda ()
                             (hl-line-mode)
-                            (show-paren-mode)
-                            (company-mode)))
+                            (show-paren-mode)))
 
 ;; Don't litter every working directory with backups
 (defvar backup-dir "~/.emacs.d/backups")
