@@ -53,7 +53,7 @@
   (dolist (face '(org-code
                   org-table
                   org-verbatim))
-	(set-face-attribute face nil :inherit '(shadow fixed-pitch)))
+    (set-face-attribute face nil :inherit '(shadow fixed-pitch)))
   (dolist (face '(org-special-keyword
                   org-meta-line))
     (set-face-attribute face nil :inherit '(font-lock-comment-face fixed-pitch)))
@@ -61,4 +61,4 @@
                   org-document-info-keyword
                   org-drawer
                   org-property-value))
-	(set-face-attribute face nil :inherit 'fixed-pitch)))
+    (set-face-attribute face nil :inherit 'fixed-pitch)))
