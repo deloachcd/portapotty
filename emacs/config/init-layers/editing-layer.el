@@ -10,8 +10,8 @@
 (use-package evil
   :init
   (progn
-	(setq evil-want-keybinding nil)
-	(setq evil-overriding-maps nil
+    (setq evil-want-keybinding nil)
+    (setq evil-overriding-maps nil
           evil-intercept-maps nil))
   :config (evil-mode t))
 
@@ -25,28 +25,53 @@
 ;; Primary autocompletion engine
 (use-package company)
 
+;; Indentation
+(setq-default tab-width 4)
+(setq-default standard-indent 4)
+(setq-default indent-tabs-mode t)
+(setq backward-delete-char-untabify-method 'hungry)
+(setq c-basic-offset tab-width)
+
+;; Source for these functions here (credit Ye-Chin,Lee):
+;; https://www.emacswiki.org/emacs/indent-file.el
+(defun indent-whole-buffer ()
+  "indent whole buffer and untabify it"
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
+
+(defun indent-file-when-save ()
+  "indent file when save."
+  (make-local-variable 'after-save-hook)
+  (add-hook 'after-save-hook
+            (lambda ()
+              (if (buffer-file-name)
+                  (indent-whole-buffer))
+              (save-buffer))))
+
+(defun indent-file-when-visit ()
+  "indent file when visit."
+  (make-local-variable 'find-file-hook)
+  (add-hook 'find-file-hook
+            (lambda ()
+              (if (buffer-file-name)
+                  (indent-whole-buffer))
+              (save-buffer))))
+
 ;; Hook for all programming language editing major modes
 (add-hook 'prog-mode-hook (lambda ()
-							(display-line-numbers-mode)
-							(hl-line-mode)
-							(show-paren-mode)
-							(company-mode)))
+                            (display-line-numbers-mode)
+                            (hl-line-mode)
+                            (show-paren-mode)
+                            (company-mode)
+                            (indent-file-when-save)))
 
 ;; Hook for text editing major modes, mainly org-mode
 (add-hook 'text-mode-hook (lambda ()
-							(hl-line-mode)
-							(show-paren-mode)
-							(company-mode)))
-
-;; Indentation
-;; TODO: deep-dive into this, and set up bindings
-;; include: C-M-q (indent-pp-sexp)
-(setq-default tab-width 4)
-(setq-default standard-indent 4)
-(setq c-basic-offset tab-width)
-;;(setq-default electric-indent-inhibit t)
-(setq-default indent-tabs-mode t)
-(setq backward-delete-char-untabify-method 'nil)
+                            (hl-line-mode)
+                            (show-paren-mode)
+                            (company-mode)))
 
 ;; Don't litter every working directory with backups
 (defvar backup-dir "~/.emacs.d/backups")
@@ -62,13 +87,15 @@
 (global-prettify-symbols-mode t)
 
 ;; Bracket pair-matching
-(setq electric-pair-pairs '(
-			    (?\{ . ?\})
-			    (?\( . ?\))
-			    (?\[ . ?\])
-			    (?\" . ?\")
-			    ))
+(setq electric-pair-pairs '((?\{ . ?\})
+                            (?\( . ?\))
+                            (?\[ . ?\])
+                            (?\" . ?\")))
 (electric-pair-mode t)
 
 ;; Type "y" or "n" instead of "yes" or "no" in minibuffer
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; It's nice to have this available for when we want to see
+;; which functions we're using
+(use-package command-log-mode)
