@@ -1,10 +1,10 @@
 #!/bin/bash -e
-#                            __                 __  __      
+#                            __                 __  __
 #             ___  ___  ____/ /____  ___  ___  / /_/ /___ __
 #            / _ \/ _ \/ __/ __/ _ `/ _ \/ _ \/ __/ __/ // /
-#           / .__/\___/_/  \__/\_,_/ .__/\___/\__/\__/\_, / 
-#          /_/                    /_/                /___/  
-# 
+#           / .__/\___/_/  \__/\_,_/ .__/\___/\__/\__/\_, /
+#          /_/                    /_/                /___/
+#
 #   "...because Ansible is bloat for single desktop provisioning"
 #
 #  GOTOs (you can jump to these through your editor's 'find next')
@@ -54,7 +54,7 @@ resolve_dependencies() {
     local distro=NONE
     while read line; do
         if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
-                || $distro == $USER_DISTRO) ]]; then
+                                             || $distro == $USER_DISTRO) ]]; then
             package=$(echo -n "$line" | awk '{ print $2 }')
             packages+=" $package"
         else
@@ -134,8 +134,8 @@ fi
 
 while read file; do
     if [[ -d "$file" && \
-            ! "$file" == setup && \
-            ! "$file" == exclude ]]; then
+              ! "$file" == setup && \
+              ! "$file" == exclude ]]; then
         # If file is non-setup directory and it has hooks.sh,
         # assume it's a potty and run the hooks script
         POTTY="$file"
@@ -147,3 +147,25 @@ while read file; do
         cd ..
     fi
 done < <(ls)
+
+if [[ -d defer ]]; then
+    # 'defer' potties always have their hooks
+    # run after the ones at project root
+    cd defer
+    while read file; do
+        if [[ -d "$file" && \
+                  ! "$file" == setup && \
+                  ! "$file" == exclude ]]; then
+            # If file is non-setup directory and it has hooks.sh,
+            # assume it's a potty and run the hooks script
+            POTTY="$file"
+            echo "Running '$POTTY' hooks..."
+            cd "$POTTY"
+            if [[ -e hooks.sh ]]; then
+                . hooks.sh
+            fi
+            cd ..
+        fi
+    done < <(ls)
+    cd ..
+fi
