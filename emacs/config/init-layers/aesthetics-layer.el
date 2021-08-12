@@ -13,6 +13,7 @@
 
 ;; I use a few DOOM emacs packages to simplify configuration
 (use-package doom-themes
+  :init (setq doom-homage-white-active t)
   :config (load-theme 'doom-homage-white t))
 
 (use-package doom-modeline
@@ -61,4 +62,10 @@
                   org-document-info-keyword
                   org-drawer
                   org-property-value))
-    (set-face-attribute face nil :inherit 'fixed-pitch)))
+    (set-face-attribute face nil :inherit 'fixed-pitch))
+
+  ;; TODO: maybe fork the theme and set this there?
+  (if 'doom-homage-white-active
+      (dolist (face '(org-block-begin-line
+                      org-block-end-line))
+        (set-face-attribute face nil :foreground "#7c7c7c"))

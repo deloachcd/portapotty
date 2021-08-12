@@ -21,41 +21,41 @@
     (defun get-display-resolution-linux ()
       (shell-command-to-string "xrandr | grep '*' | awk '{ printf $1 }'"))
 
-	(defun set-fonts-from-heights (fixed-pitch-height variable-pitch-height)
-	  (set-face-attribute 'default nil
-						  :font fixed-pitch-font :height fixed-pitch-height)
-	  (set-face-attribute 'fixed-pitch nil
-						  :font fixed-pitch-font :height fixed-pitch-height)
-	  (set-face-attribute 'variable-pitch nil
-						  :font variable-pitch-font :height variable-pitch-height)
-	  (add-to-list 'default-frame-alist (cons 'font 'default))
-	  (set-frame-font 'default nil t))
+    (defun set-fonts-from-heights (fixed-pitch-height variable-pitch-height)
+      (set-face-attribute 'default nil
+                          :font fixed-pitch-font :height fixed-pitch-height)
+      (set-face-attribute 'fixed-pitch nil
+                          :font fixed-pitch-font :height fixed-pitch-height)
+      (set-face-attribute 'variable-pitch nil
+                          :font variable-pitch-font :height variable-pitch-height)
+      (add-to-list 'default-frame-alist (cons 'font 'default))
+      (set-frame-font 'default nil t))
 
     (let ((resolution (cond ((string-equal system-type "gnu/linux")
-							 (get-display-resolution-linux))
-							((string-equal system-type "windows-nt")
-							 (get-display-resolution-windows)))))
+                             (get-display-resolution-linux))
+                            ((string-equal system-type "windows-nt")
+                             (get-display-resolution-windows)))))
 
       (cond (;; 4k
-			 (string-equal resolution "3840x2160")
-			 (set-fonts-from-heights 140 180))
+             (string-equal resolution "3840x2160")
+             (set-fonts-from-heights 150 150))
 
-			 ;; 1080p
-			((string-equal resolution "1920x1080")
-			 (set-fonts-from-heights 120 150))
+            ;; 1080p
+            ((string-equal resolution "1920x1080")
+             (set-fonts-from-heights 120 150))
 
-			;; Default case - same as 1080p for now
-			(t (set-fonts-from-heights 120 150))))))
+            ;; Default case - same as 1080p for now
+            (t (set-fonts-from-heights 120 150))))))
 
 ;; This function sets default params for a frame, and resizes the current frame
 ;; to that size
 (defun set-frame-defaults (frame-width frame-height)
   (if (display-graphic-p)
-	  (let ((frame-size-params '((width . frame-width) (height . frame-height))))
-		(setq initial-frame-alist frame-size-params)
-		(setq default-frame-alist frame-size-params)
-		(when window-system (set-frame-size (selected-frame) frame-width frame-height)))))
+      (let ((frame-size-params '((width . frame-width) (height . frame-height))))
+        (setq initial-frame-alist frame-size-params)
+        (setq default-frame-alist frame-size-params)
+        (when window-system (set-frame-size (selected-frame) frame-width frame-height)))))
 
 ;; We call our functions to apply their changes here
-(set-fonts-from-display-resolution "FiraCode" "ETBembo")
+(set-fonts-from-display-resolution "FiraCode" "Noto Sans")
 (set-frame-defaults 108 42)
