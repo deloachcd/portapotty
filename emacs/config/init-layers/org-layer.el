@@ -23,7 +23,8 @@
       org-src-window-setup 'current-window
       org-src-strip-leading-and-trailing-blank-lines t
       org-src-preserve-indentation t
-      org-src-tab-acts-natively t)
+      org-src-tab-acts-natively t
+      org-edit-src-content-indentation 0)
 
 ;; Source: http://wenshanren.org/?p=334
 (defun org-insert-src-block (src-code-type)
