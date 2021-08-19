@@ -3,7 +3,7 @@
 ;; Splash screen displayed on startup
 (use-package dashboard
   :init
-  (setq dashboard-startup-banner 'official)
+  (setq dashboard-startup-banner "~/.emacs.d/res/img/zenmacs.png")
   (setq dashboard-center-content t)
   (setq dashboard-set-footer nil)
   (setq dashboard-items '((recents . 5)
@@ -12,9 +12,11 @@
   (dashboard-setup-startup-hook))
 
 ;; I use a few DOOM emacs packages to simplify configuration
-(use-package doom-themes
-  :init (setq doom-homage-white-active t)
-  :config (load-theme 'doom-homage-white t))
+(use-package doom-themes)
+
+(use-package zenburn-theme
+  :config
+  (load-theme 'zenburn t))
 
 (use-package doom-modeline
   :init (setq doom-modeline-icon nil)
@@ -24,10 +26,11 @@
 ;; ----------------------------------------------
 
 ;; This gives us nice looking bullets in org-mode
+;; old value: '("♣" "♠" "♦" "♥")
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode)
-  :config (setq org-bullets-bullet-list '("♣" "♠" "♦" "♥")))
+  :config (setq org-bullets-bullet-list '("✮" "✸" "✱" "❖")))
 
 (defun aesthetics/org-mode-setup ()
   (setq org-hide-emphasis-markers t)
@@ -68,4 +71,4 @@
   (if 'doom-homage-white-active
       (dolist (face '(org-block-begin-line
                       org-block-end-line))
-        (set-face-attribute face nil :foreground "#7c7c7c"))
+        (set-face-attribute face nil :foreground "#7c7c7c"))))
