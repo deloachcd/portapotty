@@ -1,11 +1,12 @@
 (provide 'org-layer)
 
 ;; Where we'll store all our org documents
-(setq org-root "~/Documents/org")
+(setq org-root "~/Sync/Documents/org")
 
 (use-package org
   :hook (org-mode . aesthetics/org-mode-setup)
-  :config (aesthetics/org-font-setup))
+  :config
+  (aesthetics/org-font-setup))
 
 (use-package org-roam
   :init
@@ -16,7 +17,9 @@
   (org-roam-setup)
   (setq org-M-RET-may-split-line nil))
 
-(setq org-agenda-files (concat org-root "/agenda"))
+(setq org-agenda-files
+      (list (concat org-root "/agenda/tasks.org")
+            (concat org-root "/agenda/dates.org")))
 
 ;; Hopefully, fix messed up indentation in source code blocks
 (setq org-src-fontify-natively t
@@ -45,6 +48,14 @@
     (previous-line 2)
     (org-edit-src-code)))
 
+(defun org-agenda-edit-tasks ()
+  (interactive)
+  (find-file (concat org-root "/agenda/tasks.org")))
+
+(defun org-agenda-edit-dates ()
+  (interactive)
+  (find-file (concat org-root "/agenda/dates.org")))
+
 ;; keybinds
 (general-create-definer org-bindings
   :prefix "SPC o"
@@ -70,4 +81,7 @@
   "t b" 'org-toggle-checkbox
   ;; editing source code
   "e c" 'org-edit-special
+  ;; switch to tasks file
+  "a t" 'org-agenda-edit-tasks
+  "a d" 'org-agenda-edit-dates
   )
