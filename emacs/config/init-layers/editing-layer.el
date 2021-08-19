@@ -22,11 +22,14 @@
 (use-package evil-collection
   :config (evil-collection-init))
 
-;; Vim-like scrolling
-(setq scroll-step 1)
+(use-package evil-surround)
 
-;; Primary autocompletion engine
-(use-package company)
+;; Vim-like scrolling
+(use-package smooth-scrolling
+  :config
+  (progn
+    (smooth-scrolling-mode 1)
+    (setq smooth-scroll-margin 3)))
 
 ;; Indentation
 (setq-default tab-width 4)
@@ -62,18 +65,26 @@
                   (indent-whole-buffer))
               (save-buffer))))
 
+;; Bracket pair-matching
+(setq electric-pair-pairs '((?\{ . ?\})
+                            (?\( . ?\))
+                            (?\[ . ?\])
+                            (?\" . ?\")))
+
 ;; Hook for all programming language editing major modes
 (add-hook 'prog-mode-hook (lambda ()
                             (display-line-numbers-mode)
                             (hl-line-mode)
                             (show-paren-mode)
                             (company-mode)
-                            (indent-file-when-save)))
+                            (indent-file-when-save)
+                            (evil-surround-mode)))
 
 ;; Hook for text editing major modes, mainly org-mode
 (add-hook 'text-mode-hook (lambda ()
                             (hl-line-mode)
-                            (show-paren-mode)))
+                            (show-paren-mode)
+                            (evil-surround-mode)))
 
 ;; Don't litter every working directory with backups
 (defvar backup-dir "~/.emacs.d/backups")
@@ -87,13 +98,6 @@
 
 ;; Prettify symbols globally
 (global-prettify-symbols-mode t)
-
-;; Bracket pair-matching
-(setq electric-pair-pairs '((?\{ . ?\})
-                            (?\( . ?\))
-                            (?\[ . ?\])
-                            (?\" . ?\")))
-(electric-pair-mode t)
 
 ;; Type "y" or "n" instead of "yes" or "no" in minibuffer
 (defalias 'yes-or-no-p 'y-or-n-p)
