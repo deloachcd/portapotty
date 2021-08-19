@@ -42,10 +42,10 @@
 
             ;; 1080p
             ((string-equal resolution "1920x1080")
-             (set-fonts-from-heights 120 150))
+             (set-fonts-from-heights 120 130))
 
             ;; Default case - same as 1080p for now
-            (t (set-fonts-from-heights 120 150))))))
+            (t (set-fonts-from-heights 120 130))))))
 
 ;; This function sets default params for a frame, and resizes the current frame
 ;; to that size
