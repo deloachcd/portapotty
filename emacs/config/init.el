@@ -63,7 +63,18 @@
 ;; Magit layer - configuration related to git integration
 (require 'magit-layer)
 
-;; Move custom-set-variables to another file, so its changes
-;; can be .gitignore'd
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
+;; I lifted some code from DOOM emacs to disable customize, because they're
+;; right on the money about `customize' being "a clumsy interface that
+;; sets variables at a time where it can be easily and unpredictably
+;; overwritten."
+;;
+;; All configuration should be done from this file or one of its layers.
+(dolist (sym '(customize-option customize-browse customize-group customize-face
+                                customize-rogue customize-saved customize-apropos
+                                customize-changed customize-unsaved customize-variable
+                                customize-set-value customize-customized customize-set-variable
+                                customize-apropos-faces customize-save-variable
+                                customize-apropos-groups customize-apropos-options
+                                customize-changed-options customize-save-customized))
+  (put sym 'disabled "This emacs doesn't support `customize', configure Emacs from ~/.emacs.d/ instead"))
+(put 'customize-themes 'disabled "Not supported, use `load-theme' instead")
