@@ -11,3 +11,4 @@ emacs/config/eshell/*
 emacs/config/recentf
 emacs/config/backups/
 emacs/config/org-roam.db
+emacs/config/custom.el

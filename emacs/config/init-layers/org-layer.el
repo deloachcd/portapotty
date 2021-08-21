@@ -17,6 +17,14 @@
   (org-roam-setup)
   (setq org-M-RET-may-split-line nil))
 
+(use-package evil-org
+  :after org
+  :hook (org-mode . evil-org-mode)
+  :config
+  (progn
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys)))
+
 (setq org-agenda-files
       (list (concat org-root "/agenda/tasks.org")
             (concat org-root "/agenda/dates.org")))

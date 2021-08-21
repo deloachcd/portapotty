@@ -1,13 +1,4 @@
-(provide 'early-init-aesthetics-layer)
-
-;; Disable GUI toolbars
-(scroll-bar-mode -1)
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(tooltip-mode -1)
-
-;; Slight padding for content in frame
-(set-fringe-mode 10)
+(provide 'font-frame-scaling-layer)
 
 ;; This function is used to set the fixed and variable pitch fonts, with font
 ;; size being set relative to display resolution. There's no formula for this
@@ -19,7 +10,7 @@
       "TODO: actually implement this"
       "1920x1080")
     (defun get-display-resolution-linux ()
-      (shell-command-to-string "xrandr | grep '*' | awk '{ printf $1 }'"))
+      (shell-command-to-string "xrandr | grep '*' | head -n 1 | awk '{ printf $1 }'"))
 
     (defun set-fonts-from-heights (fixed-pitch-height variable-pitch-height)
       (set-face-attribute 'default nil
