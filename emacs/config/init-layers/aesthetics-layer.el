@@ -11,13 +11,6 @@
   :config
   (dashboard-setup-startup-hook))
 
-;; I use a few DOOM emacs packages to simplify configuration
-(use-package doom-themes)
-
-(use-package zenburn-theme
-  :config
-  (load-theme 'zenburn t))
-
 (use-package doom-modeline
   :init (setq doom-modeline-icon nil)
   :config (doom-modeline-mode 1))
