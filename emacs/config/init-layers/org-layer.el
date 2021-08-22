@@ -34,7 +34,9 @@
 (use-package org
   :hook (org-mode . org-mode-setup)
   :config
-  (org-font-setup))
+  (progn
+    (setf org-blank-before-new-entry '((heading . nil) (plain-list-item . nil)))
+    (org-font-setup)))
 
 ;; old value: '("♣" "♠" "♦" "♥")
 (use-package org-bullets
@@ -57,6 +59,14 @@
   :config
   (progn
     (require 'evil-org-agenda)
+    (evil-org-set-key-theme '(return
+                              textobjects
+                              insert
+                              navigation
+                              additional
+                              shift
+                              todo
+                              heading))
     (evil-org-agenda-set-keys)))
 
 (setq org-agenda-files
@@ -107,8 +117,8 @@
 (org-bindings
   ;; insertion
   "i i" 'org-insert-item
-  "i h" 'org-insert-heading
-  "i s" 'org-insert-subheading
+  ;; "i h" 'org-insert-heading     DEPRECATED: use O instead
+  ;; "i s" 'org-insert-subheading  DEPRECATED: use M-O instead
   "i l" 'org-insert-link
   "i c" 'org-insert-src-block
   ;; org-roam
