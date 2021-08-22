@@ -9,5 +9,5 @@ pip3_() {
 if [[ "$QUICK_DEPLOY" == false ]]; then
     npm_  install -g     bash-language-server
     npm_  install -g     typescript-language-server
-    pip3_ install --user python-language-server
+    pip3_ install --user python-lsp-server
 fi
