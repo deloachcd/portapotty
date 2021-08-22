@@ -3,10 +3,44 @@
 ;; Where we'll store all our org documents
 (setq org-root "~/Sync/Documents/org")
 
+;; Automagically mix variable and monospace fonts
+(use-package mixed-pitch
+  :init (setq mixed-pitch-set-height t))
+
+(defun org-mode-setup ()
+  (setq org-hide-emphasis-markers t)
+  (mixed-pitch-mode 1)
+  (visual-line-mode 1))
+
+(defun org-font-setup ()
+  (dolist (face '((org-document-title . 1.75)
+                  (org-level-1 . 1.5)
+                  (org-level-2 . 1.25)
+                  (org-level-3 . 1.1)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.0)
+                  (org-level-6 . 1.0)
+                  (org-level-7 . 1.0)
+                  (org-level-8 . 1.0)))
+    (set-face-attribute (car face) nil
+                        :inherit 'variable-pitch :weight 'bold :height (cdr face)))
+
+  ;; TODO: maybe fork the theme and set this there?
+  (if 'doom-homage-white-active
+      (dolist (face '(org-block-begin-line
+                      org-block-end-line))
+        (set-face-attribute face nil :foreground "#7c7c7c"))))
+
 (use-package org
-  :hook (org-mode . aesthetics/org-mode-setup)
+  :hook (org-mode . org-mode-setup)
   :config
-  (aesthetics/org-font-setup))
+  (org-font-setup))
+
+;; old value: '("♣" "♠" "♦" "♥")
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :config (setq org-bullets-bullet-list '("✮" "✸" "✱" "❖")))
 
 (use-package org-roam
   :init
