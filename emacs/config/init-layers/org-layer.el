@@ -49,6 +49,7 @@
   (setq org-roam-v2-ack t)
   :custom
   (org-roam-directory (concat org-root "/roam"))
+  (org-roam-dailies-directory "journal/")
   :config
   (org-roam-setup)
   (setq org-M-RET-may-split-line nil))
@@ -75,11 +76,8 @@
 
 ;; Hopefully, fix messed up indentation in source code blocks
 (setq org-src-fontify-natively t
-      org-src-window-setup 'current-window
       org-src-strip-leading-and-trailing-blank-lines t
-      org-src-preserve-indentation t
-      org-src-tab-acts-natively t
-      org-edit-src-content-indentation 0)
+      org-src-tab-acts-natively t)
 
 ;; Source: http://wenshanren.org/?p=334
 (defun org-insert-src-block (src-code-type)
@@ -116,7 +114,7 @@
 
 (org-bindings
   ;; insertion
-  "i i" 'org-insert-item
+  ;; "i i" 'org-insert-item        DEPRECATED: use RET instead
   ;; "i h" 'org-insert-heading     DEPRECATED: use O instead
   ;; "i s" 'org-insert-subheading  DEPRECATED: use M-O instead
   "i l" 'org-insert-link
