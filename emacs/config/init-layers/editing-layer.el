@@ -24,12 +24,8 @@
 
 (use-package evil-surround)
 
-;; Vim-like scrolling
-(use-package smooth-scrolling
-  :config
-  (progn
-    (smooth-scrolling-mode 1)
-    (setq smooth-scroll-margin 3)))
+;; Scroll one line at a time, like it should be
+(setq scroll-conservatively 100)
 
 ;; Indentation
 (setq-default tab-width 4)
