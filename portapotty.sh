@@ -104,11 +104,8 @@ done
 
 # Determine which distro we're running
 DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
-if [[ "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
-    USER_DISTRO="ubuntu"
-    PKG_CMD="apt install"
-elif [[ "$DISTRO_LONGNAME" == *"Debian"* ]]; then
-    USER_DISTRO="ubuntu"
+if [[ "$DISTRO_LONGNAME" == *"Debian"* || "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
+    USER_DISTRO="debian"
     PKG_CMD="apt install"
 elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
     USER_DISTRO="opensuse"

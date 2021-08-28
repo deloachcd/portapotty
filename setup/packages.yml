@@ -10,7 +10,7 @@ all:
     - util-linux
     - xsel
     - gawk
-ubuntu:
+debian:
     - build-essential
     - pkg-config
 opensuse:

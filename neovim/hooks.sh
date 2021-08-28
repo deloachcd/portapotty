@@ -2,6 +2,7 @@
 VIM_AUTOLOAD_DIR="$HOME/.vim/autoload"
 NEOVIM_AUTOLOAD_DIR="$HOME/.local/share/nvim/site/autoload"
 #ensure_dir_exists "$VIM_AUTOLOAD_DIR"
+ensure_dir_exists ~/.vim
 ensure_dir_exists "$NEOVIM_AUTOLOAD_DIR"
 
 # Deploy vimrc in home directory
