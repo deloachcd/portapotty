@@ -98,3 +98,5 @@ synlink() {
 alias vim="nvim"
 alias echo="echo -e"
 alias mirrorget="wget --mirror --convert-links --backup-converted --adjust-extension"
+
+alias ls="ls --color"

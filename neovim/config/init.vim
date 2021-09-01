@@ -20,6 +20,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'wincent/terminus'
   Plug 'deloachcd/nord-vim'
+  Plug 'jnurmine/Zenburn'
   " plugins written by me
   Plug 'mildewchan/takodachi.vim'
   Plug 'mildewchan/atlantean.vim'
@@ -31,7 +32,7 @@ let g:syntastic_cpp_include_dirs = [
       \ ]
 
 """ color config
-colorscheme nord
+colorscheme zenburn
 
 """ themed statusline
 function! g:StatuslineMode()
