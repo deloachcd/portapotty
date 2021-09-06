@@ -100,3 +100,4 @@ alias echo="echo -e"
 alias mirrorget="wget --mirror --convert-links --backup-converted --adjust-extension"
 
 alias ls="ls --color"
+alias gmacs="gccemacs"
