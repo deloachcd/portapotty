@@ -1,3 +1,6 @@
+opensuse:
+    - noto-fonts-cjk
+    - noto-coloremoji-fonts
 arch:
     - noto-fonts-cjk
     - noto-fonts-emoji
