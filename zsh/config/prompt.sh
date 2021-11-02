@@ -1,6 +1,8 @@
 function __folding_prompt {
-    # Have the bash prompt automagically fold long
-    # paths, like in emacs' eshell
+    # Have the bash/zsh prompt automagically fold long
+    # paths, like in emacs' eshell. works better with
+    # zsh due to strange history scrollback bug in
+    # bash.
     pwd | gawk -F '/' '{
         NFF=NF-2
         for(i=2; i<=NF; i++) {
@@ -15,7 +17,11 @@ function __folding_prompt {
                 printf $i
             } else {
                 if (NF > 4 && i < NFF) {
-                    printf substr($i, 0, 1)"/"
+                    if (substr($i, 0, 1) == ".") {
+                        printf substr($i, 0, 2)"/"
+                    } else {
+                        printf substr($i, 0, 1)"/"
+                    }
                 } else {
                     printf $i"/"
                 }
