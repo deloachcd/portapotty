@@ -90,10 +90,10 @@
   control+alt+shift + w
 
 # focus text editor
-"jumpapp emacs"
+"jumpapp ~/.local/bin/emacs"
   control+shift + e
 
-"jumpapp -r emacs"
+"jumpapp -r ~/.local/bin/emacs"
   control+alt+shift + e
 
 # focus graphical file manager
