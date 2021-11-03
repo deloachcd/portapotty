@@ -10,3 +10,6 @@ unset $message_buffer
 
 # Deploy xbindkeysrc
 link_config config/xbindkeysrc ~/.xbindkeysrc
+
+# Deploy jumpapp
+link_config config/jumpapp ~/.local/bin/jumpapp

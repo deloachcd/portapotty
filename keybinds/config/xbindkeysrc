@@ -76,52 +76,52 @@
 # Space
 
 # focus terminal emulator
-"jumpapp konsole"
+"~/.local/bin/jumpapp konsole"
   control+shift + t
 
-"jumpapp -r konsole"
+"~/.local/bin/jumpapp -r konsole"
   control+alt+shift + t
 
 # focus web browser
-"jumpapp firefox"
+"~/.local/bin/jumpapp firefox"
   control+shift + w
 
-"jumpapp -r firefox"
+"~/.local/bin/jumpapp -r firefox"
   control+alt+shift + w
 
 # focus text editor
-"jumpapp ~/.local/bin/emacs"
+"~/.local/bin/jumpapp ~/.local/bin/emacs"
   control+shift + e
 
-"jumpapp -r ~/.local/bin/emacs"
+"~/.local/bin/jumpapp -r ~/.local/bin/emacs"
   control+alt+shift + e
 
 # focus graphical file manager
-"jumpapp dolphin"
+"~/.local/bin/jumpapp dolphin"
   control+shift + f
 
-"jumpapp -r dolphin"
+"~/.local/bin/jumpapp -r dolphin"
   control+alt+shift + f
 
 # focus PDF reader
-"jumpapp okular"
+"~/.local/bin/jumpapp okular"
   control+shift + r
 
-"jumpapp -r okular"
+"~/.local/bin/jumpapp -r okular"
   control+alt+shift + r
 
 # focus 3D graphics editor
-"jumpapp blender"
+"~/.local/bin/jumpapp blender"
   control+shift + g
 
-"jumpapp -r blender"
+"~/.local/bin/jumpapp -r blender"
   control+alt+shift + g
 
 # focus image editor
-"jumpapp gimp"
+"~/.local/bin/jumpapp gimp"
   control+shift + i
 
-"jumpapp -r gimp"
+"~/.local/bin/jumpapp -r gimp"
   control+alt+shift + i
 
 ##################################
