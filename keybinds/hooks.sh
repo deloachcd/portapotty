@@ -11,5 +11,8 @@ unset $message_buffer
 # Deploy xbindkeysrc
 link_config config/xbindkeysrc ~/.xbindkeysrc
 
+# Deploy xbindkeys to autostart
+link_config config/xbindkeys.desktop ~/.config/autostart/xbindkeys.desktop
+
 # Deploy jumpapp
 link_config config/jumpapp ~/.local/bin/jumpapp
