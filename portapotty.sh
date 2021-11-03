@@ -27,6 +27,7 @@ Optional parameters:
     -q      pass QUICK_DEPLOY flag to hooks.sh scripts to skip redundant work
     -s      skip automated installation of packages.yml dependencies
     -t      run deploy logic only for target directory, specified as argument
+    -n      skip all halting messages
 
 EOF
 }
@@ -83,18 +84,30 @@ link_config() {
     fi
 }
 
+halting_message() {
+    if [[ ! $SKIP_HALTING_MESSAGES == true ]]; then
+        echo ""
+        echo "[Execution paused]"
+        echo "$1"
+        echo "Press [Enter] to continue..."
+        read -u 1
+    fi
+}
+
 ## g2. Argument parsing
 
 TARGET=all
 SKIP_DEPENDENCY_RESOLUTION=false
 QUICK_DEPLOY=false
+SKIP_HALTING_MESSAGES=false
 
-while getopts "qhst:" opt_sg; do
+while getopts "nqhst:" opt_sg; do
     case $opt_sg in
         h) display_help && exit 0 ;;
         s) SKIP_DEPENDENCY_RESOLUTION=true ;;
         t) TARGET=$OPTARG ;;
         q) QUICK_DEPLOY=true ;;
+        n) SKIP_HALTING_MESSAGES=true ;;
         ?) echo "unknown_option: $opt_sg" ;;
     esac
 done
