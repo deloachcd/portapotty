@@ -124,6 +124,20 @@
 "~/.local/bin/jumpapp -r gimp"
   control+alt+shift + i
 
+# focus password manager
+"~/.local/bin/jumpapp keepassxc"
+  control+shift + k
+
+"~/.local/bin/jumpapp -r keepassxc"
+  control+alt+shift + k
+
+# focus music player
+"~/.local/bin/jumpapp strawberry"
+  control+shift + m
+
+"~/.local/bin/jumpapp -r strawberry"
+  control+alt+shift + m
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
