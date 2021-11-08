@@ -68,6 +68,12 @@
 
 ## User bindings (the important part)
 
+# Blender conflicts with Ctrl+Alt scheme:
+# C
+# V
+# D
+# Spacebar
+
 # Blender conflicts with Ctrl+Shift scheme:
 # M
 # B
@@ -77,63 +83,63 @@
 
 # focus terminal emulator
 "~/.local/bin/jumpapp konsole"
-  control+shift + t
+  control+alt + t
 
 "~/.local/bin/jumpapp -r konsole"
   control+alt+shift + t
 
 # focus web browser
-"~/.local/bin/jumpapp firefox"
-  control+shift + w
+"~/.local/bin/jumpapp librewolf"
+  control+alt + w
 
-"~/.local/bin/jumpapp -r firefox"
+"~/.local/bin/jumpapp -r librewolf"
   control+alt+shift + w
 
 # focus text editor
 "~/.local/bin/jumpapp ~/.local/bin/emacs"
-  control+shift + e
+  control+alt + e
 
 "~/.local/bin/jumpapp -r ~/.local/bin/emacs"
   control+alt+shift + e
 
 # focus graphical file manager
 "~/.local/bin/jumpapp dolphin"
-  control+shift + f
+  control+alt + f
 
 "~/.local/bin/jumpapp -r dolphin"
   control+alt+shift + f
 
 # focus PDF reader
 "~/.local/bin/jumpapp okular"
-  control+shift + r
+  control+alt + r
 
 "~/.local/bin/jumpapp -r okular"
   control+alt+shift + r
 
 # focus 3D graphics editor
 "~/.local/bin/jumpapp blender"
-  control+shift + g
+  control+alt + g
 
 "~/.local/bin/jumpapp -r blender"
   control+alt+shift + g
 
 # focus image editor
 "~/.local/bin/jumpapp gimp"
-  control+shift + i
+  control+alt + i
 
 "~/.local/bin/jumpapp -r gimp"
   control+alt+shift + i
 
 # focus password manager
 "~/.local/bin/jumpapp keepassxc"
-  control+shift + k
+  control+alt + k
 
 "~/.local/bin/jumpapp -r keepassxc"
   control+alt+shift + k
 
 # focus music player
 "~/.local/bin/jumpapp strawberry"
-  control+shift + m
+  control+alt + m
 
 "~/.local/bin/jumpapp -r strawberry"
   control+alt+shift + m
