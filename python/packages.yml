@@ -3,6 +3,6 @@ debian:
     - python3-pip
     - python3-venv
 opensuse:
-    - python38
-    - python38-pip
-    - python38-virtualenv
+    - python39
+    - python39-pip
+    - python39-virtualenv
