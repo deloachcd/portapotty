@@ -82,10 +82,10 @@
 # Space
 
 # focus terminal emulator
-"~/.local/bin/jumpapp konsole"
+"~/.local/bin/jumpapp kitty"
   control+alt + t
 
-"~/.local/bin/jumpapp -r konsole"
+"~/.local/bin/jumpapp -r kitty"
   control+alt+shift + t
 
 # focus web browser
