@@ -89,10 +89,10 @@
   control+alt+shift + t
 
 # focus web browser
-"~/.local/bin/jumpapp librewolf"
+"~/.local/bin/jumpapp firefox"
   control+alt + w
 
-"~/.local/bin/jumpapp -r librewolf"
+"~/.local/bin/jumpapp -r firefox"
   control+alt+shift + w
 
 # focus text editor
