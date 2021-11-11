@@ -6,7 +6,7 @@ into KDE for comfier kwin bindings.
 EOF
 )
 halting_message "$message_buffer"
-unset $message_buffer
+unset message_buffer
 
 # Deploy xbindkeysrc
 link_config config/xbindkeysrc ~/.xbindkeysrc
