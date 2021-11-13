@@ -82,10 +82,10 @@
 # Space
 
 # focus terminal emulator
-"~/.local/bin/jumpapp kitty"
+"~/.local/bin/jumpapp -t 'zsh' kitty -e /bin/zsh"
   control+alt + t
 
-"~/.local/bin/jumpapp -r kitty"
+"~/.local/bin/jumpapp -r 'zsh' kitty -e /bin/zsh"
   control+alt+shift + t
 
 # focus web browser
@@ -138,10 +138,10 @@
   control+alt+shift + k
 
 # focus music player
-"~/.local/bin/jumpapp strawberry"
+"~/.local/bin/jumpapp -i 'kitty -e cmus' ~/.local/bin/cmus-wrapper"
   control+alt + m
 
-"~/.local/bin/jumpapp -r strawberry"
+"~/.local/bin/jumpapp -i 'kitty -e cmus' ~/.local/bin/cmus-wrapper"
   control+alt+shift + m
 
 ##################################

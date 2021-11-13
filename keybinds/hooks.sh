@@ -14,5 +14,6 @@ link_config config/xbindkeysrc ~/.xbindkeysrc
 # Deploy xbindkeys to autostart
 link_config config/xbindkeys.desktop ~/.config/autostart/xbindkeys.desktop
 
-# Deploy jumpapp
+# Deploy jumpapp & cmus wrapper script for jumpapp
 link_config config/jumpapp ~/.local/bin/jumpapp
+link_config config/cmus-wrapper.sh ~/.local/bin/cmus-wrapper
