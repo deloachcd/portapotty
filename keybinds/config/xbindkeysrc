@@ -117,11 +117,11 @@
   control+alt+shift + r
 
 # focus 3D graphics editor
-"~/.local/bin/jumpapp blender"
-  control+alt + g
+"~/.local/bin/jumpapp ~/.local/bin/blender"
+  control+alt + 3
 
-"~/.local/bin/jumpapp -r blender"
-  control+alt+shift + g
+"~/.local/bin/jumpapp -r ~/.local/bin/blender"
+  control+alt+shift + 3
 
 # focus image editor
 "~/.local/bin/jumpapp gimp"
