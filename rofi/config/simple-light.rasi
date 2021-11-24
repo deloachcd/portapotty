@@ -7,10 +7,14 @@
 }
 
 window {
-  border: 3px;
-  border-radius: 3px;
+  border: 4px;
+  border-radius: 4px;
   border-color: #6f7e86;
   box-shadow: 3px;
+}
+
+mainbox {
+  padding: 10px;
 }
 
 inputbar {
@@ -35,6 +39,7 @@ listview {
 }
 
 element {
+  border-radius: 3px;
   padding: 16px;
 }
 
