@@ -1,9 +1,16 @@
 * {
   background-color: rgba ( 245, 245, 245, 100 % );
-  border-color: rgba ( 68, 68, 68, 100 % );
+  border-color: #4f5a5f;
   text-color: #6f7e86;
   spacing: 0;
-  width: 600px;
+  width: 700px;
+}
+
+window {
+  border: 3px;
+  border-radius: 3px;
+  border-color: #6f7e86;
+  box-shadow: 3px;
 }
 
 inputbar {
@@ -19,7 +26,8 @@ prompt {
 textbox {
   background-color: #2e343f;
   border: 0 0 1px 0;
-  border-color: #282C33;
+  //border-color: #282C33;
+  border-color: #6a88ae;
   padding: 8px 16px;
 }
 
@@ -41,7 +49,8 @@ element {
 element selected {
   //background-color: #82a8ba;
   //background-color: #8ca0aa;
-  background-color: rgba ( 66, 113, 174, 100 % );
+  //background-color: rgba ( 66, 113, 174, 100 % );
+  background-color: #6a88ae;
   text-color: rgba ( 245, 245, 245, 100 % );
 }
 
