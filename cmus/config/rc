@@ -1,0 +1,2 @@
+set format_title=cmus :: %{artist} - %{album} - %{title} (%{date})
+set altformat_title=cmus :: %{path}
