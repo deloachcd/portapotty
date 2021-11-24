@@ -1,0 +1,22 @@
+[Desktop Entry]
+Categories=Multimedia;
+Comment[en_US]=The music player with the least bullshit
+Comment=The music player with the least bullshit
+Exec=/usr/bin/kitty -e cmus
+GenericName[en_US]=Music Player
+GenericName=Music Player
+Icon=music-note-16th
+Keywords=Music;
+MimeType=
+Name[en_US]=cmus
+Name=cmus
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Version=1.0
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
