@@ -1,5 +1,5 @@
 * {
-  background-color: rgba ( 245, 245, 245, 100 % );
+  background-color: #f5f5f5;
   border-color: #4f5a5f;
   text-color: #6f7e86;
   spacing: 0;
@@ -19,7 +19,6 @@ inputbar {
 
 textbox {
   background-color: #2e343f;
-  //border: 0 0 1px 0;
   border-color: #6a88ae;
   padding: 8px 16px;
 }
@@ -32,18 +31,14 @@ listview {
   cycle: false;
   margin: 0 0 -1px 0;
   scrollbar: false;
+  lines: 10;
 }
 
 element {
-  //border: 0 0 1px 0;
   padding: 16px;
 }
 
 element selected {
   background-color: #6a88ae;
-  text-color: rgba ( 245, 245, 245, 100 % );
-}
-
-#listview {
-  lines: 10;
+  text-color: #f5f5f5;
 }
