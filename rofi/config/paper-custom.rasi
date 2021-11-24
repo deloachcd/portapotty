@@ -14,25 +14,18 @@ window {
 }
 
 inputbar {
-  border: 0 0 1px 0;
-  children: [prompt,entry];
-}
-
-prompt {
-  padding: 16px;
-  border: 0 1px 0 0;
+  children: [entry];
 }
 
 textbox {
   background-color: #2e343f;
-  border: 0 0 1px 0;
-  //border-color: #282C33;
+  //border: 0 0 1px 0;
   border-color: #6a88ae;
   padding: 8px 16px;
 }
 
 entry {
-  padding: 16px;
+  padding: 20px;
 }
 
 listview {
@@ -42,14 +35,11 @@ listview {
 }
 
 element {
-  border: 0 0 1px 0;
+  //border: 0 0 1px 0;
   padding: 16px;
 }
 
 element selected {
-  //background-color: #82a8ba;
-  //background-color: #8ca0aa;
-  //background-color: rgba ( 66, 113, 174, 100 % );
   background-color: #6a88ae;
   text-color: rgba ( 245, 245, 245, 100 % );
 }
