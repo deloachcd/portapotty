@@ -16,5 +16,7 @@ their contents anywhere.
 ```
 git clone git@github.com:deloachcd/portapotty.git ~/.potty
 cd ~/.potty
+git submodule init
+git submodule update
 ./portapotty.sh
 ```
