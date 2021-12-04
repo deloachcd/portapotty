@@ -67,13 +67,19 @@ __make_operation() {
     local OPERATION="$2"
     if [[ -z "$SHTTR_PACKAGE_NAME" ]]; then
         echo "Error: nothing to $OPERATION!"
-        exit -2
+        exit -2  # TODO figure out if this is the correct error code
     elif [[ ! -d "$SHTTR_HOME/$SHTTR_PACKAGE_NAME" ]]; then
         echo "Error: package '$SHTTR_PACKAGE_NAME' not found!"
         exit -2
     fi
     cd "$SHTTR_HOME/$SHTTR_PACKAGE_NAME"
-    env SHTTR_PACKAGE_NAME="$SHTTR_PACKAGE_NAME" make "$OPERATION"
+    if [[ ! -e shttr.conf ]]; then
+        echo "Error: shttr.conf not found for package '$SHTTR_PACKAGE_NAME'!"
+        exit -2
+    fi
+    env SHTTR_PACKAGE_NAME="$SHTTR_PACKAGE_NAME" \
+        $(cat shttr.conf | xargs) \
+        make "$OPERATION"
 }
 
 # Argument parsing

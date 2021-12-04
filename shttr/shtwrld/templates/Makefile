@@ -1,7 +1,7 @@
 SHELL:=bash
 
 build:
-	env $(cat shttr.conf | xargs) recipe.sh
+	bash recipe.sh
 
 install:
 	ln -sf $PWD/${SHTTR_BUILD_EXECUTABLE} \
