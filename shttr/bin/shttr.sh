@@ -38,6 +38,9 @@ Operations:
     uninstall, un)
         Uninstall a package listed in ~/.local/share/shttr
 
+    list, lt)
+        List packages in ~/.local/share/shttr, and if they're installed
+
     make-package, mp)
         Create a new package listing in ~/.local/share/shttr
 
@@ -60,6 +63,17 @@ _make_package() {
     cp $SHTTR_HOME/templates/recipe.sh "$SHTTR_PACKAGE_NAME/recipe.sh"
     cp $SHTTR_HOME/templates/Makefile "$SHTTR_PACKAGE_NAME/Makefile"
     cp $SHTTR_HOME/templates/shttr.conf "$SHTTR_PACKAGE_NAME/shttr.conf"
+}
+
+_list() {
+    local entries="$(ls $SHTTR_HOME)"
+    for entry in $(ls $SHTTR_HOME); do
+        printf "$entry"
+        if [[ -e ~/.local/bin/$entry ]]; then
+            printf " [installed]"
+        fi
+        echo
+    done
 }
 
 __make_operation() {
@@ -104,6 +118,10 @@ case "$OPERATION" in
 
     uninstall | un)
         __make_operation "$TARGET" "uninstall"
+        ;;
+
+    list | lt)
+        _list
         ;;
 
     make-package | mp)
