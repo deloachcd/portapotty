@@ -55,7 +55,7 @@ resolve_dependencies() {
     local distro=NONE
     while read line; do
         if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
-                                             || $distro == $USER_DISTRO) ]]; then
+                || $distro == $USER_DISTRO) ]]; then
             package=$(echo -n "$line" | awk '{ print $2 }')
             packages+=" $package"
         else
