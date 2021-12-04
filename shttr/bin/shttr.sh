@@ -40,39 +40,24 @@ Operations:
 
     uninstall, un)
         Uninstall a package listed in ~/.local/share/shttr
+
+    make-package, mp)
+        Create a new package listing in ~/.local/share/shttr
+
+    get-debfiles, gd)
+        Download and unpack APT's file listing to get .desktop files
+        and icons which can aid in quicker package creation.
+
 EOF
 }
 
-
-display_help() {
-    cat << eof
-
-shttr - the ass build helper
-----------------------------
-an aggressively simple software (ass) tool for compiling packages locally.
-it fills a similar role as pkgbuilds on arch linux, except that both the
-implementation and the packages themselves are much, much simpler as they
-only leverage the system package manager for
-
-optional parameters:
-    -h      display this help message
-    -q      pass quick_deploy flag to hooks.sh scripts to skip redundant work
-    -s      skip automated installation of packages.yml dependencies
-    -t      run deploy logic only for target directory, specified as argument
-    -n      skip all halting messages
-
-eof
-}
-
-
-
-get_debfiles() {
+_get_debfiles() {
     local TARGET="$1"
     apt download "$TARGET"
     dpkg --extract $TARGET*.deb ${TARGET}_debfiles
 }
 
-make_package() {
+_make_package() {
     local SHTTR_PACKAGE_NAME="$1"
     mkdir "$SHTTR_PACKAGE_NAME"
     cp $SHTTR_HOME/templates/recipe.sh "$SHTTR_PACKAGE_NAME/recipe.sh"
@@ -80,44 +65,57 @@ make_package() {
     cp $SHTTR_HOME/templates/shttr.conf "$SHTTR_PACKAGE_NAME/shttr.conf"
 }
 
-make_operation() {
+__make_operation() {
     local SHTTR_PACKAGE_NAME="$1"
     local OPERATION="$2"
-    if [[ ! -d "$SHTTR_HOME/$SHTTR_PACKAGE_NAME" ]]; then
+    if [[ -z "$SHTTR_PACKAGE_NAME" ]]; then
+        echo "Error: nothing to $OPERATION!"
+        exit -2
+    elif [[ ! -d "$SHTTR_HOME/$SHTTR_PACKAGE_NAME" ]]; then
         echo "Error: package '$SHTTR_PACKAGE_NAME' not found!"
+        exit -2
     fi
     cd "$SHTTR_HOME/$SHTTR_PACKAGE_NAME"
     env SHTTR_PACKAGE_NAME="$SHTTR_PACKAGE_NAME" make "$OPERATION"
 }
 
-build() {
-    make_operation "$1" "build"
+_install() {
+    __make_operation "$1" "install"
 }
 
-install() {
-    make_operation "$1" "install"
+_uninstall() {
+    __make_operation "$1" "uninstall"
 }
 
-uninstall() {
-    make_operation "$1" "uninstall"
-}
+# Argument parsing
+if [[ -z "$1" ]]; then
+    display_help
+    exit -1
+elif [[ "help" =~ "$1" || "-h" == "$1" ]]; then
+    display_help
+fi
 
-display_help() {
-    cat << EOF
+OPERATION="$1"
+TARGET="$2"
 
-Portapotty - deploy script
---------------------------
-An aggressively simple software (ASS) suite for keeping my shit together.
-By default this script resolves dependencies from packages.yml and runs
-hooks from hooks.sh for all subdirectories, but you can tweak this behavior through
-the parameters listed below.
+case "$OPERATION" in
+    build | bd)
+        __make_operation "$TARGET" "build"
+        ;;
 
-Optional parameters:
-    -h      display this help message
-    -q      pass QUICK_DEPLOY flag to hooks.sh scripts to skip redundant work
-    -s      skip automated installation of packages.yml dependencies
-    -t      run deploy logic only for target directory, specified as argument
-    -n      skip all halting messages
+    install | in)
+        __make_operation "$TARGET" "install"
+        ;;
 
-EOF
-}
+    uninstall | un)
+        __make_operation "$TARGET" "uninstall"
+        ;;
+
+    make-package | mp)
+        _make_package "$TARGET"
+        ;;
+
+    get-debfiles | gd)
+        _get_debfiles  "$TARGET"
+        ;;
+esac
