@@ -25,9 +25,6 @@ It allows an extremely easy to understand framework (provided you know bash)
 for scripting out build instructions for projects on github/gitlab/etc,
 and installing them where they can be executed in the user's home directory.
 
-Switches:
-    -h, --help     display this help message
-
 Operations:
     help, -h, --help)
         Display this help message.
@@ -77,14 +74,6 @@ __make_operation() {
     fi
     cd "$SHTTR_HOME/$SHTTR_PACKAGE_NAME"
     env SHTTR_PACKAGE_NAME="$SHTTR_PACKAGE_NAME" make "$OPERATION"
-}
-
-_install() {
-    __make_operation "$1" "install"
-}
-
-_uninstall() {
-    __make_operation "$1" "uninstall"
 }
 
 # Argument parsing
