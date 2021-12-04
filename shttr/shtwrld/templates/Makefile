@@ -7,7 +7,8 @@ install:
 	ln -sf $PWD/${SHTTR_BUILD_EXECUTABLE} \
 		$HOME/.local/share/bin/${SHTTR_PACKAGE_NAME}
 
-	ln -sf $PWD/${SHTTR_PACKAGE_NAME}.desktop \
+	env SED_FRIENDLY_HOME=$(echo $HOME | awk '{ gsub(/\//,"\\/"); print $1 }') \
+		sed "s/\$HOME/$SED_FRIENDLY_HOME/g" emacs.desktop >> \
 		$HOME/.local/share/applications/${SHTTR_PACKAGE_NAME}.desktop
 
 uninstall:
