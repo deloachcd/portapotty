@@ -24,5 +24,5 @@ install:
 	cp pixmaps/* ${HOME}/.local/share/icons/hicolor/256x256/apps/
 
 uninstall:
-	rm $HOME/.local/share/bin/${SHTTR_PACKAGE_NAME}
-	rm $HOME/.local/share/applications/${SHTTR_PACKAGE_NAME}.desktop
+	rm ${HOME}/.local/share/bin/${SHTTR_PACKAGE_NAME}
+	rm ${HOME}/.local/share/applications/${SHTTR_PACKAGE_NAME}.desktop
