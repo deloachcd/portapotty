@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 shttr_build() {
     local MAKEOPTS="-j$(nproc)"
-    local GIT_REMOTE="" # TODO add this
+    local GIT_REMOTE="" # TODO set this
+    local REPO_DIR="repo"
 
-    # you probably want this to be named 'repo'
-    git clone "$GIT_REMOTE" repo
+    if [[ ! -d "$REPO_DIR" ]]; then
+        git clone "$GIT_REMOTE" "$REPO_DIR"
+    fi
 
     # TODO script out project build instructions here,
     # before the project gets made
 
-    # usually, MAKEOPTS will just be -j$(nproc)
     make $MAKEOPTS
 }
 
