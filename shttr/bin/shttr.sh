@@ -18,9 +18,9 @@ display_help() {
 shttr - the ASS build helper
 ----------------------------
 An aggressively simple software (ASS) tool for managing build automation.
-It allows an extremely easy to understand framework (provided you know bash)
-for scripting out build instructions for projects on github/gitlab/etc,
-and installing them where they can be executed in the user's home directory.
+It allows an easy to understand framework (provided you know bash) for
+scripting out build instructions for projects on github/gitlab/etc, and
+installing them where they can be executed in the user's home directory.
 
 Operations:
     help, -h, --help)
@@ -126,15 +126,15 @@ __make_operation() {
     local OPERATION="$2"
     if [[ -z "$SHTTR_PACKAGE_NAME" ]]; then
         echo "Error: nothing to $OPERATION!"
-        exit -2  # TODO figure out if this is the correct error code
+        exit 1
     elif [[ ! -d "$SHTTR_HOME/pkgs/$SHTTR_PACKAGE_NAME" ]]; then
         echo "Error: package '$SHTTR_PACKAGE_NAME' not found!"
-        exit -2
+        exit 1
     fi
     cd "$SHTTR_HOME/pkgs/$SHTTR_PACKAGE_NAME"
     if [[ ! -e shttr.conf ]]; then
         echo "Error: shttr.conf not found for package '$SHTTR_PACKAGE_NAME'!"
-        exit -2
+        exit 1
     fi
     # Get environment variables from file
     getvars=$(cat shttr.conf | grep '=')
@@ -149,7 +149,7 @@ __make_operation() {
 # Argument parsing
 if [[ $# -lt 1 ]]; then
     display_help
-    exit -1
+    exit 2
 elif [[ "help" =~ "$1" || "-h" == "$1" ]]; then
     display_help
 fi
