@@ -136,9 +136,14 @@ __make_operation() {
         echo "Error: shttr.conf not found for package '$SHTTR_PACKAGE_NAME'!"
         exit -2
     fi
-    env SHTTR_PACKAGE_NAME="$SHTTR_PACKAGE_NAME" \
-        $(cat shttr.conf | xargs) \
-        make "$OPERATION"
+    # Get environment variables from file
+    getvars=$(cat shttr.conf | grep '=')
+    eval "$getvars"
+    make "$OPERATION" \
+            SHTTR_PACKAGE_NAME="$SHTTR_PACKAGE_NAME" \
+            SHTTR_APT_DEPENDENCIES="$SHTTR_APT_DEPENDENCIES" \
+            SHTTR_BUILD_EXECUTABLE="$SHTTR_BUILD_EXECUTABLE"
+
 }
 
 # Argument parsing
