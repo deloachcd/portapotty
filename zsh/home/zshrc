@@ -1,4 +1,4 @@
-autoload -Uz compinit promptinit
+autoload -Uz compinit promptinit add-zsh-hook
 
 export ZSH_CONFIG_DIR=~/.config/zsh
 
@@ -24,3 +24,8 @@ export ZLE_SPACE_SUFFIX_CHARS=$'|&'
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+# shell-side configuration for emacs's vterm to correctly track the directory
+if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+    source $ZSH_CONFIG_DIR/vterm.sh
+fi
