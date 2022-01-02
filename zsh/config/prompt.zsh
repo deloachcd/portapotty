@@ -1,4 +1,4 @@
-function __folding_prompt {
+__folding_prompt() {
     # Have the bash/zsh prompt automagically fold long
     # paths, like in emacs' eshell. works better with
     # zsh due to strange history scrollback bug in
@@ -35,5 +35,10 @@ precmd() {
     PROMPT_PRE_DIR='%(?.%F{green}%?.%F{red}%?)%f %F{cyan}'
     PROMPT_POST_DIR='%f %# '
     export PROMPT="${PROMPT_PRE_DIR}$(__folding_prompt)${PROMPT_POST_DIR}"
+    if [[ $INSIDE_EMACS = 'vterm' ]]; then
+        export PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+    else
+        export PROMPT=$PROMPT
+    fi
 }
 

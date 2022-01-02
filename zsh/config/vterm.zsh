@@ -20,12 +20,10 @@ vterm_cmd() {
     vterm_printf "51;E$vterm_elisp"
 }
 
-# TODO: figure out why this isn't working
-# 'Failed to find command: update-pwd'
-vterm_set_directory() {
-    vterm_cmd update-pwd "$PWD/"
+setopt PROMPT_SUBST
+vterm_prompt_end() {
+    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
 }
-add-zsh-hook -Uz chpwd() { vterm_set_directory }
 
 find_file() {
     vterm_cmd find-file "$(realpath "${@:-.}")"
