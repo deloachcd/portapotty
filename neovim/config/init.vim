@@ -32,7 +32,7 @@ let g:syntastic_cpp_include_dirs = [
       \ ]
 
 """ color config
-colorscheme zenburn
+colorscheme elflord
 
 """ themed statusline
 function! g:StatuslineMode()
