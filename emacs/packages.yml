@@ -1,4 +1,5 @@
 all:
-    - libtools
+    - libtool
+    - libtool-bin
 debian:
-    - libvterm
+    - libvterm-dev
