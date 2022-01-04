@@ -10,9 +10,11 @@ all:
     - util-linux
     - xsel
     - gawk
+    - cmake
 debian:
     - build-essential
     - pkg-config
+    - clang-11
 opensuse:
     - gcc
     - gcc-c++
