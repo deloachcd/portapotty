@@ -8,6 +8,8 @@ EOF
 halting_message "$message_buffer"
 unset message_buffer
 
+ensure_dir_exists ~/.config/autostart
+
 # Deploy xbindkeysrc
 link_config config/xbindkeysrc ~/.xbindkeysrc
 
