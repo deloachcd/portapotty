@@ -1,14 +1,13 @@
 SHELL:=bash
+.PHONY: build
 
 build:
-	bash recipe.sh
+	bash build-recipe.sh
 
 install:
 	test ! -z "${SHTTR_BUILD_EXECUTABLE}"
-	test -e "${SHTTR_BUILD_EXECUTABLE}"
 
-	ln -sf ${HOME}/.local/share/emacs/${SHTTR_BUILD_EXECUTABLE} \
-		${HOME}/.local/bin/${SHTTR_PACKAGE_NAME}
+	bash link-binaries.sh "${SHTTR_BUILD_EXECUTABLE}" "${HOME}/.local/bin"
 
 	if [[ -e ${SHTTR_PACKAGE_NAME}.desktop ]]; then \
 		awk '{ gsub(/\$$HOME/,ENVIRON["HOME"]); print $0 }' ${SHTTR_PACKAGE_NAME}.desktop >\
