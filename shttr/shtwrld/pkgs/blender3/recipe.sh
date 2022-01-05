@@ -31,11 +31,10 @@ shttr_build() {
 }
 
 # resolve dependencies
-if [[ "$SHTTR_APT_DEPENDENCIES" == "build-dep" ]]; then
-    sudo apt build-dep "$SHTTR_APP_NAME"
-elif [[ ! -z "$SHTTR_APT_DEPENDENCIES" ]]; then
-    #sudo apt install $SHTTR_APT_DEPENDENCIES
-    cat /dev/null
+if [[ ! -z "$SHTTR_BUILD_DEP" ]]; then
+    sudo apt build-dep "$SHTTR_PACKAGE_NAME"
+if [[ ! -z "$SHTTR_APT_DEPENDENCIES" ]]; then
+    sudo apt install $SHTTR_APT_DEPENDENCIES
 fi
 
 # build
