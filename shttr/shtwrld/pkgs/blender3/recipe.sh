@@ -33,6 +33,7 @@ shttr_build() {
 # resolve dependencies
 if [[ ! -z "$SHTTR_BUILD_DEP" ]]; then
     sudo apt build-dep "$SHTTR_PACKAGE_NAME"
+fi
 if [[ ! -z "$SHTTR_APT_DEPENDENCIES" ]]; then
     sudo apt install $SHTTR_APT_DEPENDENCIES
 fi
