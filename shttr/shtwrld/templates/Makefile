@@ -1,7 +1,8 @@
 SHELL:=bash
+.PHONY: build
 
 build:
-	bash recipe.sh
+	bash build-recipe.sh
 
 install:
 	test ! -z "${SHTTR_BUILD_EXECUTABLE}"
