@@ -151,7 +151,7 @@ __make_operation() {
 if [[ $# -lt 1 ]]; then
     display_help
     exit 2
-elif [[ "help" =~ "$1" || "-h" == "$1" ]]; then
+elif [[ "$1" == *"help"* || "-h" == "$1" ]]; then
     display_help
 fi
 
