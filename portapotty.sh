@@ -151,9 +151,6 @@ if [[ $UNAME == "linux" ]]; then
     elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
         USER_DISTRO="opensuse"
         PKG_CMD="zypper in"
-    elif [[ "$DISTRO_LONGNAME" == *"Arch Linux"* ]]; then
-        USER_DISTRO="arch"
-        PKG_CMD="pacman -S --needed"
     fi
 elif [[ $UNAME == "darwin" ]]; then
     # we're running macOS

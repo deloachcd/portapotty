@@ -21,7 +21,3 @@ opensuse:
     - glibc-devel
     - linux-glibc-devel
     - systemd-coredump
-arch:
-    - gcc
-    - glibc
-    - lazygit
