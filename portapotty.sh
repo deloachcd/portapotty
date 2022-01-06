@@ -51,7 +51,7 @@ resolve_dependencies() {
     local USER_DISTRO="$1"
     local PACKAGE_LISTING_YAML="$2"
 
-    if "$USER_DISTRO" == "macos"; then
+    if [[ "$USER_DISTRO" == "macos" ]]; then
         local current_os="macos"
     else
         local current_os="linux"
