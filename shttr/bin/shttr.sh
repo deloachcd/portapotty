@@ -66,7 +66,7 @@ _make_package() {
     cd "$SHTTR_HOME/pkgs/$SHTTR_PACKAGE_NAME"
 
     # Copy over initial templates
-    cp $SHTTR_HOME/templates/recipe.sh .
+    cp $SHTTR_HOME/templates/build-recipe.sh .
     cp $SHTTR_HOME/templates/Makefile .
     cp $SHTTR_HOME/templates/shttr.conf .
 
