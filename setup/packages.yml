@@ -1,23 +1,23 @@
 linux:
-    - dkms
-    - wget
-    - git
-    - curl
-    - make
-    - htop
-    - zip
-    - unzip
-    - util-linux
-    - xsel
-    - gawk
-    - cmake
+  - dkms
+  - wget
+  - git
+  - curl
+  - make
+  - htop
+  - zip
+  - unzip
+  - util-linux
+  - xsel
+  - gawk
+  - cmake
 debian:
-    - build-essential
-    - pkg-config
-    - clang-11
+  - build-essential
+  - pkg-config
+  - clang-11
 opensuse:
-    - gcc
-    - gcc-c++
-    - glibc-devel
-    - linux-glibc-devel
-    - systemd-coredump
+  - gcc
+  - gcc-c++
+  - glibc-devel
+  - linux-glibc-devel
+  - systemd-coredump
