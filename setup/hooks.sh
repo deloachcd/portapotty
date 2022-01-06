@@ -1,6 +1,7 @@
 # Ensure user install dir exists and has subdirs we expect
-ensure_dir_exists "$HOME/.config"
-ensure_dir_exists "$HOME/.local/bin"
-ensure_dir_exists "$HOME/.local/lib"
-ensure_dir_exists "$HOME/.local/include"
-ensure_dir_exists "$HOME/.local/share"
+ensure_dir_exists ~/.config
+ensure_dir_exists ~/.local/bin
+ensure_dir_exists ~/.local/lib
+ensure_dir_exists ~/.local/include
+ensure_dir_exists ~/.local/share
+ensure_dir_exists ~/.local/share/applications
