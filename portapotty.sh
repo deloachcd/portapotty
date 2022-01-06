@@ -51,11 +51,18 @@ resolve_dependencies() {
     local USER_DISTRO="$1"
     local PACKAGE_LISTING_YAML="$2"
 
+    if "$USER_DISTRO" == "macos"; then
+        local current_os="macos"
+    else
+        local current_os="linux"
+    fi
     local packages=""
     local distro=NONE
+    # ultra-simple YAML parsing that only goes one layer deep
     while read line; do
         if [[ $line =~ ((' '|\t)*\-) && ($distro == all \
-                || $distro == $USER_DISTRO) ]]; then
+                                             || $distro == $current_os \
+                                             || $distro == $USER_DISTRO) ]]; then
             package=$(echo -n "$line" | awk '{ print $2 }')
             packages+=" $package"
         else
@@ -63,6 +70,26 @@ resolve_dependencies() {
         fi
     done < "$PACKAGE_LISTING_YAML"
     printf "$packages"
+}
+
+run_hooks_for_potty() {
+    POTTY="$1"
+    # If file is non-setup directory and it has hooks.sh,
+    # assume it's a potty and run the hooks script
+    cd "$POTTY"
+    if [[ -e hooks.sh ]]; then
+        echo "Running '$POTTY' hooks..."
+        . hooks.sh
+    fi
+    cd ..
+}
+
+run_hooks_for_all_potties_in_pwd() {
+    while read file; do
+        if [[ -d "$file" && ! "$file" == setup ]]; then
+            run_hooks_for_potty "$file"
+        fi
+    done < <(ls)
 }
 
 ensure_dir_exists() {
@@ -114,18 +141,27 @@ done
 
 
 ## g3. Main deploy logic
-
-# Determine which distro we're running
-DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
-if [[ "$DISTRO_LONGNAME" == *"Debian"* || "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
-    USER_DISTRO="debian"
-    PKG_CMD="apt install"
-elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
-    USER_DISTRO="opensuse"
-    PKG_CMD="zypper in"
-elif [[ "$DISTRO_LONGNAME" == *"Arch Linux"* ]]; then
-    USER_DISTRO="arch"
-    PKG_CMD="pacman -S --needed"
+UNAME=$(uname | tr '[:upper:]' '[:lower:]')
+if [[ $UNAME == "linux" ]]; then
+    # we're running linux -- determine specific distro
+    DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
+    if [[ "$DISTRO_LONGNAME" == *"Debian"* || "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
+        USER_DISTRO="debian"
+        PKG_CMD="apt install"
+    elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
+        USER_DISTRO="opensuse"
+        PKG_CMD="zypper in"
+    elif [[ "$DISTRO_LONGNAME" == *"Arch Linux"* ]]; then
+        USER_DISTRO="arch"
+        PKG_CMD="pacman -S --needed"
+    fi
+elif [[ $UNAME == "darwin" ]]; then
+    # we're running macOS
+    USER_DISTRO="macos"
+    PKG_CMD="brew install"
+else
+    echo "Unsupported operating system!"
+    exit -1
 fi
 
 # Install packages first
@@ -137,49 +173,17 @@ echo "Initializing submodules..."
 git submodule init
 git submodule update
 
+# 'setup' always has its hooks run before all other potties
 if [[ -d setup ]]; then
-    # 'setup' always has its hooks run before all other
-    # potties
     echo "Running setup hooks..."
-    cd setup
-    . hooks.sh
-    cd ..
+    run_hooks_for_potty setup
 fi
 
-while read file; do
-    if [[ -d "$file" && \
-              ! "$file" == setup && \
-              ! "$file" == exclude ]]; then
-        # If file is non-setup directory and it has hooks.sh,
-        # assume it's a potty and run the hooks script
-        POTTY="$file"
-        echo "Running '$POTTY' hooks..."
-        cd "$POTTY"
-        if [[ -e hooks.sh ]]; then
-            . hooks.sh
-        fi
-        cd ..
-    fi
-done < <(ls)
+run_hooks_for_all_potties_in_pwd
 
+# 'defer' potties always have their hooks run after the ones at project root
 if [[ -d defer ]]; then
-    # 'defer' potties always have their hooks
-    # run after the ones at project root
     cd defer
-    while read file; do
-        if [[ -d "$file" && \
-                  ! "$file" == setup && \
-                  ! "$file" == exclude ]]; then
-            # If file is non-setup directory and it has hooks.sh,
-            # assume it's a potty and run the hooks script
-            POTTY="$file"
-            echo "Running '$POTTY' hooks..."
-            cd "$POTTY"
-            if [[ -e hooks.sh ]]; then
-                . hooks.sh
-            fi
-            cd ..
-        fi
-    done < <(ls)
+    run_hooks_for_all_potties_in_pwd
     cd ..
 fi

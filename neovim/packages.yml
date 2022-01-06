@@ -1,2 +1,2 @@
-all:
-    - neovim
+linux:
+  - neovim
