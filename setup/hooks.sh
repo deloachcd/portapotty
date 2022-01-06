@@ -4,4 +4,7 @@ ensure_dir_exists ~/.local/bin
 ensure_dir_exists ~/.local/lib
 ensure_dir_exists ~/.local/include
 ensure_dir_exists ~/.local/share
-ensure_dir_exists ~/.local/share/applications
+
+if [[ $UNAME == linux ]]; then
+    ensure_dir_exists ~/.local/share/applications
+fi
