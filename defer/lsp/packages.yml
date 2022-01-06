@@ -1,4 +1,0 @@
-debian:
-    - ccls
-opensuse:
-	- ccls
