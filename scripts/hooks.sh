@@ -1,1 +1,1 @@
-link_config files ~/Scripts
+link_config bin/jumpapp ~/.local/bin/jumpapp
