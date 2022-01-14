@@ -28,4 +28,9 @@ vterm_prompt_end() {
 find_file() {
     vterm_cmd find-file "$(realpath "${@:-.}")"
 }
+
+man() {
+    vterm_cmd man "$@"
+}
+
 alias ff='find_file'
