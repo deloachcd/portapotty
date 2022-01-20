@@ -94,6 +94,24 @@ synlink() {
     done < <(ls)
 }
 
+# This provides the vim/emacs concept of 'marks', except 
+# for directories instead of for lines of text.
+#
+# It should be self-evident how useful this is.
+dmark() {
+    export USER_MARKED_DIRECTORY="$PWD"
+}
+
+dget() {
+    printf "$USER_MARKED_DIRECTORY"
+}
+
+dreturn() {
+    cd "$USER_MARKED_DIRECTORY"
+}
+alias dm="dmark"
+alias dg="dget"
+alias dr="dreturn"
 
 alias vim="nvim"
 alias echo="echo -e"
