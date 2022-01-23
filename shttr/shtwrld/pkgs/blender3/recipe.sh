@@ -19,6 +19,7 @@ shttr_build() {
         mkdir "$LIBRARY_DIR"
         cd "$LIBRARY_DIR"
         svn checkout "$SVN_LIB_REMOTE"
+        cd ..
     fi
     if [[ ! -d blender ]]; then
         git clone "$GIT_REMOTE" blender
