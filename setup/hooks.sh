@@ -7,4 +7,5 @@ ensure_dir_exists ~/.local/share
 
 if [[ $UNAME == linux ]]; then
     ensure_dir_exists ~/.local/share/applications
+    ensure_dir_exists ~/.config/autostart
 fi
