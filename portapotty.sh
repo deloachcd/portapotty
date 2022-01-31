@@ -119,7 +119,7 @@ link_config() {
     fi
     local DST="$(echo "$2" | awk '{ home=ENVIRON["HOME"]; gsub(/~/, home); print }')"
     # new behavior - bulldoze anything that exists in place of the symlink we want
-    if [[ -e "$DST" ]]; then
+    if [[ -e "$DST" || -L "$DST" ]]; then
         rm "$DST"
     fi
     ln -s "$SRC" "$DST"
@@ -172,7 +172,6 @@ while getopts "nqhst:" opt_sg; do
         ?) echo "unknown_option: $opt_sg" ;;
     esac
 done
-
 
 ## g3. Main deploy logic
 UNAME=$(uname | tr '[:upper:]' '[:lower:]')
