@@ -3,7 +3,7 @@
   border-color: #4f5a5f;
   text-color: #3a5a6b;
   spacing: 0;
-  width: 25%;
+  width: 23%;
   font: "Sans-Serif Bold 16";
 }
 
