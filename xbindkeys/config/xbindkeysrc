@@ -85,6 +85,10 @@
 "rofi -modi combi -show combi -combi-modi window,drun,run"
 mod4 + space
 
+# rofi switcher - alternate keybinding
+"rofi -modi combi -show combi -combi-modi window,drun,run"
+alt + space
+
 # focus terminal emulator
 "~/.local/bin/jumpapp kitty"
 control+alt + t
