@@ -99,7 +99,7 @@ ensure_dir_exists() {
     fi
 }
 
-link_config() {
+link_config_safe() {
     if [[ "$SRC" == "$PWD"* ]]; then
         local SRC="$1"
     else
@@ -109,6 +109,20 @@ link_config() {
     if [[ ! -e "$DST" ]]; then
         ln -s "$SRC" "$DST"
     fi
+}
+
+link_config() {
+    if [[ "$SRC" == "$PWD"* ]]; then
+        local SRC="$1"
+    else
+        local SRC="$PWD/$1"
+    fi
+    local DST="$(echo "$2" | awk '{ home=ENVIRON["HOME"]; gsub(/~/, home); print }')"
+    # new behavior - bulldoze anything that exists in place of the symlink we want
+    if [[ -e "$DST" ]]; then
+        rm "$DST"
+    fi
+    ln -s "$SRC" "$DST"
 }
 
 halting_message() {
