@@ -166,10 +166,6 @@ if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
     install_packages_from_all_potties "$USER_DISTRO" "$PKG_CMD"
 fi
 
-echo "Initializing submodules..."
-git submodule init
-git submodule update
-
 # 'setup' always has its hooks run before all other potties
 if [[ -d setup ]]; then
     echo "Running setup hooks..."
