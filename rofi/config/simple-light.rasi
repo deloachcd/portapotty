@@ -4,7 +4,7 @@
   text-color: #3a5a6b;
   spacing: 0;
   width: 37%;
-  font: "Sans-Serif Bold 12";
+  font: "DejaVu Sans Mono 12";
 }
 
 window {
