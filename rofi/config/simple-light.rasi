@@ -1,14 +1,14 @@
 * {
   background-color: #f5f5f5;
   border-color: #4f5a5f;
-  text-color: #6f7e86;
+  text-color: #3a5a6b;
   spacing: 0;
-  width: 700px;
+  width: 25%;
+  font: "Sans-Serif Bold 16";
 }
 
 window {
-  border: 1px;
-  border-radius: 5px;
+  border: 4px;
   border-color: #6f7e86;
 }
 
