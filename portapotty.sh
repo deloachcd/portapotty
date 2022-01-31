@@ -135,6 +135,26 @@ halting_message() {
     fi
 }
 
+init_unpopulated_submodules() {
+    # ensure all submodules are checked out if they don't exist
+    RETURN_DIR="$PWD"
+    MODULE_COUNT=0
+    FIRST_RUN=
+    while read submodule_path; do
+        cd $submodule_path
+        if [[ $MODULE_COUNT -eq 0 && ! -e .git ]]; then
+            FIRST_RUN=true
+            git submodule init
+            git submodule update
+        fi
+        if [[ $FIRST_RUN ]]; then
+            git checkout master
+            git pull
+        fi
+        cd "$RETURN_DIR"
+    done < <(cat .gitmodules | grep '\s*path =' | awk '{ print $3 }')
+}
+
 ## g2. Argument parsing
 
 TARGET=all
@@ -179,6 +199,9 @@ fi
 if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
     install_packages_from_all_potties "$USER_DISTRO" "$PKG_CMD"
 fi
+
+# Next, set up submodules from root dir
+init_unpopulated_submodules
 
 # 'setup' always has its hooks run before all other potties
 if [[ -d setup ]]; then
