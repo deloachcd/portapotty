@@ -99,7 +99,9 @@ ensure_dir_exists() {
     fi
 }
 
-link_config_safe() {
+link_config_soft() {
+    # same as link_config, but backs off if the file exists instead of bulldozing
+    # it -- potentially useful for files that user applications write to
     if [[ "$SRC" == "$PWD"* ]]; then
         local SRC="$1"
     else
