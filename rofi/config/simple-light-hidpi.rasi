@@ -34,7 +34,7 @@ listview {
   cycle: false;
   margin: 0 0 -1px 0;
   scrollbar: false;
-  lines: 10;
+  lines: 12;
 }
 
 element {
