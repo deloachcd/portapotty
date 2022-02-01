@@ -10,3 +10,6 @@ fi
 
 ensure_dir_exists ~/.config/openbox
 link_config config/rc.xml ~/.config/openbox/rc.xml
+
+ensure_dir_exists ~/.themes
+link_config themes/Clearlooks-Steel/ ~/.themes/Clearlooks-Steel
