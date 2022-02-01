@@ -42,7 +42,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Clearlooks</name>
+    <name>Clearlooks-Steel</name>
     <titleLayout>CMILD</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -57,7 +57,7 @@
     <keepBorder>yes</keepBorder>
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
-      <name>sans</name>
+      <name>Samyak Tamil</name>
       <size>11</size>
       <!-- font size in points -->
       <weight>Bold</weight>
@@ -66,7 +66,7 @@
       <!-- 'italic' or 'normal' -->
     </font>
     <font place="InactiveWindow">
-      <name>sans</name>
+      <name>Samyak Tamil</name>
       <size>11</size>
       <!-- font size in points -->
       <weight>Bold</weight>
@@ -261,7 +261,8 @@
       <action name="ToggleMaximize"/>
     </keybind>
     <!-- tiling start -->
-    <keybind key="W-j">        <!-- MoveResizeTo Left half of screen -->
+    <keybind key="W-j">
+      <!-- MoveResizeTo Left half of screen -->
       <action name="UnmaximizeFull"/>
       <action name="MaximizeVert"/>
       <action name="Raise"/>
@@ -271,7 +272,8 @@
         <y>0</y>
       </action>
     </keybind>
-    <keybind key="W-l">        <!--MoveResizeTo Right half of screen -->
+    <keybind key="W-l">
+      <!--MoveResizeTo Right half of screen -->
       <action name="UnmaximizeFull"/>
       <action name="MaximizeVert"/>
       <action name="Raise"/>
@@ -281,7 +283,8 @@
         <y>0</y>
       </action>
     </keybind>
-    <keybind key="W-i">        <!--MoveResizeTo Top half of screen -->
+    <keybind key="W-i">
+      <!--MoveResizeTo Top half of screen -->
       <action name="UnmaximizeFull"/>
       <action name="Raise"/>
       <action name="MoveResizeTo">
@@ -291,7 +294,8 @@
         <height>50%</height>
       </action>
     </keybind>
-    <keybind key="W-k">        <!--MoveResizeTo Bottom half of screen -->
+    <keybind key="W-k">
+      <!--MoveResizeTo Bottom half of screen -->
       <action name="UnmaximizeFull"/>
       <action name="Raise"/>
       <action name="MoveResizeTo">
@@ -301,7 +305,8 @@
         <height>50%</height>
       </action>
     </keybind>
-    <keybind key="W-u">        <!--MoveResizeTo Top left quarter -->
+    <keybind key="W-u">
+      <!--MoveResizeTo Top left quarter -->
       <action name="UnmaximizeFull"/>
       <action name="Raise"/>
       <action name="MoveResizeTo">
@@ -311,7 +316,8 @@
         <height>50%</height>
       </action>
     </keybind>
-    <keybind key="W-o">        <!--MoveResizeTo Top right quarter -->
+    <keybind key="W-o">
+      <!--MoveResizeTo Top right quarter -->
       <action name="UnmaximizeFull"/>
       <action name="Raise"/>
       <action name="MoveResizeTo">
@@ -321,7 +327,8 @@
         <height>50%</height>
       </action>
     </keybind>
-    <keybind key="W-h">        <!--MoveResizeTo Bottom left quarter -->
+    <keybind key="W-h">
+      <!--MoveResizeTo Bottom left quarter -->
       <action name="UnmaximizeFull"/>
       <action name="Raise"/>
       <action name="MoveResizeTo">
@@ -331,7 +338,8 @@
         <height>50%</height>
       </action>
     </keybind>
-    <keybind key="W-semicolon">        <!--MoveResizeTo Bottom right quarter -->
+    <keybind key="W-semicolon">
+      <!--MoveResizeTo Bottom right quarter -->
       <action name="UnmaximizeFull"/>
       <action name="Raise"/>
       <action name="MoveResizeTo">
