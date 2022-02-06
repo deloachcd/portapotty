@@ -78,7 +78,7 @@ window.*.grip.bg.color: #eaebec
 
 window.*.border.color: #585a5d
 
-window.active.title.separator.color: #4e76a8
+window.active.title.separator.color: #585a5d
 
 *.title.bg: Raised Gradient splitvertical
 !#*.title.bg.color: #8CB0DC
@@ -105,7 +105,7 @@ window.active.button.*.bg.color.splitTo: #EBEAE9
 window.active.button.*.bg.colorTo: #DEDCDA
 window.active.button.*.bg.colorTo.splitTo: #D5D3D1
 
-window.active.button.*.bg.border.color: #49678B
+window.active.button.*.bg.border.color: #585a5d
 window.active.button.*.image.color: #555555
 
 window.active.button.hover.bg.color: #b5d3ef
