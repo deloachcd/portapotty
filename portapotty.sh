@@ -33,18 +33,27 @@ EOF
 }
 
 ## g1. Helper definitions
-install_packages_from_all_potties() {
+_install_packages_recursively() {
     local DISTRO="$1"
-    local PACKAGE_CMD="$2"
+    local ROOTDIR="$2"
+    if [[ $USER_DISTRO == debian ]]; then
+        PKG_CMD="sudo apt install -y"
+    elif [[ $USER_DISTRO == opensuse ]]; then
+        PKG_CMD="sudo zypper in"
+    elif [[ $USER_DISTRO == macos ]]; then
+        PKG_CMD="brew install"
+    fi
 
     local PACKAGES=""
     while read packagefile; do
         for package in $(resolve_dependencies "$DISTRO" "$packagefile"); do
             PACKAGES="$(eval printf "$package") $PACKAGES"
         done
-    done < <(find . | grep 'packages.yml')
-    echo "** INSTALL DEPENDENCIES **"
-    sudo $PACKAGE_CMD -y $PACKAGES
+    done < <(find $ROOTDIR | grep 'packages.yml')
+    if [[ ! -z "$PACKAGES" ]]; then
+        echo "** Installing packages for '$(basename $PWD)' ***"
+        $PACKAGE_CMD $PACKAGES
+    fi
 }
 
 resolve_dependencies() {
@@ -84,8 +93,12 @@ run_hooks_for_potty() {
 }
 
 run_hooks_for_profile_if_exists() {
-    if [[ -d "$1" ]]; then
-        cd "$1"
+    PROFILE="$1"
+    if [[ -d "$PROFILE" ]]; then
+        if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
+            install_packages_recursively "$PROFILE"
+        fi
+        cd "$PROFILE"
         while read file; do
             if [[ -d "$file" ]]; then
                 run_hooks_for_potty "$file"
@@ -201,19 +214,20 @@ if [[ $UNAME == linux ]]; then
     DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
     if [[ "$DISTRO_LONGNAME" == *"Debian"* || "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
         USER_DISTRO="debian"
-        PKG_CMD="apt install"
     elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
         USER_DISTRO="opensuse"
-        PKG_CMD="zypper in"
     fi
 elif [[ $UNAME == "darwin" ]]; then
     # we're running macOS
     USER_DISTRO="macos"
-    PKG_CMD="brew install"
 else
     echo "Unsupported operating system!"
     exit -1
 fi
+
+install_packages_recursively() {
+    _install_packages_recursively $USER_DISTRO "$1"
+}
 
 # Install packages first
 if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
@@ -251,6 +265,9 @@ else
 
     # run hooks for target if we find it in a profile
     cd $TARGET_PROFILE
+    if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
+        install_packages_recursively "$TARGET"
+    fi
     run_hooks_for_potty "$TARGET"
     cd ..
 fi
