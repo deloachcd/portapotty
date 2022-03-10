@@ -73,10 +73,9 @@ resolve_dependencies() {
 }
 
 run_hooks_for_potty() {
-    POTTY="$1"
     # If file is non-setup directory and it has hooks.sh,
     # assume it's a potty and run the hooks script
-    cd "$POTTY"
+    cd "$1"
     if [[ -e hooks.sh ]]; then
         echo "Running '$POTTY' hooks..."
         . hooks.sh
@@ -84,12 +83,16 @@ run_hooks_for_potty() {
     cd ..
 }
 
-run_hooks_for_all_potties_in_pwd() {
-    while read file; do
-        if [[ -d "$file" && ! "$file" == setup ]]; then
-            run_hooks_for_potty "$file"
-        fi
-    done < <(ls)
+run_hooks_for_profile_if_exists() {
+    if [[ -d "$1" ]]; then
+        cd "$1"
+        while read file; do
+            if [[ -d "$file" ]]; then
+                run_hooks_for_potty "$file"
+            fi
+        done < <(ls)
+        cd ..
+    fi
 }
 
 ensure_dir_exists() {
@@ -157,6 +160,22 @@ init_unpopulated_submodules() {
     done < <(cat .gitmodules | grep '\s*path =' | awk '{ print $3 }')
 }
 
+find_containing_profile() {
+    CONTAINING_PROFILE=
+    if [ -d base ] && ls base | grep "$TARGET" 1>/dev/null; then
+        CONTAINING_PROFILE=base
+    elif [ -d extra ] && ls extra | grep "$TARGET" 1>/dev/null; then
+        CONTAINING_PROFILE=extra
+    elif [ -d linux ] && ls linux | grep "$TARGET" 1>/dev/null; then
+        CONTAINING_PROFILE=linux
+    elif [ -d macos ] && ls macos | grep "$TARGET" 1>/dev/null; then
+        CONTAINING_PROFILE=macos
+    fi
+
+    printf $CONTAINING_PROFILE
+}
+        TARGET_PROFILE=macos
+
 ## g2. Argument parsing
 
 TARGET=all
@@ -168,7 +187,7 @@ while getopts "nqhst:" opt_sg; do
     case $opt_sg in
         h) display_help && exit 0 ;;
         s) SKIP_DEPENDENCY_RESOLUTION=true ;;
-        t) TARGET=$OPTARG ;;
+        t) TARGET="$OPTARG" ;;
         q) QUICK_DEPLOY=true ;;
         n) SKIP_HALTING_MESSAGES=true ;;
         ?) echo "unknown_option: $opt_sg" ;;
@@ -177,7 +196,7 @@ done
 
 ## g3. Main deploy logic
 UNAME=$(uname | tr '[:upper:]' '[:lower:]')
-if [[ $UNAME == "linux" ]]; then
+if [[ $UNAME == linux ]]; then
     # we're running linux -- determine specific distro
     DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
     if [[ "$DISTRO_LONGNAME" == *"Debian"* || "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
@@ -204,17 +223,34 @@ fi
 # Next, set up submodules from root dir
 init_unpopulated_submodules
 
-# 'setup' always has its hooks run before all other potties
+# 'setup' always has its hooks run before any other potties
 if [[ -d setup ]]; then
     echo "Running setup hooks..."
     run_hooks_for_potty setup
 fi
 
-run_hooks_for_all_potties_in_pwd
+if [[ "$TARGET" == all ]]; then
+    # base profile hooks run on both linux and macOS
+    run_hooks_for_profile_if_exists base
 
-# 'defer' potties always have their hooks run after the ones at project root
-if [[ -d defer ]]; then
-    cd defer
-    run_hooks_for_all_potties_in_pwd
+    # linux profile hooks only run on linux
+    if [[ $UNAME == linux ]]; then
+        run_hooks_for_profile_if_exists linux
+
+    # I don't actually do anything with a macOS-only profile (yet)
+    elif [[ $UNAME == darwin ]]; then
+        run_hooks_for_profile_if_exists macos
+    fi
+else
+    # find which profile our target is in (or error if we don't find it)
+    TARGET_PROFILE=$(find_containing_profile)
+    if [[ -z $TARGET_PROFILE ]]; then
+        echo "Error: could not find '$TARGET' in any profile"
+        exit -1
+    fi
+
+    # run hooks for target if we find it in a profile
+    cd $TARGET_PROFILE
+    run_hooks_for_potty "$TARGET"
     cd ..
 fi
