@@ -1,5 +1,34 @@
-linux:
+all:
   - libtool
+linux:
   - libtool-bin
 debian:
   - libvterm-dev
+macos:
+  - cmake
+  - gcc
+  - autoconf
+  - coreutils
+  - curl
+  - dbus
+  - expat
+  - gmp
+  - gnu-sed
+  - gnutls
+  - jansson
+  - libffi
+  - libgccjit
+  - libiconv
+  - librsvg
+  - libtasn1
+  - libunistring
+  - libvterm
+  - libxml2
+  - little-cms2
+  - mailutils
+  - make
+  - ncurses
+  - nettle
+  - pkg-config
+  - texinfo
+  - zlib
