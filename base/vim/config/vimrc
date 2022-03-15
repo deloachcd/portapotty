@@ -1,9 +1,8 @@
 """ Vim 8 / Neovim configuration section
-set nu rnu                                  " hybrid line numbers
-set t_Co=256                                " truecolor
+syntax on
+set nu                                      " line numbers
 set scrolloff=3                             " scroll padding
-set list                                    "
-set listchars=tab:>-                        " visualize hard tabs as >---
+set list listchars=tab:>-                   " visualize hard tabs as >---
 set tabstop=4                               " hard tabs are 8 spaces wide
-set shiftwidth=4                            " 4-space wide indents
+set softtabstop=4 shiftwidth=4              " 4-space wide indents
 set expandtab                               " hitting "tab" inserts spaces
