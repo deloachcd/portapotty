@@ -23,11 +23,11 @@ hooks from hooks.sh for all subdirectories, but you can tweak this behavior thro
 the parameters listed below.
 
 Optional parameters:
-    -h      display this help message
-    -q      pass QUICK_DEPLOY flag to hooks.sh scripts to skip redundant work
-    -s      skip automated installation of packages.yml dependencies
-    -t      run deploy logic only for target directory, specified as argument
-    -n      skip all halting messages
+    -i           install packages from packages.yml files
+    -h           display this help message
+    -q           pass QUICK_DEPLOY flag to hooks.sh scripts to skip redundant work
+    -e {potty}   install {potty} from 'extra' profile by name
+    -s           skip all halting messages
 
 EOF
 }
@@ -46,17 +46,23 @@ _install_packages_recursively() {
 
     local PACKAGES=""
     while read packagefile; do
-        for package in $(resolve_dependencies "$DISTRO" "$packagefile"); do
+        for package in $(find_packages "$DISTRO" "$packagefile"); do
             PACKAGES="$(eval printf "$package") $PACKAGES"
         done
     done < <(find $ROOTDIR | grep 'packages.yml')
     if [[ ! -z "$PACKAGES" ]]; then
-        echo "** Installing packages for '$(basename $PWD)' ***"
-        $PACKAGE_CMD $PACKAGES
+        NAME=$(basename $ROOTDIR)
+        UNDERLINE=$(echo $NAME | awk '{ gsub(/./, "-"); print }')
+        echo
+        echo "The following packages for '$NAME' will be installed:"
+        echo "$UNDERLINE------------------------------------------------"
+        echo "$PACKAGES"
+        echo
+        $PKG_CMD $PACKAGES
     fi
 }
 
-resolve_dependencies() {
+find_packages() {
     local USER_DISTRO="$1"
     local PACKAGE_LISTING_YAML="$2"
 
@@ -84,7 +90,8 @@ resolve_dependencies() {
 run_hooks_for_potty() {
     # If file is non-setup directory and it has hooks.sh,
     # assume it's a potty and run the hooks script
-    cd "$1"
+    POTTY="$1"
+    cd "$POTTY"
     if [[ -e hooks.sh ]]; then
         echo "Running '$POTTY' hooks..."
         . hooks.sh
@@ -95,7 +102,7 @@ run_hooks_for_potty() {
 run_hooks_for_profile_if_exists() {
     PROFILE="$1"
     if [[ -d "$PROFILE" ]]; then
-        if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
+        if [[ $INSTALL_PACKAGES == true ]]; then
             install_packages_recursively "$PROFILE"
         fi
         cd "$PROFILE"
@@ -153,36 +160,19 @@ halting_message() {
     fi
 }
 
-find_containing_profile() {
-    CONTAINING_PROFILE=
-    if [ -d base ] && ls base | grep "$TARGET" 1>/dev/null; then
-        CONTAINING_PROFILE=base
-    elif [ -d extra ] && ls extra | grep "$TARGET" 1>/dev/null; then
-        CONTAINING_PROFILE=extra
-    elif [ -d linux ] && ls linux | grep "$TARGET" 1>/dev/null; then
-        CONTAINING_PROFILE=linux
-    elif [ -d macos ] && ls macos | grep "$TARGET" 1>/dev/null; then
-        CONTAINING_PROFILE=macos
-    fi
-
-    printf $CONTAINING_PROFILE
-}
-        TARGET_PROFILE=macos
-
 ## g2. Argument parsing
-
 TARGET=all
-SKIP_DEPENDENCY_RESOLUTION=false
+INSTALL_PACKAGES=false
 QUICK_DEPLOY=false
 SKIP_HALTING_MESSAGES=false
 
-while getopts "nqhst:" opt_sg; do
+while getopts "iqhse:" opt_sg; do
     case $opt_sg in
-        h) display_help && exit 0 ;;
-        s) SKIP_DEPENDENCY_RESOLUTION=true ;;
-        t) TARGET="$OPTARG" ;;
+        i) INSTALL_PACKAGES=true ;;
         q) QUICK_DEPLOY=true ;;
-        n) SKIP_HALTING_MESSAGES=true ;;
+        h) display_help && exit 0 ;;
+        s) SKIP_HALTING_MESSAGES=true ;;
+        e) TARGET="$OPTARG" ;;
         ?) echo "unknown_option: $opt_sg" ;;
     esac
 done
@@ -209,17 +199,8 @@ install_packages_recursively() {
     _install_packages_recursively $USER_DISTRO "$1"
 }
 
-# Install packages first
-if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
-    install_packages_from_all_potties "$USER_DISTRO" "$PKG_CMD"
-fi
-
-# Next, set up submodules from root dir
-init_unpopulated_submodules
-
 # 'setup' always has its hooks run before any other potties
 if [[ -d setup ]]; then
-    echo "Running setup hooks..."
     run_hooks_for_potty setup
 fi
 
@@ -236,18 +217,17 @@ if [[ "$TARGET" == all ]]; then
         run_hooks_for_profile_if_exists macos
     fi
 else
-    # find which profile our target is in (or error if we don't find it)
-    TARGET_PROFILE=$(find_containing_profile)
-    if [[ -z $TARGET_PROFILE ]]; then
-        echo "Error: could not find '$TARGET' in any profile"
+    # install a single potty from the 'extra' profile
+    if ! [ -d extra ] && find extra -maxdepth 1 | grep "$TARGET" 1>/dev/null 2>&1; then
+        echo "Error: cannot find $TARGET in 'extra' profile."
         exit -1
     fi
 
     # run hooks for target if we find it in a profile
-    cd $TARGET_PROFILE
-    if [[ $SKIP_DEPENDENCY_RESOLUTION == false ]]; then
+    cd extra/$TARGET_PROFILE
+    if [[ $INSTALL_PACKAGES == true ]]; then
         install_packages_recursively "$TARGET"
     fi
     run_hooks_for_potty "$TARGET"
-    cd ..
+    cd ../..
 fi
