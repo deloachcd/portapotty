@@ -6,7 +6,7 @@ __folding_prompt() {
     pwd | gawk -F '/' '{
         NFF=NF-2
         for(i=2; i<=NF; i++) {
-            if (i == 2 && $i == "home") {
+            if (i == 2 && ($i == "home" || $i == "Users")) {
                 if (NF == 3) {
                     printf "~"
                 } else {
