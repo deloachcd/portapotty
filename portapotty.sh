@@ -153,26 +153,6 @@ halting_message() {
     fi
 }
 
-init_unpopulated_submodules() {
-    # ensure all submodules are checked out if they don't exist
-    RETURN_DIR="$PWD"
-    MODULE_COUNT=0
-    FIRST_RUN=
-    while read submodule_path; do
-        cd $submodule_path
-        if [[ $MODULE_COUNT -eq 0 && ! -e .git ]]; then
-            FIRST_RUN=true
-            git submodule init
-            git submodule update
-        fi
-        if [[ $FIRST_RUN ]]; then
-            git checkout master
-            git pull
-        fi
-        cd "$RETURN_DIR"
-    done < <(cat .gitmodules | grep '\s*path =' | awk '{ print $3 }')
-}
-
 find_containing_profile() {
     CONTAINING_PROFILE=
     if [ -d base ] && ls base | grep "$TARGET" 1>/dev/null; then
