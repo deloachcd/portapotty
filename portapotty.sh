@@ -33,6 +33,12 @@ EOF
 }
 
 ## g1. Helper definitions
+uline_echo() {
+    UNDERLINE=$(echo "$1" | awk '{ gsub(/./, "-"); print }')
+    echo "$1"
+    echo "$UNDERLINE"
+}
+
 _install_packages_recursively() {
     local DISTRO="$1"
     local ROOTDIR="$2"
@@ -54,8 +60,7 @@ _install_packages_recursively() {
         NAME=$(basename $ROOTDIR)
         UNDERLINE=$(echo $NAME | awk '{ gsub(/./, "-"); print }')
         echo
-        echo "The following packages for '$NAME' will be installed:"
-        echo "$UNDERLINE------------------------------------------------"
+        uline_echo "The following packages for '$NAME' will be installed:"
         echo "$PACKAGES"
         echo
         $PKG_CMD $PACKAGES
