@@ -7,7 +7,6 @@ source $ZSH_CONFIG_DIR/constants.sh
 source $ZSH_CONFIG_DIR/path.sh
 source $ZSH_CONFIG_DIR/aliases.sh
 source $ZSH_CONFIG_DIR/bsd-style-pkg.sh
-source $ZSH_CONFIG_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # NOTE prompt.zsh needs to be sourced after vterm.zsh for shell-side integration
 # (directory tracking) to work properly
