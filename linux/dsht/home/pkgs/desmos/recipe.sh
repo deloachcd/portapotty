@@ -1,15 +1,6 @@
 # local path to the binary the build process generates
 SHTTR_BUILD_EXECUTABLE="repo/dist/desmos 1.0.0.AppImage"
 
-# if not a zero-length string, build recipe will use 'apt build-dep' 
-# to resolve build dependencies, which requires deb-src repos to be
-# enabled but can greatly simplify things
-SHTTR_BUILD_DEP=""
-
-# all additional dependencies to be installed by package managers for the build process
-SHTTR_APT_DEPENDENCIES=""
-SHTTR_DNF_DEPENDENCIES=""
-
 build() {
     local MAKEOPTS="-j$(nproc)"
     local GIT_REMOTE="https://github.com/deloachcd/Desmos-Desktop.git"

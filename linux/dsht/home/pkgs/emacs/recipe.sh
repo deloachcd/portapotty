@@ -1,9 +1,8 @@
 # local path to the binary the build process generates
 SHTTR_BUILD_EXECUTABLE="build/bin/*"
 
-# if not a zero-length string, build recipe will use 'apt build-dep' 
-# to resolve build dependencies, which requires deb-src repos to be
-# enabled but can greatly simplify things
+# if not a zero-length string, build recipe will use package manager
+# to resolve build dependencies, which can greatly simplify things
 SHTTR_BUILD_DEP="yes"
 
 # all additional dependencies to be installed by package managers for the build process
@@ -15,6 +14,9 @@ build() {
     local GIT_REMOTE="git://git.savannah.gnu.org/emacs.git"
     local REPO_DIR="repo"
     local SHTTR_DIR=$PWD
+
+    # resolves dependencies from variables above function definitions
+    install_pkg_manager_dependencies
 
     if [[ ! -d "$REPO_DIR" ]]; then
         git clone "$GIT_REMOTE" "$REPO_DIR"
