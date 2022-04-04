@@ -2,6 +2,8 @@ debian:
   - python3
   - python3-pip
   - python3-venv
+fedora:
+  - python3-pip
 opensuse:
   - python39
   - python39-pip
