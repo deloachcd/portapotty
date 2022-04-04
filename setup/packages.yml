@@ -10,6 +10,7 @@ linux:
   - util-linux
   - xsel
   - gawk
+  - gcc
   - cmake
 debian:
   - build-essential
@@ -21,3 +22,7 @@ opensuse:
   - glibc-devel
   - linux-glibc-devel
   - systemd-coredump
+fedora:
+  - automake
+  - gcc-c++
+  - kernel-devel
