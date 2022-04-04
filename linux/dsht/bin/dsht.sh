@@ -126,6 +126,19 @@ _list() {
     done
 }
 
+install_pkg_manager_dependencies() {
+    if [[ ! -z "$SHTTR_BUILD_DEP" ]]; then
+        # NOTE: this may grow into more lines if package managers
+        # are added that don't share this syntax
+        sudo $PKG_MANAGER build-dep "$SHTTR_APP_NAME"
+    fi
+    if [[ $DISTRO == 'debian' && ! -z "$SHTTR_APT_DEPENDENCIES" ]]; then
+        sudo apt install $SHTTR_APT_DEPENDENCIES
+    elif [[ $DISTRO == 'fedora' && ! -z "$SHTTR_DNF_DEPENDENCIES" ]]; then
+        sudo dnf install $SHTTR_DNF_DEPENDENCIES
+    fi
+}
+
 __call_recipe() {
     local SHTTR_PACKAGE_NAME="$1"
     local OPERATION="$2"
@@ -140,21 +153,6 @@ __call_recipe() {
 
     cd "$DSHT_HOME/pkgs/$SHTTR_PACKAGE_NAME"
     source recipe.sh
-
-    if [[ $OPERATION == 'build' ]]; then
-        # resolve dependencies if build operation
-        if [[ ! -z "$SHTTR_BUILD_DEP" ]]; then
-            # NOTE: this may grow into more lines if package managers
-            # are added that don't share this syntax
-            sudo $PKG_MANAGER build-dep "$SHTTR_APP_NAME"
-        fi
-        if [[ $DISTRO == 'debian' && ! -z "$SHTTR_APT_DEPENDENCIES" ]]; then
-            sudo apt install $SHTTR_APT_DEPENDENCIES
-        elif [[ $DISTRO == 'fedora' && ! -z "$SHTTR_DNF_DEPENDENCIES" ]]; then
-            sudo dnf install $SHTTR_DNF_DEPENDENCIES
-        fi
-    fi
-
     $OPERATION
 }
 
@@ -171,15 +169,15 @@ TARGET="$2"
 
 case "$OPERATION" in
     build | bd)
-        __call_recipe "$TARGET" "build"
+        __call_recipe "$TARGET" build
         ;;
 
     install | in)
-        __call_recipe "$TARGET" "install"
+        __call_recipe "$TARGET" install
         ;;
 
     uninstall | un)
-        __call_recipe "$TARGET" "uninstall"
+        __call_recipe "$TARGET" uninstall
         ;;
 
     list | lt)
