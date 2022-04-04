@@ -46,6 +46,8 @@ _install_packages_recursively() {
         PKG_CMD="sudo apt install -y"
     elif [[ $USER_DISTRO == opensuse ]]; then
         PKG_CMD="sudo zypper in"
+    elif [[ $USER_DISTRO == fedora ]]; then
+        PKG_CMD="sudo dnf install"
     elif [[ $USER_DISTRO == macos ]]; then
         PKG_CMD="brew install"
     fi
@@ -189,6 +191,8 @@ if [[ $UNAME == linux ]]; then
     DISTRO_LONGNAME="$(cat /etc/os-release | egrep '^NAME' | awk -F '"' '{ print $2 }')"
     if [[ "$DISTRO_LONGNAME" == *"Debian"* || "$DISTRO_LONGNAME" == *"Ubuntu"* ]]; then
         USER_DISTRO="debian"
+    elif [[ "$DISTRO_LONGNAME" == *"Fedora"* ]]; then
+        USER_DISTRO="fedora"
     elif [[ "$DISTRO_LONGNAME" == *"openSUSE"* ]]; then
         USER_DISTRO="opensuse"
     fi
