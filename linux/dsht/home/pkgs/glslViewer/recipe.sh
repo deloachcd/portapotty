@@ -7,7 +7,7 @@ SHTTR_BUILD_DEP=""
 
 # all additional dependencies to be installed by package managers for the build process
 SHTTR_APT_DEPENDENCIES="git cmake xorg-dev libglu1-mesa-dev ffmpeg libavcodec-dev libavcodec-extra libavfilter-dev libavfilter-extra libavdevice-dev libavformat-dev libavutil-dev libswscale-dev libv4l-dev libjpeg-dev libpng-dev libtiff-dev"
-SHTTR_DNF_DEPENDENCIES=""
+SHTTR_DNF_DEPENDENCIES="git gcc-c++ cmake mesa-libGLU-devel libXi-devel libXxf86vm-devel libXdamage-devel libatomic"
 
 build() {
     local MAKEOPTS="-j$(nproc)"
