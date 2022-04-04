@@ -1,9 +1,10 @@
 all:
   - libtool
-linux:
-  - libtool-bin
 debian:
+  - libtool-bin
   - libvterm-dev
+fedora:
+  - libvterm
 macos:
   - cmake
   - gcc
