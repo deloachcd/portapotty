@@ -72,10 +72,8 @@ _make_package() {
     mkdir "$DSHT_HOME/pkgs/$SHTTR_PACKAGE_NAME"
     cd "$DSHT_HOME/pkgs/$SHTTR_PACKAGE_NAME"
 
-    # Copy over initial templates
+    # Copy over initial template
     cp $DSHT_HOME/templates/recipe.sh .
-    cp $DSHT_HOME/templates/Makefile .
-    cp $DSHT_HOME/templates/shttr.conf .
 
     # Check if package exists in distro's repos, to look for desktop files/icons there
     if $(eval $PKG_SEARCH $SHTTR_PACKAGE_NAME 1>/dev/null 2>&1); then
