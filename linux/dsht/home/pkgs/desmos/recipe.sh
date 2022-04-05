@@ -19,7 +19,7 @@ install() {
     test ! -z "${SHTTR_BUILD_EXECUTABLE}"
     test -e "${SHTTR_BUILD_EXECUTABLE}"
 
-    ln -sf ${PWD}/${SHTTR_BUILD_EXECUTABLE} ${HOME}/.local/bin/${SHTTR_PACKAGE_NAME}
+    ln -sf "${PWD}/${SHTTR_BUILD_EXECUTABLE}" ${HOME}/.local/bin/${SHTTR_PACKAGE_NAME}
 
     if [[ -e ${SHTTR_PACKAGE_NAME}.desktop ]]; then
         # use awk to substitute $HOME in desktop file with absolute path
