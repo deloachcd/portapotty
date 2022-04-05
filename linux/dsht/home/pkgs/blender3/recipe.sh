@@ -15,7 +15,7 @@ build() {
     local SVN_LIB_REMOTE="https://svn.blender.org/svnroot/bf-blender/trunk/lib/linux_centos7_x86_64"
     local REPO_DIR="blender-git"
     local LIBRARY_DIR="lib"
-    local BUILD_TAG="blender-v3.0-release"
+    local RELEASE_BRANCH="blender-v3.1-release"
 
     # resolves dependencies from variables above function definitions
     install_pkg_manager_dependencies
@@ -37,7 +37,17 @@ build() {
     fi
 
     cd blender
-    git checkout "$BUILD_TAG"
+
+    # reset everything just in case
+    git reset --hard
+    for module_path in $(cat .gitmodules | grep path | awk '{ print $3 }'); do
+        anchor=$PWD
+        cd $module_path
+        git reset --hard
+        cd $anchor
+    done
+
+    git checkout "$RELEASE_BRANCH"
     make update
     make $MAKEOPTS
 }
@@ -45,9 +55,7 @@ build() {
 install() {
     test ! -z "${SHTTR_BUILD_EXECUTABLE}"
 
-    for binary in "${SHTTR_BUILD_EXECUTABLE}"; do
-        ln -sf ${PWD}/${binary} ${HOME}/.local/bin/$(basename ${binary})
-    done
+    ln -sf ${PWD}/${SHTTR_BUILD_EXECUTABLE} ${HOME}/.local/bin/${SHTTR_PACKAGE_NAME}
 
     if [[ -e ${SHTTR_PACKAGE_NAME}.desktop ]]; then
         # use awk to substitute $HOME in desktop file with absolute path
