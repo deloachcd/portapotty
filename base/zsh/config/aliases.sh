@@ -113,7 +113,6 @@ alias dm="dmark"
 alias dg="dget"
 alias dr="dreturn"
 
-alias vim="nvim"
 alias echo="echo -e"
 alias mirrorget="wget --mirror --convert-links --backup-converted --adjust-extension"
 
