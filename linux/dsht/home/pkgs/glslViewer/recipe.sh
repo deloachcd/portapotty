@@ -44,7 +44,7 @@ install() {
 
     if [[ -e ${SHTTR_PACKAGE_NAME}.desktop ]]; then
         # use awk to substitute $HOME in desktop file with absolute path
-        awk '{ gsub(/\$$HOME/,ENVIRON["HOME"]); print $0 }' ${SHTTR_PACKAGE_NAME}.desktop >\
+        awk '{ gsub(/\$HOME/,ENVIRON["HOME"]); print $0 }' ${SHTTR_PACKAGE_NAME}.desktop >\
             ${HOME}/.local/share/applications/${SHTTR_PACKAGE_NAME}.desktop
     fi
 
