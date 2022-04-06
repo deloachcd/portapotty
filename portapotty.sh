@@ -210,6 +210,9 @@ install_packages_recursively() {
 
 # 'setup' always has its hooks run before any other potties
 if [[ -d setup ]]; then
+    if [[ $INSTALL_PACKAGES == true ]]; then
+        install_packages_recursively setup
+    fi
     run_hooks_for_potty setup
 fi
 
