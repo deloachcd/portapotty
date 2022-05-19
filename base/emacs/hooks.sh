@@ -4,7 +4,7 @@ fi
 
 if [[ $UNAME == darwin && $INSTALL_PACKAGES == true ]]; then
     EMACS_FORMULA="emacs-plus@28"
-    EMACS_OPTIONS="--with-native-comp"
+    EMACS_OPTIONS=""
     echo
     uline_echo "The following formula will be installed:"
     echo "$EMACS_FORMULA"
@@ -12,6 +12,6 @@ if [[ $UNAME == darwin && $INSTALL_PACKAGES == true ]]; then
     brew tap d12frosted/emacs-plus
     brew install $EMACS_FORMULA $EMACS_OPTIONS
     if [[ ! -e /Applications/Emacs.app ]]; then
-        ln -s /usr/local/opt/$EMACS_FORMULA/Emacs.app /Applications
+        cp -r /usr/local/opt/$EMACS_FORMULA/Emacs.app /Applications
     fi
 fi
