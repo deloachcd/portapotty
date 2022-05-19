@@ -3,7 +3,7 @@ __folding_prompt() {
     # paths, like in emacs' eshell. works better with
     # zsh due to strange history scrollback bug in
     # bash.
-    pwd | gawk -F '/' '{
+    pwd | awk -F '/' '{
         NFF=NF-2
         for(i=2; i<=NF; i++) {
             if (i == 2 && ($i == "home" || $i == "Users")) {
