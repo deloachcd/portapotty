@@ -26,3 +26,6 @@ fedora:
   - automake
   - gcc-c++
   - kernel-devel
+macos:
+  - coreutils
+  - git
