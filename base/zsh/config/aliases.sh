@@ -113,8 +113,13 @@ alias dm="dmark"
 alias dg="dget"
 alias dr="dreturn"
 
+if [[ $(uname) == Linux ]]; then
+    alias ls="ls --color"
+elif [[ $(uname) == Darwin ]]; then
+    alias ls="ls -G"
+fi
+
 alias echo="echo -e"
 alias mirrorget="wget --mirror --convert-links --backup-converted --adjust-extension"
 
-alias ls="ls --color"
 alias gmacs="gccemacs"
