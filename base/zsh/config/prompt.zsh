@@ -1,3 +1,7 @@
+__virtualenv() {
+    test ! -z "$VIRTUAL_ENV" && printf "("$(basename "$VIRTUAL_ENV")") "
+}
+
 __folding_prompt() {
     # Have the bash/zsh prompt automagically fold long
     # paths, like in emacs' eshell. works better with
@@ -34,7 +38,7 @@ __folding_prompt() {
 precmd() {
     PROMPT_PRE_DIR='%(?.%F{green}%?.%F{red}%?)%f %F{cyan}'
     PROMPT_POST_DIR='%f %# '
-    export PROMPT="${PROMPT_PRE_DIR}$(__folding_prompt)${PROMPT_POST_DIR}"
+    export PROMPT="$(__virtualenv)${PROMPT_PRE_DIR}$(__folding_prompt)${PROMPT_POST_DIR}"
     if [[ $INSIDE_EMACS = 'vterm' ]]; then
         export PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
     else
