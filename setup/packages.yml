@@ -15,7 +15,6 @@ linux:
 debian:
   - build-essential
   - pkg-config
-  - clang-11
 opensuse:
   - gcc
   - gcc-c++
