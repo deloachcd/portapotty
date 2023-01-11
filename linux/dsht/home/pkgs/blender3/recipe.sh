@@ -15,7 +15,7 @@ build() {
     local SVN_LIB_REMOTE="https://svn.blender.org/svnroot/bf-blender/trunk/lib/linux_centos7_x86_64"
     local REPO_DIR="blender-git"
     local LIBRARY_DIR="lib"
-    local RELEASE_BRANCH="blender-v3.1-release"
+    local RELEASE_BRANCH="blender-v3.3-release"
 
     # resolves dependencies from variables above function definitions
     install_pkg_manager_dependencies
