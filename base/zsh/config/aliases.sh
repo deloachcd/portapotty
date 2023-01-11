@@ -123,3 +123,43 @@ alias echo="echo -e"
 alias mirrorget="wget --mirror --convert-links --backup-converted --adjust-extension"
 
 alias gmacs="gccemacs"
+
+appimage_install() {
+    FOUND_DESKTOP_FILE=
+    BINNAME=
+    mkdir APPIMAGE_temp
+    cd APPIMAGE_temp
+    "../$1" --appimage-extract
+    cd squashfs-root
+    if [[ -e *.desktop ]]; then
+        echo "Found .desktop file entry, copying to ~/.local/share/applications/"
+        BINNAME=$(echo *.desktop | awk '{ gsub(/\.desktop/, ""); print }')
+        FOUND_DESKTOP_FILE=yes
+        cp *.desktop ~/.local/share/applications/
+    fi
+    if [[ -e *.png ]]; then
+        echo "Found .PNG icon file, copying to ~/.local/share/icons/"
+        cp *.png ~/.local/share/icons/
+    fi
+    if [[ -e *.ico ]]; then
+        echo "Found .ICO icon file, copying to ~/.local/share/icons/"
+        cp *.ico ~/.local/share/icons/
+    fi
+    cd ../..
+    echo "Creating symlink to $1 in ~/.local/bin"
+    if [[ -z "$BINNAME" ]]; then
+        echo "Enter a short name for the binary:"
+        read BINNAME
+    fi
+    ln -s "$PWD/$1" ~/.local/bin/$BINNAME
+    if [[ ! -z $FOUND_DESKTOP_FILE ]]; then
+        echo "Modifying installed .desktop file to execute symlink"
+        cd APPIMAGE_temp
+        sed "s+Exec=.*+Exec=$HOME/.local/bin/$BINNAME --no-sandbox %U+g" \
+            ~/.local/share/applications/$BINNAME.desktop >> $BINNAME.desktop.new
+        mv $BINNAME.desktop.new ~/.local/share/applications/$BINNAME.desktop
+        cd ..
+    fi
+    rm -r APPIMAGE_temp
+    echo "Done!"
+}
