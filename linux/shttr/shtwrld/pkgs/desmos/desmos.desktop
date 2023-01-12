@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Desmos
-Comment=Offline Desmos Calculator
-Exec=$HOME/.local/bin/desmos
-TryExec=$HOME/.local/bin/desmos
-Terminal=false
-Type=Application
-Icon=desmos
-Categories=Math;
