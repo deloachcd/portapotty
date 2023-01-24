@@ -163,3 +163,18 @@ appimage_install() {
     rm -r APPIMAGE_temp
     echo "Done!"
 }
+
+ytg() {
+    # Get thumbnail for a youtube video
+    LINK="$1"
+    if echo "$LINK" | grep -e 'watch\?' 1>/dev/null; then
+        ID=$(echo $LINK | awk -F 'v=' '{ print $2 }')
+    elif echo "$LINK" | grep -e '\.be' 1>/dev/null; then
+        ID=$(echo $LINK | awk -F 'be/' '{ print $2 }')
+    else
+        echo "I don't recognize that URL format!"
+        return
+    fi
+    IMG_LINK="https://i3.ytimg.com/vi/$ID/maxresdefault.jpg"
+    echo "$IMG_LINK"
+}
